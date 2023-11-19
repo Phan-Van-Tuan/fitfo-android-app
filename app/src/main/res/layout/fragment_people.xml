@@ -1,0 +1,409 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#DDDDDD"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".people">
+
+    <!-- TODO: Update blank fragment layout -->
+    <androidx.appcompat.widget.SearchView
+        android:background="@color/white"
+        android:id="@+id/searchView"
+        app:closeIcon="@drawable/ic_close"
+        app:defaultQueryHint="Không có dữ liệu"
+        app:iconifiedByDefault="false"
+        app:queryHint="Tìm kiếm"
+        android:layout_width="350dp"
+        android:layout_height="wrap_content"
+        android:hint="Tìm kiếm" />
+
+    <ImageView
+        android:layout_width="65dp"
+        android:layout_height="48dp"
+        android:layout_gravity="end"
+        android:background="@color/white"
+        android:src="@drawable/baseline_settings_24"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="55dp"
+            android:background="@color/white"
+            >
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    app:cardCornerRadius="70dp"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginTop="5dp"
+                    >
+
+<!--                    //truyền avt vào-->
+
+                    <ImageView
+                        android:id="@+id/imgAvt"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+
+                        />
+
+                </androidx.cardview.widget.CardView>
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_marginLeft="10dp"
+                android:gravity="center"
+                android:orientation="vertical">
+
+
+                <!--            truyền tên vào-->
+                <TextView
+                    android:id="@+id/txtName"
+                    android:layout_width="match_parent"
+                    android:textColor="#000000"
+                    android:textSize="22dp"
+                    android:layout_height="wrap_content"
+                    android:text="Phan Tuấn" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:textColor="#555555"
+                    android:layout_height="wrap_content"
+                    android:text="Xem trang cá nhân" />
+            </LinearLayout>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:background="@color/white"
+            >
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginTop="5dp"
+                    >
+
+                    <ImageView
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:background="@android:color/transparent"
+                        android:src="@drawable/baseline_music_note_24" />
+
+                </androidx.cardview.widget.CardView>
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_marginLeft="10dp"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:textColor="#000000"
+                    android:textSize="22dp"
+                    android:layout_height="wrap_content"
+                    android:text="Nhạc chờ Fitfo" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:textColor="#555555"
+                    android:layout_height="wrap_content"
+                    android:text="Đăng ký nhạc chờ, thể hiện cá tính" />
+            </LinearLayout>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:background="@color/white"
+            >
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginTop="5dp"
+                    >
+
+                    <ImageView
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+
+                        android:src="@drawable/qr_code" />
+
+                </androidx.cardview.widget.CardView>
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_marginLeft="10dp"
+                android:gravity="center"
+                android:orientation="vertical">
+
+
+                <TextView
+
+                    android:layout_width="match_parent"
+                    android:textColor="#000000"
+                    android:textSize="22dp"
+                    android:layout_height="wrap_content"
+                    android:text="Ví QR" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:textColor="#555555"
+                    android:layout_height="wrap_content"
+                    android:text="Lưu trữ và xuất trình các giấy tờ quan trọng" />
+            </LinearLayout>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:background="@color/white"
+            >
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginTop="5dp"
+                    >
+
+                    /truyền avt vào
+
+                    <ImageView
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+
+                        android:src="@drawable/baseline_cloud_24" />
+
+                </androidx.cardview.widget.CardView>
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_marginLeft="10dp"
+                android:gravity="center"
+                android:orientation="vertical">
+
+
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:textColor="#000000"
+                    android:textSize="22dp"
+                    android:layout_height="wrap_content"
+                    android:text="Cloud của tôi" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:textColor="#555555"
+                    android:layout_height="wrap_content"
+                    android:text="Lưu trữ các tin nhắn quan trọng" />
+            </LinearLayout>
+            <ImageView
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_gravity="center"
+                android:src="@drawable/baseline_navigate_next_24"/>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="1dp"
+            android:background="@color/white"
+            >
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginTop="5dp"
+                    >
+
+
+                    <ImageView
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+
+                        android:src="@drawable/baseline_sim_card_alert_24" />
+
+                </androidx.cardview.widget.CardView>
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_marginLeft="10dp"
+                android:gravity="center"
+                android:orientation="vertical">
+
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:textColor="#000000"
+                    android:textSize="22dp"
+                    android:layout_height="wrap_content"
+                    android:text="Dung lượng và dữ liệu" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:textColor="#555555"
+                    android:layout_height="wrap_content"
+                    android:text="Quản lý dữ liệu Fitfo của bạn" />
+
+            </LinearLayout>
+            <ImageView
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_gravity="center"
+                android:src="@drawable/baseline_navigate_next_24"/>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:background="@color/white"
+            >
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginTop="5dp"
+                    >
+
+
+                    <ImageView
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+
+                        android:src="@drawable/baseline_local_police_24" />
+
+                </androidx.cardview.widget.CardView>
+            </LinearLayout>
+
+                <TextView
+                    android:layout_width="320dp"
+                    android:textColor="#000000"
+                    android:textSize="22dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_gravity="center"
+                    android:layout_height="wrap_content"
+                    android:text="Tài khoản và bảo mật" />
+            <ImageView
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_gravity="center"
+                android:src="@drawable/baseline_navigate_next_24"/>
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="1dp"
+            android:background="@color/white"
+            >
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginTop="5dp"
+                    >
+
+
+                    <ImageView
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+
+                        android:src="@drawable/baseline_lock_24" />
+
+                </androidx.cardview.widget.CardView>
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="320dp"
+                android:textColor="#000000"
+                android:textSize="22dp"
+                android:layout_marginLeft="10dp"
+                android:layout_gravity="center"
+                android:layout_height="wrap_content"
+                android:text="Quyền riêng tư" />
+            <ImageView
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_gravity="center"
+                android:src="@drawable/baseline_navigate_next_24"/>
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+
+
+</FrameLayout>

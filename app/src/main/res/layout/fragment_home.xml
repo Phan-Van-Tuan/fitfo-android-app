@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".homeFragment">
+
+    <androidx.appcompat.widget.SearchView
+        android:id="@+id/searchView"
+        android:layout_width="350dp"
+        android:layout_height="wrap_content"
+        android:hint="Tìm kiếm đoạn chat"
+        app:iconifiedByDefault="false"
+        app:closeIcon="@drawable/ic_close"
+        app:defaultQueryHint="Không có dữ liệu"
+        app:queryHint="Nhập tên người dùng" />
+
+    <ImageView
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_gravity="end"
+        android:layout_marginTop="5dp"
+        android:layout_marginRight="5dp"
+        android:src="@drawable/baseline_add_24"/>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/dsChat"
+        android:layout_width="match_parent"
+        android:layout_marginTop="60dp"
+        android:layout_height="wrap_content" />
+
+
+</FrameLayout>
