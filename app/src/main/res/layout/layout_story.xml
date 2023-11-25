@@ -17,7 +17,7 @@
         >
 
         <ImageView
-            android:id="@+id/imgTin"
+            android:id="@+id/imgStory"
             android:layout_width="120dp"
             android:scaleType="centerCrop"
             android:layout_height="240dp"
@@ -35,7 +35,7 @@
             android:layout_marginLeft="10dp"
             android:layout_marginTop="10dp">
             <ImageView
-                android:id="@+id/imgAvtTin"
+                android:id="@+id/imgAvtStory"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 app:srcCompat="@drawable/a" />
@@ -43,7 +43,7 @@
 
 
         <TextView
-            android:id="@+id/txtNameTin"
+            android:id="@+id/txtNameStory"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
