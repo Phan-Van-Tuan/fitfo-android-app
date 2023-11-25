@@ -2,4 +2,8 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="primary">#4876FF</color>
+    <color name="textprimary">#0000FF</color>
+    <color name="view">#C1CDC1</color>
+    <color name="chatsent">#4876FF</color>
 </resources>

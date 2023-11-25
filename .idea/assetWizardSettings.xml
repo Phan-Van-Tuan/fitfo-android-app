@@ -321,7 +321,7 @@
                                 <PersistentState>
                                   <option name="values">
                                     <map>
-                                      <entry key="url" value="file:/$USER_HOME$/AppData/Local/Android/Sdk/icons/material/materialicons/comment/baseline_comment_24.xml" />
+                                      <entry key="url" value="file:/$USER_HOME$/AppData/Local/Android/Sdk/icons/material/materialicons/image/baseline_image_24.xml" />
                                     </map>
                                   </option>
                                 </PersistentState>
@@ -331,8 +331,8 @@
                         </option>
                         <option name="values">
                           <map>
-                            <entry key="color" value="0c0c0c" />
-                            <entry key="outputName" value="comment" />
+                            <entry key="color" value="404040" />
+                            <entry key="outputName" value="image" />
                             <entry key="sourceFile" value="C:\LongVu\ff" />
                           </map>
                         </option>
