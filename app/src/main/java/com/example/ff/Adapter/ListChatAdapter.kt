@@ -35,6 +35,7 @@ inner class listchat(itemView: View) :RecyclerView.ViewHolder(itemView)
         }
     }
 
+
     override fun getItemCount(): Int {
         return listChat.size
     }

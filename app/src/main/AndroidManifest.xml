@@ -12,6 +12,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Ff"
         tools:targetApi="31">
+
         <activity
             android:name=".OptionActivity.OptionPersonal"
             android:exported="false" />

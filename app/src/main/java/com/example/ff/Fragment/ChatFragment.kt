@@ -71,11 +71,15 @@ class ChatFragment : Fragment() {
         listchat.add(OutDataChat(R.drawable.a, "Tuấn", "hihi", "10 phút"))
         listchat.add(OutDataChat(R.drawable.a, "Tuấn", "hihi", "10 phút"))
 
+
+
         val adapterDs = ListChatAdapter(listchat, object : RvChat {
+
             override fun onClickchat(pos: Int) {
 //                Toast.makeText(context, "bạn đã click vào ${ds[pos].txtName}", Toast.LENGTH_SHORT).show()
 //                truyền đến màn hình chat
                 var intent = Intent(context, ChatActivity::class.java)
+                intent.putExtra("txtNameChat","${listchat[pos].txtNameChat}")
                 startActivity(intent)
             }
 

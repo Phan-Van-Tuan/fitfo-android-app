@@ -3,6 +3,8 @@ package com.example.ff
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.example.ff.Login_Register_ForgotPass.LoginActivity
+import com.example.ff.Login_Register_ForgotPass.RegisterActivity
 import com.example.ff.MainActivity_Logged_in
 import com.example.ff.databinding.ActivityMainBinding
 
@@ -16,6 +18,14 @@ class MainActivity : AppCompatActivity() {
         binding.txbam.setOnClickListener {
             var intent = Intent(this, MainActivity_Logged_in::class.java)
             startActivity( intent)
+        }
+        binding.btnToRegister.setOnClickListener {
+            var intent = Intent(this, RegisterActivity::class.java)
+            startActivity(intent)
+        }
+        binding.btnTologin.setOnClickListener {
+            var intent = Intent(this,LoginActivity::class.java)
+            startActivity(intent)
         }
     }
 

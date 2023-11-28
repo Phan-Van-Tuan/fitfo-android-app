@@ -23,4 +23,18 @@
         android:text="Bấm để tiếp tục"
         android:layout_marginTop="5dp"/>
 
+    <Button
+        android:id="@+id/btnTologin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Đăng nhập" />
+
+    <Button
+        android:id="@+id/btnToRegister"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Đăng ký" />
+
+
+
 </LinearLayout>

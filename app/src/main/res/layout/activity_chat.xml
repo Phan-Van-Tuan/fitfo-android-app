@@ -74,13 +74,12 @@
         android:clipToPadding="false"
         android:layout_marginBottom="60dp"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        android:visibility="gone"
         />
 
-    <ProgressBar
-        android:layout_width="40dp"
-        android:layout_height="match_parent"
-        android:layout_gravity="center"/>
+<!--    <ProgressBar-->
+<!--        android:layout_width="40dp"-->
+<!--        android:layout_height="match_parent"-->
+<!--        android:layout_gravity="center"/>-->
 
 
 
