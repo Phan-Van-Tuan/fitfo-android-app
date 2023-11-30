@@ -27,8 +27,17 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btnLogin" />
 
+    <com.hbb20.CountryCodePicker
+        android:id="@+id/ccp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
     <EditText
-        android:id="@+id/edtSĐT"
+        android:id="@+id/edtPhoneNumber"
         android:layout_width="260dp"
         android:layout_height="48dp"
         android:layout_marginTop="10dp"
@@ -49,10 +58,10 @@
         android:inputType="textPassword"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/edtSĐT" />
+        app:layout_constraintTop_toBottomOf="@+id/edtPhoneNumber" />
 
     <EditText
-        android:id="@+id/edtConfirmpassword"
+        android:id="@+id/edtConfirmPassword"
         android:layout_width="260dp"
         android:layout_height="48dp"
         android:layout_marginTop="20dp"
@@ -92,7 +101,31 @@
         android:text="Bạn đồng ý với chính sách của chúng tôi"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/edtConfirmpassword" />
+        app:layout_constraintTop_toBottomOf="@+id/edtConfirmPassword" />
+
+    <TextView
+        android:id="@+id/NotificationPhone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toTopOf="@+id/edtPassword"
+        app:layout_constraintStart_toStartOf="@+id/edtPhoneNumber"
+        app:layout_constraintTop_toBottomOf="@+id/edtPhoneNumber" />
+
+    <TextView
+        android:id="@+id/NotificationPassword"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toTopOf="@+id/edtConfirmPassword"
+        app:layout_constraintStart_toStartOf="@+id/edtPassword"
+        app:layout_constraintTop_toBottomOf="@+id/edtPassword" />
+
+    <TextView
+        android:id="@+id/NotificationConfirmPassword"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toTopOf="@+id/checkBox"
+        app:layout_constraintStart_toStartOf="@+id/edtConfirmPassword"
+        app:layout_constraintTop_toBottomOf="@+id/edtConfirmPassword" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

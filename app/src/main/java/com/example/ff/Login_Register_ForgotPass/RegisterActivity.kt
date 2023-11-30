@@ -1,10 +1,12 @@
 package com.example.ff.Login_Register_ForgotPass
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import com.example.ff.R
+import androidx.appcompat.app.AppCompatActivity
 import com.example.ff.databinding.ActivityRegisterBinding
+import com.hbb20.CountryCodePicker
+import com.hbb20.CountryCodePicker.PhoneNumberValidityChangeListener
+
 
 class RegisterActivity : AppCompatActivity() {
     private lateinit var binding:ActivityRegisterBinding
@@ -16,5 +18,8 @@ class RegisterActivity : AppCompatActivity() {
                 var intent = Intent(this,LoginActivity::class.java)
                 startActivity(intent)
         }
+        binding.ccp.registerCarrierNumberEditText(binding.edtPhoneNumber)
+
+
     }
 }

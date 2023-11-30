@@ -3,6 +3,9 @@ package com.example.ff
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
+import androidx.core.view.isGone
+import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.ff.Adapter.ListMessageAdapter
 import com.example.ff.OutData.OutDataMessage
@@ -18,6 +21,7 @@ class ChatActivity : AppCompatActivity() {
         val intent = intent
         val item = intent.getStringExtra("txtNameChat")
         binding.txtNameChat.setText(item)
+//        binding.edtMessage.
         binding.chatBack.setOnClickListener {
             var intent = Intent(this, MainActivity_Logged_in::class.java)
             startActivity(intent)
