@@ -10,7 +10,7 @@
         android:id="@+id/imageView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="52dp"
+        android:layout_marginTop="20dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
@@ -18,22 +18,14 @@
         app:srcCompat="@drawable/a" />
 
     <TextView
-        android:id="@+id/txtToDangNhap"
+        android:id="@+id/txtToLogin"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="36dp"
         android:layout_marginEnd="120dp"
         android:text="Đăng nhập"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnLogin" />
-
-    <com.hbb20.CountryCodePicker
-        android:id="@+id/ccp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/btnRegister" />
 
 
     <EditText
@@ -52,19 +44,19 @@
         android:id="@+id/edtPassword"
         android:layout_width="260dp"
         android:layout_height="48dp"
-        android:layout_marginTop="20dp"
         android:ems="10"
         android:hint="Nhập mật khẩu"
         android:inputType="textPassword"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/edtPhoneNumber" />
+        android:layout_marginTop="10dp"
+        app:layout_constraintEnd_toEndOf="@+id/edtName"
+        app:layout_constraintStart_toStartOf="@+id/edtName"
+        app:layout_constraintTop_toBottomOf="@+id/edtName" />
 
     <EditText
         android:id="@+id/edtConfirmPassword"
         android:layout_width="260dp"
         android:layout_height="48dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="10dp"
         android:ems="10"
         android:hint="Nhập lại mật khẩu"
         android:inputType="textPassword"
@@ -73,7 +65,7 @@
         app:layout_constraintTop_toBottomOf="@+id/edtPassword" />
 
     <Button
-        android:id="@+id/btnLogin"
+        android:id="@+id/btnRegister"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
@@ -87,11 +79,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Đã có tài khoản?"
-        app:layout_constraintBottom_toBottomOf="@+id/txtToDangNhap"
-        app:layout_constraintEnd_toStartOf="@+id/txtToDangNhap"
+        app:layout_constraintBottom_toBottomOf="@+id/txtToLogin"
+        app:layout_constraintEnd_toStartOf="@+id/txtToLogin"
         app:layout_constraintHorizontal_bias="0.925"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/txtToDangNhap"
+        app:layout_constraintTop_toTopOf="@+id/txtToLogin"
         app:layout_constraintVertical_bias="0.0" />
 
     <CheckBox
@@ -126,6 +118,31 @@
         app:layout_constraintBottom_toTopOf="@+id/checkBox"
         app:layout_constraintStart_toStartOf="@+id/edtConfirmPassword"
         app:layout_constraintTop_toBottomOf="@+id/edtConfirmPassword" />
+
+    <EditText
+        android:id="@+id/edtEmail"
+        android:layout_width="260dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="10dp"
+        android:ems="10"
+        android:hint="Nhập email"
+        android:inputType="text"
+        app:layout_constraintEnd_toEndOf="@+id/edtPhoneNumber"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/edtPhoneNumber"
+        app:layout_constraintTop_toBottomOf="@+id/edtPhoneNumber" />
+
+    <EditText
+        android:id="@+id/edtName"
+        android:layout_width="260dp"
+        android:layout_height="48dp"
+        android:ems="10"
+        android:hint="Nhập tên của bạn"
+        android:layout_marginTop="10dp"
+        android:inputType="text"
+        app:layout_constraintEnd_toEndOf="@+id/edtEmail"
+        app:layout_constraintStart_toStartOf="@+id/edtEmail"
+        app:layout_constraintTop_toBottomOf="@+id/edtEmail" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
