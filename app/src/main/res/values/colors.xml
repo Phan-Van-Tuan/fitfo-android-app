@@ -2,8 +2,22 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
-    <color name="primary">#4876FF</color>
-    <color name="textprimary">#0000FF</color>
+    <color name="primary">#f4c2d7</color>
+    <color name="textprimary">#f4c2d7</color>
     <color name="view">#C1CDC1</color>
     <color name="chatsent">#4876FF</color>
+    <color name="line">#DDDDDD</color>
+
+    <color name="gray">#4876FF</color>
+    <color name="text">#4d4d4d</color>
+    <color name="pastel">#efb0c9</color>
+
+
+
+
+
+
+
+
+
 </resources>

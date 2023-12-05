@@ -1,5 +1,7 @@
 package com.example.ff
 
+import android.content.Context
+import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.example.ff.databinding.ActivityMainLoggedInBinding
@@ -15,10 +17,13 @@ import com.example.ff.Fragment.PersonalFragment
 
 private lateinit var binding: ActivityMainLoggedInBinding
 class MainActivity_Logged_in : AppCompatActivity() {
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         com.example.ff.binding = ActivityMainLoggedInBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+
         // khởi tạo đối tượng dialog
         // display all title and content in bottom nav
         com.example.ff.binding.bottomNavigationView.labelVisibilityMode =
@@ -46,6 +51,8 @@ class MainActivity_Logged_in : AppCompatActivity() {
             true
         }
     }
+
+
     private fun replaceFragment(fragment: Fragment) {
         val fragmentTransaction = supportFragmentManager.beginTransaction()
         fragmentTransaction.replace(R.id.frameLayout, fragment)
