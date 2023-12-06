@@ -22,7 +22,7 @@
                 android:layout_width="50dp"
                 android:layout_height="50dp"
 
-                android:src="@drawable/images" />
+                android:src="@drawable/k" />
 
         </androidx.cardview.widget.CardView>
     </LinearLayout>

@@ -167,7 +167,7 @@
                                             <option name="values">
                                               <map>
                                                 <entry key="color" value="000000" />
-                                                <entry key="imagePath" value="C:\Users\LongVu\AppData\Local\Temp\baseline_logout_24.xml" />
+                                                <entry key="imagePath" value="C:\Users\LongVu\AppData\Local\Temp\baseline_person_add_24.xml" />
                                               </map>
                                             </option>
                                           </PersistentState>
@@ -178,7 +178,18 @@
                                           <PersistentState>
                                             <option name="values">
                                               <map>
-                                                <entry key="url" value="file:/$USER_HOME$/AppData/Local/Android/Sdk/icons/material/materialicons/logout/baseline_logout_24.xml" />
+                                                <entry key="url" value="file:/$USER_HOME$/AppData/Local/Android/Sdk/icons/material/materialicons/person_add/baseline_person_add_24.xml" />
+                                              </map>
+                                            </option>
+                                          </PersistentState>
+                                        </value>
+                                      </entry>
+                                      <entry key="image">
+                                        <value>
+                                          <PersistentState>
+                                            <option name="values">
+                                              <map>
+                                                <entry key="color" value="000000" />
                                               </map>
                                             </option>
                                           </PersistentState>
@@ -210,7 +221,7 @@
                                   </option>
                                   <option name="values">
                                     <map>
-                                      <entry key="outputName" value="ic_logout" />
+                                      <entry key="outputName" value="personadd" />
                                     </map>
                                   </option>
                                 </PersistentState>
@@ -321,7 +332,7 @@
                                 <PersistentState>
                                   <option name="values">
                                     <map>
-                                      <entry key="url" value="file:/$USER_HOME$/AppData/Local/Android/Sdk/icons/material/materialicons/person/baseline_person_24.xml" />
+                                      <entry key="url" value="file:/$USER_HOME$/AppData/Local/Android/Sdk/icons/material/materialicons/chat/baseline_chat_24.xml" />
                                     </map>
                                   </option>
                                 </PersistentState>
@@ -332,7 +343,7 @@
                         <option name="values">
                           <map>
                             <entry key="color" value="0c0c0c" />
-                            <entry key="outputName" value="person" />
+                            <entry key="outputName" value="chat" />
                             <entry key="sourceFile" value="C:\LongVu\ff" />
                           </map>
                         </option>

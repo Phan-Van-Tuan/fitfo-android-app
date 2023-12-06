@@ -1,17 +1,22 @@
 package com.example.ff.Interface
 
-import com.example.ff.Models.ApiRegister
-import com.example.ff.Models.ApiLogin
+import com.example.ff.Models.RegisterResponse
+import com.example.ff.Models.LoginResponse
+import com.example.ff.Models.GetUserByPhoneNumberResponse
 import com.example.ff.Models.LoginRequest
 import com.example.ff.Models.RegisterRequest
 import retrofit2.Call
 import retrofit2.http.Body
+import retrofit2.http.GET
 import retrofit2.http.POST
+import retrofit2.http.Path
 
 
 interface ApiService {
     @POST("api/users/login")
-    fun loginUser(@Body requestBody: LoginRequest): Call<ApiLogin>
+    fun loginUser(@Body requestBody: LoginRequest): Call<LoginResponse>
     @POST("api/users/register")
-    fun registerUser(@Body requestBody: RegisterRequest): Call<ApiRegister>
+    fun registerUser(@Body requestBody: RegisterRequest): Call<RegisterResponse>
+    @GET("api/users/getUserByPhoneNumber/{phoneNumber}")
+    fun getUserByPhoneNumber(@Path("phoneNumber") phoneNumber: String): Call<GetUserByPhoneNumberResponse>
 }

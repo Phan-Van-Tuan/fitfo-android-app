@@ -2,4 +2,8 @@
     <string name="app_name">ff</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="add_friend">Kết bạn</string>
+    <string name="chat">Nhắn tin</string>
+    <string name="login">Đăng nhập</string>
+    <string name="register">Đăng ký</string>
 </resources>
