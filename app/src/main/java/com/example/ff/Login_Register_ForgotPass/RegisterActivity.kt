@@ -6,11 +6,9 @@ import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.ff.Interface.ApiService
-import com.example.ff.Models.ApiRegister
+import com.example.ff.Models.RegisterResponse
 import com.example.ff.Models.RegisterRequest
 import com.example.ff.databinding.ActivityRegisterBinding
-import com.hbb20.CountryCodePicker
-import com.hbb20.CountryCodePicker.PhoneNumberValidityChangeListener
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -46,8 +44,8 @@ class RegisterActivity : AppCompatActivity() {
 
             val call = apiService.registerUser(RegisterRequest)
 
-            call.enqueue(object : Callback<ApiRegister> {
-                override fun onResponse(call: Call<ApiRegister>, response: Response<ApiRegister>) {
+            call.enqueue(object : Callback<RegisterResponse> {
+                override fun onResponse(call: Call<RegisterResponse>, response: Response<RegisterResponse>) {
                     if (response.isSuccessful) {
                         // Xử lý phản hồi thành công
                         val message = response.body()?.success ?: ""
@@ -65,7 +63,7 @@ class RegisterActivity : AppCompatActivity() {
                     }
                 }
 
-                override fun onFailure(call: Call<ApiRegister>, t: Throwable) {
+                override fun onFailure(call: Call<RegisterResponse>, t: Throwable) {
                     // Xử lý lỗi khi request không thành công
                     // TODO: Xử lý lỗi
                     Toast.makeText(context, "lỗi khi request không thành công", Toast.LENGTH_SHORT).show();

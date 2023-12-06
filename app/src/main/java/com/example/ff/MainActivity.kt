@@ -30,7 +30,7 @@ class MainActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
-        binding.btnTologin.setOnClickListener {
+        binding.btnToLogin.setOnClickListener {
             var intent = Intent(this,LoginActivity::class.java)
             startActivity(intent)
         }

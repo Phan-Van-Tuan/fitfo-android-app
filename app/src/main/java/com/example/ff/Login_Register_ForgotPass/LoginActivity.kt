@@ -8,7 +8,7 @@ import android.os.Bundle
 import android.widget.Toast
 import com.example.ff.Interface.ApiService
 import com.example.ff.MainActivity_Logged_in
-import com.example.ff.Models.ApiLogin
+import com.example.ff.Models.LoginResponse
 import com.example.ff.Models.LoginRequest
 import com.example.ff.databinding.ActivityLoginBinding
 import retrofit2.Call
@@ -43,8 +43,8 @@ class LoginActivity : AppCompatActivity() {
 
             val call = apiService.loginUser(loginRequest)
 
-            call.enqueue(object : Callback<ApiLogin> {
-                override fun onResponse(call: Call<ApiLogin>, response: Response<ApiLogin>) {
+            call.enqueue(object : Callback<LoginResponse> {
+                override fun onResponse(call: Call<LoginResponse>, response: Response<LoginResponse>) {
                     if (response.isSuccessful) {
                         // Xử lý phản hồi thành công
                         val name = response.body()?.name ?: ""
@@ -65,7 +65,7 @@ class LoginActivity : AppCompatActivity() {
                     }
                 }
 
-                override fun onFailure(call: Call<ApiLogin>, t: Throwable) {
+                override fun onFailure(call: Call<LoginResponse>, t: Throwable) {
                     // Xử lý lỗi khi request không thành công
                     // TODO: Xử lý lỗi
                     Toast.makeText(context, "lỗi khi request không thành công", Toast.LENGTH_SHORT).show();
