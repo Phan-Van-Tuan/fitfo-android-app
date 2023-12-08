@@ -11,6 +11,7 @@ import com.example.ff.R
 
 class ListMessageAdapter(var listmessage: MutableList<OutDataMessage>):RecyclerView.Adapter<ListMessageAdapter.listMessage>(){
     inner class listMessage(itemView: View):RecyclerView.ViewHolder(itemView)
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): listMessage {
         if (viewType==2){
             val view = LayoutInflater.from(parent.context).inflate(R.layout.item_container_received_message,parent,false)
@@ -42,6 +43,8 @@ class ListMessageAdapter(var listmessage: MutableList<OutDataMessage>):RecyclerV
             return 2
         }
     }
+
+
     override fun getItemCount(): Int {
         return listmessage.size
     }
