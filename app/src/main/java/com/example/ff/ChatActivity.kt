@@ -1,11 +1,14 @@
 package com.example.ff
 
 import android.content.Intent
+import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.View
+import androidx.activity.result.ActivityResultLauncher
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.view.isGone
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -17,10 +20,44 @@ import com.example.ff.databinding.ActivityChatBinding
 class ChatActivity : AppCompatActivity() {
     private lateinit var binding: ActivityChatBinding
 
+    private var selectedImages: ArrayList<String> = ArrayList()
+    private lateinit var pickImagesLauncher: ActivityResultLauncher<Intent>
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         binding = ActivityChatBinding.inflate(layoutInflater)
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
+
+        pickImagesLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+            if (result.resultCode == RESULT_OK) {
+                // Lấy danh sách các Uri của hình ảnh đã chọn
+                result.data?.let { intent ->
+                    val clipData = intent.clipData
+                    if (clipData != null) {
+                        // Nếu người dùng chọn nhiều hình ảnh
+                        for (i in 0 until clipData.itemCount) {
+                            val uri = clipData.getItemAt(i).uri
+                            selectedImages.add(uri.toString())
+                        }
+                    } else {
+                        // Nếu người dùng chỉ chọn một hình ảnh
+                        val uri = intent.data
+                        uri?.let {
+                            selectedImages.add(it.toString())
+                        }
+                    }
+
+                    // Hiển thị hình ảnh hoặc thực hiện các thao tác khác với danh sách hình ảnh đã chọn
+                    // ...
+                }
+            }
+        }
+
+        binding.btnImageSent.setOnClickListener {
+            pickMultipleImages()
+        }
+
         val intent = intent
         val item = intent.getStringExtra("txtNameChat")
         val listmessage = mutableListOf<OutDataMessage>()
@@ -89,6 +126,15 @@ class ChatActivity : AppCompatActivity() {
         }
 
 
+    }
+
+    private fun pickMultipleImages() {
+        val intent = Intent(Intent.ACTION_OPEN_DOCUMENT)
+        intent.type = "image/*"
+        intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true)
+
+        // Mở trình quản lý hình ảnh để chọn nhiều hình ảnh
+        pickImagesLauncher.launch(intent)
     }
 
 
