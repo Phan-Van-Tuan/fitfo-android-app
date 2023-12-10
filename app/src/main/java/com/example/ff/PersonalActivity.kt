@@ -19,7 +19,7 @@ class PersonalActivity : AppCompatActivity() {
         binding = ActivityPersonalBinding.inflate(layoutInflater)
         setContentView(binding.root)
         sharedPreferences =this.getSharedPreferences("data", Context.MODE_PRIVATE)
-        binding.txtName.setText(sharedPreferences.getString("PROFILE_NAME",null).toString())
+        binding.txtName.setText(sharedPreferences.getString("MY_NAME",null).toString())
         binding.imgoption.setOnClickListener {
             var intent = Intent(this, OptionPersonal::class.java)
             startActivity( intent)

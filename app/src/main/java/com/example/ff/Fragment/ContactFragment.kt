@@ -83,7 +83,7 @@ class ContactFragment : Fragment() {
                         binding.listcontact.visibility = View.GONE
                         binding.frameSearch.visibility = View.VISIBLE
                         val retrofit = Retrofit.Builder()
-                            .baseUrl("https://fitfo-api.onrender.com/")
+                            .baseUrl("https://fitfo-api.vercel.app/")
                             .addConverterFactory(GsonConverterFactory.create())
                             .build()
 
@@ -109,7 +109,9 @@ class ContactFragment : Fragment() {
                                         binding.noContact.visibility = View.GONE
                                         binding.searchSuccess.setOnClickListener{
                                             var intent = Intent(context, ProfileActivity::class.java)
-                                            intent.putExtra("txtNameChat",userName)
+                                            intent.putExtra("userId",userId)
+                                            intent.putExtra("userName",userName)
+                                            intent.putExtra("userPhoneNumber",userPhoneNumber)
                                             startActivity(intent)
                                         }
 

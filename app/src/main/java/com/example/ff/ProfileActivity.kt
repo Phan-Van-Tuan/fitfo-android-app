@@ -15,11 +15,10 @@ class ProfileActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         val intent = intent
-        val name = intent.getStringExtra("txtNameChat")
-        binding.txtName.setText(name)
+        val userName = intent.getStringExtra("userName")
+        binding.txtName.setText(userName)
         binding.btnToChat.setOnClickListener {
             var intent = Intent(this, ChatActivity::class.java)
-            intent.putExtra("txtNameChat",name)
             startActivity(intent)
         }
     }

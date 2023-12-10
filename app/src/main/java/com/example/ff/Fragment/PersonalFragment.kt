@@ -71,7 +71,7 @@ class PersonalFragment : Fragment() {
         }
 
         sharedPreferences = requireActivity()?.getSharedPreferences("data", Context.MODE_PRIVATE)!!
-        binding.txtName.setText(sharedPreferences.getString("PROFILE_NAME", ""))
+        binding.txtName.setText(sharedPreferences.getString("MY_NAME", ""))
 
     }
 
@@ -98,9 +98,9 @@ class PersonalFragment : Fragment() {
         sharedPreferences = requireActivity()?.getSharedPreferences("data", Context.MODE_PRIVATE)!!
         val editor = sharedPreferences.edit()
 
-        editor.remove("PROFILE_ID")
-        editor.remove("PROFILE_NAME")
-        editor.remove("PROFILE_PHONE_NUMBER")
+        editor.remove("MY_ID")
+        editor.remove("MY_NAME")
+        editor.remove("MY_PHONE_NUMBER")
         editor.remove("ACCESS_TOKEN")
 
         editor.apply()
