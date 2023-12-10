@@ -26,11 +26,22 @@ class LoginActivity : AppCompatActivity() {
         setContentView(binding.root)
 
 
-        binding.btnLogin.setOnClickListener {
-            val phoneNumber = binding.edtSDT.text.toString()
-            val password = binding.password.text.toString()
-            val context: Context = this
+        sharedPreferences = this.getSharedPreferences("remember_password", Context.MODE_PRIVATE)
+        var rememberIsChecked = sharedPreferences.getBoolean("REMEMBER_IS_CHECKED",false)
+        binding.rememberPassword.setChecked(rememberIsChecked);
+        if(rememberIsChecked){
+            var rememberPhoneNumber = sharedPreferences.getString("REMEMBER_PHONE_NUMBER",null).toString()
+            var rememberPassword = sharedPreferences.getString("REMEMBER_PASSWORD",null).toString()
+            binding.inputPhoneNumber.setText(rememberPhoneNumber)
+            binding.inputPassword.setText(rememberPassword)
+        }
 
+
+
+        binding.btnLogin.setOnClickListener {
+            val context: Context = this
+            val phoneNumber = binding.inputPhoneNumber.text.toString().trim();
+            val password = binding.inputPassword.text.toString().trim();
 
             val loginRequest = LoginRequest(phoneNumber, password)
 
@@ -52,6 +63,11 @@ class LoginActivity : AppCompatActivity() {
                         val phoneNumber = response.body()?.phoneNumber ?: ""
                         val accessToken = response.body()?.token ?: ""
                         setData(id,name,phoneNumber,accessToken)
+                        if (binding.rememberPassword.isChecked){
+                            rememberPassword(phoneNumber,password,true);
+                        } else {
+                            rememberPassword("","",false);
+                        }
 //                        Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
                         // TODO: Xử lý message
                         val intent = Intent(this@LoginActivity, MainActivity_Logged_in::class.java)
@@ -61,23 +77,22 @@ class LoginActivity : AppCompatActivity() {
                     } else {
                         // Xử lý phản hồi không thành công
                         // TODO: Xử lý lỗi
-                        Toast.makeText(context, "phản hồi không thành công", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(context, "đã xảy ra lỗi", Toast.LENGTH_SHORT).show();
                     }
                 }
 
                 override fun onFailure(call: Call<LoginResponse>, t: Throwable) {
                     // Xử lý lỗi khi request không thành công
                     // TODO: Xử lý lỗi
-                    Toast.makeText(context, "lỗi khi request không thành công", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(context, "đã xảy ra lỗi", Toast.LENGTH_SHORT).show();
                 }
             })
         }
-
-        binding.txtToDangKy.setOnClickListener {
+        binding.btnToRegister.setOnClickListener {
             var intent = Intent(this,RegisterActivity::class.java)
             startActivity(intent)
         }
-        binding.txtToQuenpass.setOnClickListener {
+        binding.btnToForgotPassword.setOnClickListener {
             var intent = Intent(this,ForgotPassActivity::class.java)
             startActivity(intent)
         }
@@ -89,6 +104,15 @@ class LoginActivity : AppCompatActivity() {
         editor.putString("MY_NAME", name)
         editor.putString("MY_PHONE_NUMBER", phoneNumber)
         editor.putString("ACCESS_TOKEN", accessToken)
+        editor.apply()
+    }
+
+    private fun rememberPassword(phoneNumber:String, password: String, isChecked: Boolean){
+        sharedPreferences =this.getSharedPreferences("remember_password", Context.MODE_PRIVATE)
+        val editor = sharedPreferences.edit()
+        editor.putString("REMEMBER_PASSWORD", password)
+        editor.putString("REMEMBER_PHONE_NUMBER", phoneNumber)
+        editor.putBoolean("REMEMBER_IS_CHECKED", isChecked)
         editor.apply()
     }
 

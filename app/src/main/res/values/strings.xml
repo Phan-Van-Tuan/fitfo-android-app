@@ -2,8 +2,17 @@
     <string name="app_name">ff</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+
     <string name="add_friend">Kết bạn</string>
     <string name="chat">Nhắn tin</string>
+
     <string name="login">Đăng nhập</string>
     <string name="register">Đăng ký</string>
+
+    <string name="forgot_password">Quên mật khẩu</string>
+    <string name="remember_password">Nhớ mật khẩu</string>
+    <string name="password">Mật khẩu</string>
+    <string name="phone_number">Số điện thoại</string>
+<!--    <string name="login">Đăng nhập</string>-->
+<!--    <string name="register">Đăng ký</string>-->
 </resources>
