@@ -2,6 +2,7 @@ package com.example.ff
 
 import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -17,6 +18,7 @@ import com.example.ff.Adapter.ListMessageAdapter
 import com.example.ff.Interface.ApiService
 import com.example.ff.Models.findChatResponse
 import com.example.ff.OutData.OutDataMessage
+import com.example.ff.Test.NameChat
 import com.example.ff.databinding.ActivityChatBinding
 import retrofit2.Call
 import retrofit2.Callback
@@ -26,7 +28,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 class ChatActivity : AppCompatActivity() {
     private lateinit var binding: ActivityChatBinding
-
+    private lateinit var sharedPreferences: SharedPreferences
     private var selectedImages: ArrayList<String> = ArrayList()
     private lateinit var pickImagesLauncher: ActivityResultLauncher<Intent>
 
@@ -36,9 +38,13 @@ class ChatActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
-        val userId = intent.getStringExtra("userId") ?: ""
-        val myId = this.getSharedPreferences("data", Context.MODE_PRIVATE).getString("MY_ID",null) ?: ""
+        val userId = NameChat.userID
+        sharedPreferences = this.getSharedPreferences("data", Context.MODE_PRIVATE)
+        val myId = sharedPreferences.getString("MY_ID",null).toString()
         fetchChat(myId,userId);
+
+//        Toast.makeText(this, myId, Toast.LENGTH_LONG).show()
+//        Toast.makeText(this, userId, Toast.LENGTH_LONG).show()
 
 
         pickImagesLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
@@ -71,22 +77,21 @@ class ChatActivity : AppCompatActivity() {
         }
 
         val intent = intent
-        val item = intent.getStringExtra("userName")
+        val item = NameChat.userName
         binding.txtNameChat.setText(item)
-        Toast.makeText(this, item, Toast.LENGTH_SHORT).show()
         val listmessage = mutableListOf<OutDataMessage>()
         listmessage.add(OutDataMessage(1,R.drawable.k,"hi chào cậu","25/11"))
-        listmessage.add(OutDataMessage(1,R.drawable.k,"hi ","26/11"))
-        listmessage.add(OutDataMessage(2,R.drawable.k,"bạn khỏe không","26/11"))
-        listmessage.add(OutDataMessage(2,R.drawable.k,"hi ","27/11"))
-        listmessage.add(OutDataMessage(1,R.drawable.k,"hi chào cậu","26/11"))
-        listmessage.add(OutDataMessage(1,R.drawable.k,"hi chào cậu","25/11"))
-        listmessage.add(OutDataMessage(2,R.drawable.k,"hi chào cậu","26/11"))
-        listmessage.add(OutDataMessage(1,R.drawable.k,"hi chào cậu","22/11"))
-        listmessage.add(OutDataMessage(1,R.drawable.k,"hi chào cậu","26/11"))
-        listmessage.add(OutDataMessage(2,R.drawable.k,"hi chào cậu","24/11"))
-        listmessage.add(OutDataMessage(1,R.drawable.k,"hi chào cậu","26/11"))
-        listmessage.add(OutDataMessage(2,R.drawable.k,"hi chào cậu","27/11"))
+//        listmessage.add(OutDataMessage(1,R.drawable.k,"hi ","26/11"))
+//        listmessage.add(OutDataMessage(2,R.drawable.k,"bạn khỏe không","26/11"))
+//        listmessage.add(OutDataMessage(2,R.drawable.k,"hi ","27/11"))
+//        listmessage.add(OutDataMessage(1,R.drawable.k,"hi chào cậu","26/11"))
+//        listmessage.add(OutDataMessage(1,R.drawable.k,"hi chào cậu","25/11"))
+//        listmessage.add(OutDataMessage(2,R.drawable.k,"hi chào cậu","26/11"))
+//        listmessage.add(OutDataMessage(1,R.drawable.k,"hi chào cậu","22/11"))
+//        listmessage.add(OutDataMessage(1,R.drawable.k,"hi chào cậu","26/11"))
+//        listmessage.add(OutDataMessage(2,R.drawable.k,"hi chào cậu","24/11"))
+//        listmessage.add(OutDataMessage(1,R.drawable.k,userId,"26/11"))
+//        listmessage.add(OutDataMessage(2,R.drawable.k,,"27/11"))
         val adapterListmessage = ListMessageAdapter(listmessage)
         var lmss = binding.chatRecyclerView
         lmss.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL,false)
@@ -159,35 +164,38 @@ class ChatActivity : AppCompatActivity() {
 
         val apiService = retrofit.create(ApiService::class.java)
         val call = apiService.findChat(myId, userId)
-        call.enqueue(object : Callback<findChatResponse> {
+        call.enqueue(object : Callback<List<findChatResponse>> {
             override fun onResponse(
-                call: Call<findChatResponse>,
-                response: Response<findChatResponse>
+                call: Call<List<findChatResponse>>,
+                response: Response<List<findChatResponse>>
             ) {
                 if (response.isSuccessful) {
-                    val chatResponse = response.body()
+                    val chatResponses = response.body()
 
-                    if (chatResponse != null) {
-                        val chatId = chatResponse._id
-                        val chatMember = chatResponse.member
-                        Toast.makeText(this@ChatActivity, "phản hồi thành công" + chatId, Toast.LENGTH_SHORT).show()
+                    if (!chatResponses.isNullOrEmpty()) {
+                        val firstChatResponse = chatResponses[0]
+                        val chatId = firstChatResponse._id
+                        val chatMember = firstChatResponse.member
+
+                        Toast.makeText(this@ChatActivity, "phản hồi thành công $chatId", Toast.LENGTH_SHORT).show()
+
                         // TODO: Thực hiện xử lý với thông tin người dùng
                     } else {
-                        // Xử lý trường hợp body của response là null
-                        Toast.makeText(this@ChatActivity, "phản hồi không thành công", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(this@ChatActivity, "Không có chat nào", Toast.LENGTH_SHORT).show()
                     }
                 } else {
-                    // Xử lý lỗi khi không thành công
-                      Toast.makeText(this@ChatActivity, "yêu cầu không thành công", Toast.LENGTH_SHORT).show();
+                    val error = response.errorBody()?.string()
+                    Toast.makeText(this@ChatActivity, "Lỗi: $error", Toast.LENGTH_SHORT).show()
                 }
             }
 
-            override fun onFailure(call: Call<findChatResponse>, t: Throwable) {
-                // Xử lý khi có lỗi trong quá trình thực hiện yêu cầu
-                Toast.makeText(this@ChatActivity, "yêu cầu 2 không thành công", Toast.LENGTH_SHORT).show();
+            override fun onFailure(call: Call<List<findChatResponse>>, t: Throwable) {
+                val errorMessage = "Lỗi: ${t.message}"
+                Toast.makeText(this@ChatActivity, errorMessage, Toast.LENGTH_LONG).show()
             }
         })
     }
+
 
 
 
