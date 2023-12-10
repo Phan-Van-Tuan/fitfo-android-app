@@ -16,6 +16,7 @@ import com.example.ff.Models.GetUserByPhoneNumberResponse
 import com.example.ff.OutData.OutDataContact
 import com.example.ff.ProfileActivity
 import com.example.ff.R
+import com.example.ff.Test.NameChat
 import com.example.ff.databinding.FragmentContactBinding
 import retrofit2.Call
 import retrofit2.Callback
@@ -104,14 +105,13 @@ class ContactFragment : Fragment() {
                                         val userId = userResponse.id
                                         val userName = userResponse.name
                                         val userPhoneNumber = userResponse.phoneNumber
+                                        NameChat.userName= userName
+                                        NameChat.userID= userId
                                         binding.txtName.setText(userName)
                                         binding.searchSuccess.visibility = View.VISIBLE
                                         binding.noContact.visibility = View.GONE
                                         binding.searchSuccess.setOnClickListener{
                                             var intent = Intent(context, ProfileActivity::class.java)
-                                            intent.putExtra("userId",userId)
-                                            intent.putExtra("userName",userName)
-                                            intent.putExtra("userPhoneNumber",userPhoneNumber)
                                             startActivity(intent)
                                         }
 

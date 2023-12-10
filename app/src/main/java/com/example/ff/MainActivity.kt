@@ -19,7 +19,7 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
         sharedPreferences =this.getSharedPreferences("data",Context.MODE_PRIVATE)
-        val id: String= sharedPreferences.getString("PROFILE_ID","").toString()
+        val id: String= sharedPreferences.getString("MY_ID","").toString()
         if (id==""){
             }else{
             var intent = Intent(this,MainActivity_Logged_in::class.java)

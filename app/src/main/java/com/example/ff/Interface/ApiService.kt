@@ -21,7 +21,6 @@ interface ApiService {
     @GET("api/users/getUserByPhoneNumber/{phoneNumber}")
     fun getUserByPhoneNumber(@Path("phoneNumber") phoneNumber: String): Call<GetUserByPhoneNumberResponse>
     @GET("api/chats/find/{myId}/{userId}")
-    fun findChat(@Path("myId") myId: String, @Path("userId") userId: String): Call<findChatResponse>
-
+    fun findChat(@Path("myId") myId: String, @Path("userId") userId: String): Call<List<findChatResponse>>
 
 }
