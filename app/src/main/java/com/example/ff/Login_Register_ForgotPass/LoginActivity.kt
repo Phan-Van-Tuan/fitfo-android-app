@@ -35,7 +35,7 @@ class LoginActivity : AppCompatActivity() {
             val loginRequest = LoginRequest(phoneNumber, password)
 
             val retrofit = Retrofit.Builder()
-                .baseUrl("https://fitfo-api.onrender.com/")
+                .baseUrl("https://fitfo-api.vercel.app/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build()
 
@@ -85,9 +85,9 @@ class LoginActivity : AppCompatActivity() {
     private fun setData(id:String, name: String, phoneNumber:String, accessToken:String ){
         sharedPreferences =this.getSharedPreferences("data", Context.MODE_PRIVATE)
         val editor = sharedPreferences.edit()
-        editor.putString("PROFILE_ID", id)
-        editor.putString("PROFILE_NAME", name)
-        editor.putString("PROFILE_PHONE_NUMBER", phoneNumber)
+        editor.putString("MY_ID", id)
+        editor.putString("MY_NAME", name)
+        editor.putString("MY_PHONE_NUMBER", phoneNumber)
         editor.putString("ACCESS_TOKEN", accessToken)
         editor.apply()
     }

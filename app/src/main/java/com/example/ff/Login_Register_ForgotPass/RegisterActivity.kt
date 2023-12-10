@@ -36,7 +36,7 @@ class RegisterActivity : AppCompatActivity() {
             val RegisterRequest = RegisterRequest(name,phoneNumber,email, password)
 
             val retrofit = Retrofit.Builder()
-                .baseUrl("https://fitfo-api.onrender.com/")
+                .baseUrl("https://fitfo-api.vercel.app/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build()
 
