@@ -8,6 +8,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.example.ff.Interface.ApiService
 import com.example.ff.Models.RegisterRequest
 import com.example.ff.Models.RegisterResponse
+import com.example.ff.Test.Validator
 import com.example.ff.databinding.ActivityRegisterBinding
 import retrofit2.Call
 import retrofit2.Callback
@@ -19,20 +20,40 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 class RegisterActivity : AppCompatActivity() {
     private lateinit var binding:ActivityRegisterBinding
+    private var validator = Validator();
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityRegisterBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        binding.txtToLogin.setOnClickListener {
+        binding.btnToLogin.setOnClickListener {
             var intent = Intent(this,LoginActivity::class.java)
             startActivity(intent)
         }
 
+        binding.inputPhoneNumber.setOnFocusChangeListener{ _, focused ->
+            if(!focused) {
+                var validatePhoneNumber = binding.inputPhoneNumber.text.toString().trim();
+                binding.layoutInputPhoneNumber.helperText = validator.isPhoneNumber(validatePhoneNumber);
+            }
+        }
+        binding.inputPhoneNumber.setOnFocusChangeListener{ _, focused ->
+            if(!focused) {
+                var validatePhoneNumber = binding.inputPhoneNumber.text.toString().trim();
+                binding.layoutInputPhoneNumber.helperText = validator.isPhoneNumber(validatePhoneNumber);
+            }
+        }
+        binding.inputPhoneNumber.setOnFocusChangeListener{ _, focused ->
+            if(!focused) {
+                var validatePhoneNumber = binding.inputPhoneNumber.text.toString().trim();
+                binding.layoutInputPhoneNumber.helperText = validator.isPhoneNumber(validatePhoneNumber);
+            }
+        }
+
         binding.btnRegister.setOnClickListener {
-            val phoneNumber = binding.edtPhoneNumber.text.toString()
-            val password = binding.edtPassword.text.toString()
-            val email = binding.edtEmail.text.toString()
-            val name = binding.edtName.text.toString()
+            val phoneNumber = binding.inputPhoneNumber.text.toString().trim()
+            val password = binding.inputPassword.text.toString().trim()
+            val email = binding.inputEmail.text.toString().trim()
+            val name = binding.inputName.text.toString().trim()
             val context: Context = this
             val RegisterRequest = RegisterRequest(name, phoneNumber, email, password)
 
@@ -55,7 +76,7 @@ class RegisterActivity : AppCompatActivity() {
                         val message = response.body()?.success ?: ""
                         Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
                         // TODO: Xử lý message
-                        val intent = Intent(this@RegisterActivity, LoginActivity::class.java)
+                        val intent = Intent(context, LoginActivity::class.java)
 //                        intent.putExtra("textView", message)
                         startActivity(intent);
 
@@ -77,5 +98,6 @@ class RegisterActivity : AppCompatActivity() {
             })
         }
     }
+
 }
 
