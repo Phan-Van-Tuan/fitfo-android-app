@@ -6,6 +6,7 @@ import com.example.ff.Models.GetUserByPhoneNumberResponse
 import com.example.ff.Models.LoginRequest
 import com.example.ff.Models.RegisterRequest
 import com.example.ff.Models.findChatResponse
+import com.example.ff.Models.findMessageResponse
 import retrofit2.Call
 import retrofit2.http.Body
 import retrofit2.http.GET
@@ -22,5 +23,9 @@ interface ApiService {
     fun getUserByPhoneNumber(@Path("phoneNumber") phoneNumber: String): Call<GetUserByPhoneNumberResponse>
     @GET("api/chats/find/{myId}/{userId}")
     fun findChat(@Path("myId") myId: String, @Path("userId") userId: String): Call<List<findChatResponse>>
+    @GET("api/chats/{myId}")
+    fun findChats(@Path("myId") myId: String): Call<List<findChatResponse>>
+    @GET("api/messages/{chatId}")
+    fun findMessages(@Path("chatId") myId: String): Call<List<findMessageResponse>>
 
 }

@@ -5,9 +5,11 @@ import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.widget.addTextChangedListener
 import com.example.ff.Interface.ApiService
 import com.example.ff.Models.RegisterRequest
 import com.example.ff.Models.RegisterResponse
+import com.example.ff.Test.Validator
 import com.example.ff.databinding.ActivityRegisterBinding
 import retrofit2.Call
 import retrofit2.Callback
@@ -19,20 +21,72 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 class RegisterActivity : AppCompatActivity() {
     private lateinit var binding:ActivityRegisterBinding
+    private var validator = Validator();
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityRegisterBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        binding.txtToLogin.setOnClickListener {
+        binding.btnToLogin.setOnClickListener {
             var intent = Intent(this,LoginActivity::class.java)
             startActivity(intent)
         }
 
+        binding.inputPhoneNumber.addTextChangedListener{
+            var validatePhoneNumber = binding.inputPhoneNumber.text.toString().trim();
+            if (validatePhoneNumber != "") {
+                binding.layoutInputPhoneNumber.helperText = validator.isPhoneNumber(validatePhoneNumber);
+            }else{
+                binding.layoutInputPhoneNumber.helperText = ""
+            }
+        }
+        binding.inputEmail.addTextChangedListener{
+            var validateEmail = binding.inputEmail.text.toString().trim();
+            if (validateEmail != "") {
+                binding.layoutInputEmail.helperText = validator.isEmail(validateEmail);
+            }else{
+                binding.layoutInputEmail.helperText = ""
+            }
+        }
+        binding.inputPassword.addTextChangedListener{
+            var validatePassword = binding.inputPassword.text.toString().trim();
+            if (validatePassword != "") {
+                binding.layoutInputPassword.helperText = validator.isStrongPassword(validatePassword);
+            }else{
+                binding.layoutInputPassword.helperText = ""
+            }
+        }
+        binding.inputConfirmPassword.addTextChangedListener{
+            var validateConfirmPassword = binding.inputConfirmPassword.text.toString().trim();
+            var validatePassword = binding.inputPassword.text.toString().trim();
+            if (validateConfirmPassword != "") {
+                if (validatePassword != ""){
+                    if(validateConfirmPassword != validatePassword)
+                        binding.layoutInputConfirmPassword.helperText = "Mật khẩu không khớp!"
+                }else{
+                    binding.layoutInputConfirmPassword.helperText = "Hãy nhập mật khẩu!"
+                }
+
+            }else{
+                binding.layoutInputConfirmPassword.helperText = ""
+            }
+        }
+
         binding.btnRegister.setOnClickListener {
-            val phoneNumber = binding.edtPhoneNumber.text.toString()
-            val password = binding.edtPassword.text.toString()
-            val email = binding.edtEmail.text.toString()
-            val name = binding.edtName.text.toString()
+            val phoneNumber = binding.inputPhoneNumber.text.toString().trim()
+            val password = binding.inputPassword.text.toString().trim()
+            val email = binding.inputEmail.text.toString().trim()
+            val name = binding.inputName.text.toString().trim()
+            if(!validator.isRequired(phoneNumber))
+                binding.layoutInputPhoneNumber.helperText = "Trường này là bắt buộc";
+            if(!validator.isRequired(email))
+                binding.layoutInputEmail.helperText = "Trường này là bắt buộc";
+            if(!validator.isRequired(name))
+                binding.layoutInputName.helperText = "Trường này là bắt buộc";
+            if(!validator.isRequired(password))
+                binding.layoutInputPassword.helperText = "Trường này là bắt buộc";
+
+
+
             val context: Context = this
             val RegisterRequest = RegisterRequest(name, phoneNumber, email, password)
 
@@ -55,7 +109,7 @@ class RegisterActivity : AppCompatActivity() {
                         val message = response.body()?.success ?: ""
                         Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
                         // TODO: Xử lý message
-                        val intent = Intent(this@RegisterActivity, LoginActivity::class.java)
+                        val intent = Intent(context, LoginActivity::class.java)
 //                        intent.putExtra("textView", message)
                         startActivity(intent);
 
@@ -77,5 +131,6 @@ class RegisterActivity : AppCompatActivity() {
             })
         }
     }
+
 }
 

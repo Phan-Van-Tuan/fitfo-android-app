@@ -13,6 +13,11 @@
     <string name="remember_password">Nhớ mật khẩu</string>
     <string name="password">Mật khẩu</string>
     <string name="phone_number">Số điện thoại</string>
-<!--    <string name="login">Đăng nhập</string>-->
-<!--    <string name="register">Đăng ký</string>-->
+    <string name="checkbox_agree">Bạn đồng ý với chính sách của chúng tôi</string>
+    <string name="confirm_password">Nhập lại mật khẩu</string>
+    <string name="user_name">Tên người dùng</string>
+    <string name="email">Email</string>
+    <string name="help">Trợ giúp</string>
+<!--    <string name="help">Trợ giúp</string>-->
+
 </resources>
