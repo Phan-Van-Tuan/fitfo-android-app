@@ -1,98 +1,101 @@
 package com.example.ff.Fragment
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.ff.Adapter.ListChatAdapter
 import com.example.ff.ChatActivity
+import com.example.ff.Interface.ApiService
 import com.example.ff.OutData.OutDataChat
 import com.example.ff.R
 import com.example.ff.Interface.RvChat
+import com.example.ff.Models.findChatResponse
+import com.example.ff.Models.findMessageResponse
+import com.example.ff.Test.NameChat
 import com.example.ff.databinding.FragmentChatBinding
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
+import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
 
-
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
 
 class ChatFragment : Fragment() {
     private lateinit var binding: FragmentChatBinding
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
-    }
+    private var listChats: MutableList<findChatResponse> = mutableListOf()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentChatBinding.inflate(inflater,container,false)
+        var sharedPreferences = requireActivity().getSharedPreferences("data", Context.MODE_PRIVATE)
+        val myId = sharedPreferences.getString("MY_ID", null).toString();
+        fetchChats(myId);
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val listchat = mutableListOf<OutDataChat>()
-        listchat.add(OutDataChat(R.drawable.a, "Tuấn", "hihi", "10 phút"))
-        listchat.add(OutDataChat(R.drawable.a, "Nhân", "hihbbjkjh", "10 phút"))
-        listchat.add(OutDataChat(R.drawable.a, "Tuấn", "hihibhjbjb", "10 phút"))
-        listchat.add(OutDataChat(R.drawable.a, "Tuấn", "hihi", "10 phút"))
-        listchat.add(OutDataChat(R.drawable.a, "Tuấn", "hihi", "10 phút"))
-        listchat.add(OutDataChat(R.drawable.a, "Tuấn", "hihi", "10 phút"))
-        listchat.add(OutDataChat(R.drawable.a, "Tuấn", "hihi", "10 phút"))
-        listchat.add(OutDataChat(R.drawable.a, "Tuấn", "hihi", "10 phút"))
-        listchat.add(OutDataChat(R.drawable.a, "Tuấn", "hihi", "10 phút"))
-        listchat.add(OutDataChat(R.drawable.a, "Tuấn", "hihi", "10 phút"))
-        listchat.add(OutDataChat(R.drawable.a, "Tuấn", "hihi", "10 phút"))
-        listchat.add(OutDataChat(R.drawable.a, "Tuấn", "hihi", "10 phút"))
-        listchat.add(OutDataChat(R.drawable.a, "Tuấn", "hihi", "10 phút"))
-        listchat.add(OutDataChat(R.drawable.a, "Tuấn", "hihi", "10 phút"))
-        listchat.add(OutDataChat(R.drawable.a, "Tuấn", "hihi", "10 phút"))
-        listchat.add(OutDataChat(R.drawable.a, "Tuấn", "hihi", "10 phút"))
-        listchat.add(OutDataChat(R.drawable.a, "Tuấn", "hihi", "10 phút"))
-        listchat.add(OutDataChat(R.drawable.a, "Tuấn", "hihi", "10 phút"))
-        listchat.add(OutDataChat(R.drawable.a, "Tuấn", "hihi", "10 phút"))
-        listchat.add(OutDataChat(R.drawable.a, "Tuấn", "hihi", "10 phút"))
-        listchat.add(OutDataChat(R.drawable.a, "Tuấn", "hihi", "10 phút"))
-
-
-
-        val adapterDs = ListChatAdapter(listchat, object : RvChat {
-
-            override fun onClickchat(pos: Int) {
-                var intent = Intent(context, ChatActivity::class.java)
-                intent.putExtra("txtNameChat","${listchat[pos].txtNameChat}")
-                startActivity(intent)
-            }
-
-        })
-        var dsChat = binding.dsChat
-        dsChat.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL,false)
-        dsChat.adapter = adapterDs
-        dsChat.setHasFixedSize(true)
-//        Log.e("adapter", binding.dsChat.toString())
-//        Toast.makeText(context, ds[0].txtName, Toast.LENGTH_LONG).show()
     }
 
-    companion object {
+    private fun fetchChats(myId: String) {
+        val retrofit = Retrofit.Builder()
+            .baseUrl("https://fitfo-api.vercel.app/")
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
 
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            ChatFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
+        val apiService = retrofit.create(ApiService::class.java)
+        val call = apiService.findChats(myId)
+        call.enqueue(object : Callback<List<findChatResponse>> {
+            override fun onResponse(
+                call: Call<List<findChatResponse>>,
+                response: Response<List<findChatResponse>>
+            ) {
+                if (response.isSuccessful) {
+                    val chatsResponse = response.body()
+
+                    if (!chatsResponse.isNullOrEmpty()) {
+                        listChats.addAll(chatsResponse);
+
+                        val adapterDs = ListChatAdapter(listChats, object : RvChat {
+
+                            override fun onClickchat(pos: Int) {
+                                NameChat.userName = listChats[pos]._id;
+                                NameChat.chatID= listChats[pos]._id;
+                                NameChat.userID = listChats[pos].members[1];
+                                var intent = Intent(context, ChatActivity::class.java)
+                                intent.putExtra("idChat","${listChats[pos]._id}")
+                                startActivity(intent)
+                            }
+                        })
+                        var dsChat = binding.dsChat
+                        dsChat.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL,false)
+                        dsChat.adapter = adapterDs
+                        dsChat.setHasFixedSize(true)
+
+                        // TODO: Thực hiện xử lý với thông tin người dùng
+                    } else {
+                        Toast.makeText(context, "Không có chat nào", Toast.LENGTH_SHORT)
+                            .show()
+                    }
+                } else {
+                    val error = response.errorBody()?.string()
+                    Toast.makeText(context, "Lỗi: $error", Toast.LENGTH_SHORT).show()
                 }
             }
+
+            override fun onFailure(call: Call<List<findChatResponse>>, t: Throwable) {
+                val errorMessage = "Lỗi: ${t.message}"
+                Toast.makeText(context, errorMessage, Toast.LENGTH_LONG).show()
+            }
+        })
     }
+
 }

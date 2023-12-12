@@ -5,6 +5,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.widget.addTextChangedListener
 import com.example.ff.Interface.ApiService
 import com.example.ff.Models.RegisterRequest
 import com.example.ff.Models.RegisterResponse
@@ -30,22 +31,43 @@ class RegisterActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
-        binding.inputPhoneNumber.setOnFocusChangeListener{ _, focused ->
-            if(!focused) {
-                var validatePhoneNumber = binding.inputPhoneNumber.text.toString().trim();
+        binding.inputPhoneNumber.addTextChangedListener{
+            var validatePhoneNumber = binding.inputPhoneNumber.text.toString().trim();
+            if (validatePhoneNumber != "") {
                 binding.layoutInputPhoneNumber.helperText = validator.isPhoneNumber(validatePhoneNumber);
+            }else{
+                binding.layoutInputPhoneNumber.helperText = ""
             }
         }
-        binding.inputPhoneNumber.setOnFocusChangeListener{ _, focused ->
-            if(!focused) {
-                var validatePhoneNumber = binding.inputPhoneNumber.text.toString().trim();
-                binding.layoutInputPhoneNumber.helperText = validator.isPhoneNumber(validatePhoneNumber);
+        binding.inputEmail.addTextChangedListener{
+            var validateEmail = binding.inputEmail.text.toString().trim();
+            if (validateEmail != "") {
+                binding.layoutInputEmail.helperText = validator.isEmail(validateEmail);
+            }else{
+                binding.layoutInputEmail.helperText = ""
             }
         }
-        binding.inputPhoneNumber.setOnFocusChangeListener{ _, focused ->
-            if(!focused) {
-                var validatePhoneNumber = binding.inputPhoneNumber.text.toString().trim();
-                binding.layoutInputPhoneNumber.helperText = validator.isPhoneNumber(validatePhoneNumber);
+        binding.inputPassword.addTextChangedListener{
+            var validatePassword = binding.inputPassword.text.toString().trim();
+            if (validatePassword != "") {
+                binding.layoutInputPassword.helperText = validator.isStrongPassword(validatePassword);
+            }else{
+                binding.layoutInputPassword.helperText = ""
+            }
+        }
+        binding.inputConfirmPassword.addTextChangedListener{
+            var validateConfirmPassword = binding.inputConfirmPassword.text.toString().trim();
+            var validatePassword = binding.inputPassword.text.toString().trim();
+            if (validateConfirmPassword != "") {
+                if (validatePassword != ""){
+                    if(validateConfirmPassword != validatePassword)
+                        binding.layoutInputConfirmPassword.helperText = "Mật khẩu không khớp!"
+                }else{
+                    binding.layoutInputConfirmPassword.helperText = "Hãy nhập mật khẩu!"
+                }
+
+            }else{
+                binding.layoutInputConfirmPassword.helperText = ""
             }
         }
 
@@ -54,6 +76,17 @@ class RegisterActivity : AppCompatActivity() {
             val password = binding.inputPassword.text.toString().trim()
             val email = binding.inputEmail.text.toString().trim()
             val name = binding.inputName.text.toString().trim()
+            if(!validator.isRequired(phoneNumber))
+                binding.layoutInputPhoneNumber.helperText = "Trường này là bắt buộc";
+            if(!validator.isRequired(email))
+                binding.layoutInputEmail.helperText = "Trường này là bắt buộc";
+            if(!validator.isRequired(name))
+                binding.layoutInputName.helperText = "Trường này là bắt buộc";
+            if(!validator.isRequired(password))
+                binding.layoutInputPassword.helperText = "Trường này là bắt buộc";
+
+
+
             val context: Context = this
             val RegisterRequest = RegisterRequest(name, phoneNumber, email, password)
 

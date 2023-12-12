@@ -119,6 +119,7 @@ class LoginActivity : AppCompatActivity() {
         editor.putString("MY_PHONE_NUMBER", phoneNumber)
         editor.putString("ACCESS_TOKEN", accessToken)
         editor.apply()
+        //day idol
     }
 
     private fun rememberPassword(phoneNumber: String, password: String, isChecked: Boolean) {

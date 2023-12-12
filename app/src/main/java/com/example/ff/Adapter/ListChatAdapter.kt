@@ -9,9 +9,10 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.ff.OutData.OutDataChat
 import com.example.ff.R
 import com.example.ff.Interface.RvChat
+import com.example.ff.Models.findChatResponse
 
 
-class ListChatAdapter(var listChat: MutableList<OutDataChat>, val rvInterfaceChat: RvChat): RecyclerView.Adapter<ListChatAdapter.listchat>() {
+class ListChatAdapter(var listChat: MutableList<findChatResponse>, val rvInterfaceChat: RvChat): RecyclerView.Adapter<ListChatAdapter.listchat>() {
 inner class listchat(itemView: View) :RecyclerView.ViewHolder(itemView)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): listchat {
@@ -25,10 +26,10 @@ inner class listchat(itemView: View) :RecyclerView.ViewHolder(itemView)
             var txtTitle = findViewById<TextView>(R.id.txtTitle)
             var txtTimeOnline = findViewById<TextView>(R.id.txtTimeOnline)
             var imgAvtChat = findViewById<ImageView>(R.id.imgAvtChat)
-            txtNameChat.setText(listChat[position].txtNameChat)
-            txtTitle.setText(listChat[position].txtTitle)
-            txtTimeOnline.setText(listChat[position].txtTimeOnline)
-            imgAvtChat.setImageResource(listChat[position].imgAvtChat)
+            txtNameChat.setText(listChat[position]._id)
+//            txtTitle.setText(listChat[position].txtTitle)
+//            txtTimeOnline.setText(listChat[position].txtTimeOnline)
+//            imgAvtChat.setImageResource(listChat[position].imgAvtChat)
             holder.itemView.setOnClickListener {
                 rvInterfaceChat.onClickchat(position)
             }
