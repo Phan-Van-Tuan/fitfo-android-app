@@ -6,10 +6,11 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.example.ff.Interface.RvChat
 import com.example.ff.OutData.OutData_Story
 import com.example.ff.R
 
-class StoryAdapter( var liststory:List<OutData_Story>):RecyclerView.Adapter<StoryAdapter.listStory> (){
+class StoryAdapter( var liststory:List<OutData_Story>, val rvInterfaceChat: RvChat):RecyclerView.Adapter<StoryAdapter.listStory> (){
     inner class listStory(itemView: View):RecyclerView.ViewHolder(itemView)
 
 
@@ -27,6 +28,9 @@ class StoryAdapter( var liststory:List<OutData_Story>):RecyclerView.Adapter<Stor
             imgAvtStory.setImageResource(liststory[position].imgAvtStory)
             imgStory.setImageResource(liststory[position].imgStory)
             txtNameStory.setText(liststory[position].txtNameStory)
+            holder.itemView.setOnClickListener {
+                rvInterfaceChat.onClickchat(position)
+            }
         }
     }
 
