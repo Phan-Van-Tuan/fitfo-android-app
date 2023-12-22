@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:cardCornerRadius="25dp"
+        >
+
+        <ImageView
+            android:id="@+id/imgDisplayStory"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="centerCrop"
+            android:src="@drawable/i" />
+
+        <!--        <VideoView-->
+<!--            android:layout_width="120dp"-->
+<!--            android:layout_height="240dp"-->
+<!--            />-->
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="wrap_content"
+            app:cardCornerRadius="50dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="10dp">
+            <ImageView
+                android:id="@+id/imgDisplayAvtStory"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                app:srcCompat="@drawable/a" />
+        </androidx.cardview.widget.CardView>
+
+
+        <TextView
+            android:id="@+id/txtDisplayNameStory"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="65dp"
+            android:textSize="18dp"
+            android:textColor="@color/white"
+            android:layout_marginTop="15dp"
+            android:text="Phan Tuấn" />
+
+        <ImageView
+            android:id="@+id/optionStory"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:src="@drawable/optionw"
+            android:padding="5dp"
+            android:layout_marginRight="55dp"
+            android:layout_gravity="end"
+            />
+
+        <ImageView
+            android:id="@+id/closeStory"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_gravity="end"
+            android:padding="5dp"
+            android:src="@drawable/ic_close" />
+
+    </androidx.cardview.widget.CardView>
+
+
+
+</RelativeLayout>

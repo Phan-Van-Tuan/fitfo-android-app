@@ -67,8 +67,8 @@ class ChatFragment : Fragment() {
                         val adapterDs = ListChatAdapter(listChats, object : RvChat {
 
                             override fun onClickchat(pos: Int) {
-                                NameChat.userName = listChats[pos]._id;
-                                NameChat.chatID= listChats[pos]._id;
+                                NameChat.userName = listChats[pos].chatName;
+                                NameChat.chatID = listChats[pos]._id;
                                 NameChat.userID = listChats[pos].members[1];
                                 var intent = Intent(context, ChatActivity::class.java)
                                 intent.putExtra("idChat","${listChats[pos]._id}")
