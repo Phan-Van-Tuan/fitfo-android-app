@@ -7,9 +7,9 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:246276691470:android:29ff4abece7ea2bf64ce5f",
+        "mobilesdk_app_id": "1:246276691470:android:38f6e6ed477069ef64ce5f",
         "android_client_info": {
-          "package_name": "com.example.test_firebase"
+          "package_name": "com.example.fitfo"
         }
       },
       "oauth_client": [],

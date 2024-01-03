@@ -5,11 +5,11 @@ plugins {
 }
 
 android {
-    namespace = "com.example.ff"
+    namespace = "com.example.fitfo"
     compileSdk = 34
 
     defaultConfig {
-        applicationId = "com.example.ff"
+        applicationId = "com.example.fitfo"
         minSdk = 24
         targetSdk = 34
         versionCode = 1
