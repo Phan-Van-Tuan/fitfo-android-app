@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import com.example.ff.databinding.ActivityMainLoggedInBinding
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.navigation.NavigationBarView
@@ -13,17 +14,24 @@ import com.example.ff.Fragment.ContactFragment
 import com.example.ff.Fragment.DiaryFragment
 import com.example.ff.Fragment.DiscoverFragment
 import com.example.ff.Fragment.PersonalFragment
+import com.example.ff.Socket.MySocketManager
 
 
 private lateinit var binding: ActivityMainLoggedInBinding
 class MainActivity_Logged_in : AppCompatActivity() {
 
+    private val socketManager = MySocketManager()
+    private lateinit var sharedPreferences: SharedPreferences
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         com.example.ff.binding = ActivityMainLoggedInBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
-
+        sharedPreferences =this.getSharedPreferences("data",Context.MODE_PRIVATE)
+        val id: String= sharedPreferences.getString("MY_ID","").toString()
+        socketManager.initSocket()
+        socketManager.connectSocket()
+        socketManager.addNewUser(id)
         // khởi tạo đối tượng dialog
         // display all title and content in bottom nav
         com.example.ff.binding.bottomNavigationView.labelVisibilityMode =

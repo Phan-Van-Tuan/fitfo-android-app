@@ -10,13 +10,12 @@ import android.widget.SearchView
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.ff.Adapter.ContactAdapter
-import com.example.ff.ChatActivity
 import com.example.ff.Interface.ApiService
 import com.example.ff.Models.GetUserByPhoneNumberResponse
 import com.example.ff.OutData.OutDataContact
 import com.example.ff.ProfileActivity
 import com.example.ff.R
-import com.example.ff.Test.NameChat
+import com.example.ff.Test.MyInfo
 import com.example.ff.databinding.FragmentContactBinding
 import retrofit2.Call
 import retrofit2.Callback
@@ -105,8 +104,8 @@ class ContactFragment : Fragment() {
                                         val userId = userResponse.id
                                         val userName = userResponse.name
                                         val userPhoneNumber = userResponse.phoneNumber
-                                        NameChat.userName= userName
-                                        NameChat.userID= userId
+                                        MyInfo.userName= userName
+                                        MyInfo.userID= userId
                                         binding.txtName.setText(userName)
                                         binding.searchSuccess.visibility = View.VISIBLE
                                         binding.noContact.visibility = View.GONE

@@ -13,6 +13,7 @@
         android:layout_height="wrap_content"
         android:hint="Tìm kiếm đoạn chat"
         app:iconifiedByDefault="false"
+        android:focusable="false"
         app:closeIcon="@drawable/ic_close"
         app:defaultQueryHint="Không có dữ liệu"
         app:queryHint="Tìm kiếm" />

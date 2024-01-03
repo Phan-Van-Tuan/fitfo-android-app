@@ -21,6 +21,7 @@
             android:layout_width="350dp"
             android:layout_height="wrap_content"
             android:hint="Tìm kiếm"
+            android:focusable="false"
             app:closeIcon="@drawable/ic_close"
             app:defaultQueryHint="Tìm kiếm"
             app:iconifiedByDefault="false" />

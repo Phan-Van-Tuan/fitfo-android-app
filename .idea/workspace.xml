@@ -12,14 +12,26 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="33f7314b-0f56-41e3-acf4-74cd42e6e1a7" name="Changes" comment="update 22/12">
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/example/ff/Adapter/DisplayStoryAdapter.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/example/ff/DisplayStory.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/example/ff/test.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_display_story.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_test.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/layout/layout_display_story.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/menu/menu_option_story.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/xml/network_security_config.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/google-services.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/example/ff/Adapter/CommentAdapter.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/example/ff/CommentPost.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/example/ff/Models/CommentRequest.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/example/ff/Models/GetPostReponse.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/example/ff/Models/GetStoryReponse.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/example/ff/Models/Response.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/example/ff/Models/findCommentResponse.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/example/ff/Socket/MySocketManager.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/example/ff/Test/DateFormat.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/example/ff/Test/ImageLoader.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/anim/slide_up.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable/closeblack.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable/delete.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable/nocmt.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable/warning.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_comment_post.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/layout/layout_comment.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/layout/option_port.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/values/styles.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/8.0/checksums/checksums.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.0/checksums/checksums.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/8.0/executionHistory/executionHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.0/executionHistory/executionHistory.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/8.0/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.0/executionHistory/executionHistory.lock" afterDir="false" />
@@ -29,21 +41,40 @@
       <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/file-system.probe" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/file-system.probe" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/assetWizardSettings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/assetWizardSettings.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/build.gradle.kts" beforeDir="false" afterPath="$PROJECT_DIR$/app/build.gradle.kts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/ff/Adapter/ListChatAdapter.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/ff/Adapter/ListChatAdapter.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/ff/Adapter/DisplayStoryAdapter.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/ff/Adapter/DisplayStoryAdapter.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/ff/Adapter/ListMessageAdapter.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/ff/Adapter/ListMessageAdapter.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/ff/Adapter/PostAdapter.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/ff/Adapter/PostAdapter.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/ff/Adapter/StoryAdapter.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/ff/Adapter/StoryAdapter.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/ff/ChatActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/ff/ChatActivity.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/ff/DisplayStory.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/ff/DisplayStory.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/ff/Fragment/ChatFragment.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/ff/Fragment/ChatFragment.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/ff/Fragment/ContactFragment.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/ff/Fragment/ContactFragment.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/ff/Fragment/DiaryFragment.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/ff/Fragment/DiaryFragment.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/ff/Login_Register_ForgotPass/RegisterActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/ff/Login_Register_ForgotPass/RegisterActivity.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/ff/MainActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/ff/MainActivity.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/ff/Models/findChatResponse.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/ff/Models/findChatResponse.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/ff/Test/validator.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/ff/Test/validator.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/drawable/optionw.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/drawable/optionw.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/ff/Interface/ApiService.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/ff/Interface/ApiService.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/ff/Login_Register_ForgotPass/LoginActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/ff/Login_Register_ForgotPass/LoginActivity.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/ff/MainActivity_Logged_in.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/ff/MainActivity_Logged_in.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/ff/Models/findMessageResponse.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/ff/Models/findMessageResponse.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/ff/OptionActivity/OptionPersonal.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/ff/OptionActivity/OptionPersonal.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/ff/ProfileActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/ff/ProfileActivity.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/ff/Test/NameChat.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/ff/Test/MyInfo.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/ff/test.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/ff/test.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_chat.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_chat.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/fragment_chat.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_chat.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/fragment_contact.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_contact.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/fragment_diary.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_diary.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/fragment_discover.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_discover.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/fragment_personal.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_personal.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/item_container_received_message.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/item_container_received_message.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/item_container_sent_message.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/item_container_sent_message.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/layout_display_story.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/layout_display_story.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/layout_port.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/layout_port.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/layout_story.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/layout_story.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/settings.gradle.kts" beforeDir="false" afterPath="$PROJECT_DIR$/settings.gradle.kts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build.gradle.kts" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle.kts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -97,21 +128,23 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="layoutResourceFile" />
         <option value="Interface" />
         <option value="Class" />
         <option value="Kotlin Interface" />
         <option value="Kotlin Data Class" />
         <option value="Kotlin Object" />
         <option value="Kotlin File" />
-        <option value="Kotlin Class" />
+        <option value="layoutResourceFile" />
         <option value="resourceFile" />
+        <option value="valueResourceFile" />
+        <option value="Kotlin Class" />
       </list>
     </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
+        <entry key="$PROJECT_DIR$" value="master" />
         <entry key="$PROJECT_DIR$/fitfo" value="Vu" />
       </map>
     </option>
@@ -149,7 +182,7 @@
     &quot;cidr.known.project.marker&quot;: &quot;true&quot;,
     &quot;com.google.services.firebase.aqiPopupShown&quot;: &quot;true&quot;,
     &quot;last_directory_selection&quot;: &quot;C:/LongVu/ff/app/src/main/res/drawable&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/LongVu/ff/app/src/main/res/layout&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/LongVu/ff/app/src/main/res/anim&quot;,
     &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
     &quot;project.structure.proportion&quot;: &quot;0.17&quot;,
     &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
@@ -171,9 +204,9 @@
       <recent name="com.example.ff" />
     </key>
     <key name="CopyKotlinDeclarationDialog.RECENTS_KEY">
+      <recent name="com.example.ff.Models" />
       <recent name="com.example.ff.Adapter" />
       <recent name="com.example.ff.OutData" />
-      <recent name="com.example.ff.Models" />
       <recent name="com.example.ff.Interface" />
       <recent name="com.example.ff" />
     </key>
@@ -181,25 +214,31 @@
       <recent name="com.example.ff" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\LongVu\ff\app\src\main\res\anim" />
+      <recent name="C:\LongVu\ff\app\src\main\res\menu" />
       <recent name="C:\LongVu\ff\app\src\main\res\layout" />
       <recent name="C:\LongVu\ff\app\src\main\java\com\example\ff\Models" />
       <recent name="C:\LongVu\ff\app\src\main\res\drawable" />
     </key>
+    <key name="android.template.-1714248998">
+      <recent name="com.example.ff" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\LongVu\ff\app\src\main\res\xml" />
+      <recent name="C:\LongVu\ff\app\src\main\java\com\example\ff\Test" />
+      <recent name="C:\LongVu\ff\app" />
       <recent name="C:\LongVu\ff\app\src\main\res\drawable" />
+      <recent name="C:\LongVu\ff\app\src\main\res\xml" />
       <recent name="C:\LongVu\ff\app\src\main\java\com\example\ff\Adapter" />
-      <recent name="C:\LongVu\ff\app\src\main\res\menu" />
     </key>
     <key name="android.template.-883622965">
       <recent name="com.example.ff" />
     </key>
     <key name="MoveKotlinTopLevelDeclarationsDialog.RECENTS_KEY">
+      <recent name="com.example.ff.Socket" />
       <recent name="com.example.ff.Login_Register_ForgotPass" />
       <recent name="com.example.ff.OptionActivity" />
       <recent name="com.example.ff.Fragment" />
       <recent name="com.example.ff.Interface" />
-      <recent name="com.example.ff.OutData" />
     </key>
     <key name="android.template.-2145343989">
       <recent name="com.example.ff" />
