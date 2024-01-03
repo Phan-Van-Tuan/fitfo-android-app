@@ -11,11 +11,19 @@ import android.widget.ImageView
 import android.widget.PopupMenu
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.example.ff.Interface.RvChat
+import com.example.ff.Models.GetStoryReponse
 import com.example.ff.OutData.OutData_Story
 import com.example.ff.R
 
-class DisplayStoryAdapter(var context:Context,var liststory:List<OutData_Story>,private val onItemClickListener: (Int) -> Unit):RecyclerView.Adapter<DisplayStoryAdapter.listStory> (){
+class DisplayStoryAdapter(var context:Context,var liststory:List<GetStoryReponse>,private val onItemClickListener: (Int) -> Unit):RecyclerView.Adapter<DisplayStoryAdapter.listStory> (){
     inner class listStory(itemView: View):RecyclerView.ViewHolder(itemView)
+    private var selectedPosition: Int = RecyclerView.NO_POSITION
+    fun setSelectedPosition(position: Int) {
+        selectedPosition = position
+        notifyDataSetChanged()
+    }
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): listStory {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.layout_display_story,parent,false)
         return listStory(view)
@@ -28,9 +36,9 @@ class DisplayStoryAdapter(var context:Context,var liststory:List<OutData_Story>,
             var txtNameStory = findViewById<TextView>(R.id.txtDisplayNameStory)
             var BtnClose = findViewById<ImageView>(R.id.closeStory)
             var BtnOptionStory = findViewById<ImageView>(R.id.optionStory)
-            imgAvtStory.setImageResource(liststory[position].imgAvtStory)
-            imgStory.setImageResource(liststory[position].imgStory)
-            txtNameStory.setText(liststory[position].txtNameStory)
+//            imgAvtStory.setImageResource(liststory[position].imgAvtStory)
+//            imgStory.setImageResource(liststory[position].imgStory)
+            txtNameStory.setText(liststory[position]._id)
 
             BtnClose.setOnClickListener {
                 onItemClickListener(position)

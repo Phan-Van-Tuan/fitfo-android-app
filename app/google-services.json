@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "246276691470",
+    "project_id": "fitfo-storage",
+    "storage_bucket": "fitfo-storage.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:246276691470:android:29ff4abece7ea2bf64ce5f",
+        "android_client_info": {
+          "package_name": "com.example.test_firebase"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAhVWhPeX70y9qn_jWndMQmZYTIHaPGta0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

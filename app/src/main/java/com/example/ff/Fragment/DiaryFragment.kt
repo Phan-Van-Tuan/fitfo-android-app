@@ -1,16 +1,16 @@
 package com.example.ff.Fragment
 
 import android.Manifest
-import android.app.Activity.RESULT_OK
+import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
-import android.graphics.Bitmap
 import android.os.Bundle
-import android.provider.MediaStore
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
+import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
@@ -20,14 +20,24 @@ import com.example.ff.Adapter.StoryAdapter
 import com.example.ff.Adapter.postAdapter
 import com.example.ff.ChatActivity
 import com.example.ff.DisplayStory
+import com.example.ff.Interface.ApiService
 import com.example.ff.Interface.RvChat
+import com.example.ff.Models.GetPostReponse
+import com.example.ff.Models.GetStoryReponse
+import com.example.ff.Models.findChatResponse
 import com.example.ff.OutData.OutDataPost
 import com.example.ff.OutData.OutData_Story
 import com.example.ff.R
-import com.example.ff.Test.NameChat
+import com.example.ff.Test.MyInfo
 import com.example.ff.databinding.FragmentDiaryBinding
 import com.example.ff.test
+import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.nguyenhoanglam.imagepicker.ui.imagepicker.registerImagePicker
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
+import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
 
 
 private const val ARG_PARAM1 = "param1"
@@ -35,6 +45,8 @@ private const val ARG_PARAM2 = "param2"
 
 class DiaryFragment : Fragment() {
     private lateinit var binding: FragmentDiaryBinding
+    private var listPosts: MutableList<GetPostReponse> = mutableListOf()
+    private var listStorys: MutableList<GetStoryReponse> = mutableListOf()
 
     val REQUEST_CODE = 10
     private val launcher = registerImagePicker { images ->
@@ -64,57 +76,44 @@ class DiaryFragment : Fragment() {
     ): View? {
         binding = FragmentDiaryBinding.inflate(inflater,container,false)
         return binding.root
+
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val liststory = mutableListOf<OutData_Story>()
-        liststory.add(OutData_Story(R.drawable.k,R.drawable.i,"Phan Tuấn"))
-        liststory.add(OutData_Story(R.drawable.k,R.drawable.i,"Phan Tuấn"))
-        liststory.add(OutData_Story(R.drawable.k,R.drawable.i,"Phan Tuấn"))
-        liststory.add(OutData_Story(R.drawable.k,R.drawable.i,"Phan Tuấn"))
-        liststory.add(OutData_Story(R.drawable.k,R.drawable.i,"Phan Tuấn"))
-        liststory.add(OutData_Story(R.drawable.k,R.drawable.i,"Phan Tuấn"))
-        liststory.add(OutData_Story(R.drawable.k,R.drawable.i,"Phan Tuấn"))
-        liststory.add(OutData_Story(R.drawable.k,R.drawable.i,"Phan Tuấn"))
-        liststory.add(OutData_Story(R.drawable.k,R.drawable.i,"Phan Tuấn"))
-        liststory.add(OutData_Story(R.drawable.k,R.drawable.i,"Phan Tuấn"))
-        liststory.add(OutData_Story(R.drawable.k,R.drawable.i,"Phan Tuấn"))
-        liststory.add(OutData_Story(R.drawable.k,R.drawable.i,"Phan Tuấn"))
-        val adapterStory = StoryAdapter(liststory, object : RvChat {
 
-            override fun onClickchat(pos: Int) {
-                var intent = Intent(context, DisplayStory::class.java)
-//                intent.putExtra("idChat","${listChats[pos]._id}")
-                startActivity(intent)
-            }
-        })
-        var listStory = binding.listStory
-        listStory.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL,false)
-        listStory.adapter = adapterStory
-        listStory.setHasFixedSize(true)
-
-
-        val listPost = mutableListOf<OutDataPost>()
-        listPost.add(OutDataPost(R.drawable.i,"Nguyễn Nhân","đã cập nhật ảnh đại diện","10/3","hi mn",R.drawable.i,"15","3"))
-        listPost.add(OutDataPost(R.drawable.i,"Nguyễn Nhân","","10/3","",R.drawable.i,"15","3"))
-        listPost.add(OutDataPost(R.drawable.i,"Nguyễn Nhân","","10/3","dbchjgcfcjkdbsjhcvbhj",R.drawable.i,"15","3"))
-        listPost.add(OutDataPost(R.drawable.i,"Nguyễn Nhân","đã cập nhật ảnh đại diện","10/3","",R.drawable.i,"15","3"))
-        listPost.add(OutDataPost(R.drawable.i,"Nguyễn Nhân","đã cập nhật ảnh đại diện","10/3","",R.drawable.i,"15","3"))
-        listPost.add(OutDataPost(R.drawable.i,"Nguyễn Nhân","đã cập nhật ảnh đại diện","10/3","",R.drawable.i,"15","3"))
-        listPost.add(OutDataPost(R.drawable.i,"Nguyễn Nhân","đã cập nhật ảnh đại diện","10/3","",R.drawable.i,"15","3"))
-        listPost.add(OutDataPost(R.drawable.i,"Nguyễn Nhân","đã cập nhật ảnh đại diện","10/3","",R.drawable.i,"15","3"))
-        listPost.add(OutDataPost(R.drawable.i,"Nguyễn Nhân","đã cập nhật ảnh đại diện","10/3","",R.drawable.i,"15","3"))
-        val adapterPost= postAdapter(listPost)
-        var Post = binding.listPort
-        Post.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL,false)
-        Post.adapter = adapterPost
-        Post.setHasFixedSize(true)
-//        Log.e("adapter", binding.listTin.toString())
-//        Toast.makeText(context, listtin[0].txtNameTin, Toast.LENGTH_LONG).show()
+        fetchPosts()
+        fetchStorys()
         binding.addStory.setOnClickListener {
-            onClickRequestPermission()
+            launcher
         }
+
+//        val liststory = mutableListOf<OutData_Story>()
+//        liststory.add(OutData_Story(R.drawable.k,R.drawable.i,"Phan Tuấn"))
+//        liststory.add(OutData_Story(R.drawable.k,R.drawable.i,"Phan Tuấn"))
+//        liststory.add(OutData_Story(R.drawable.k,R.drawable.i,"Phan Tuấn"))
+//        liststory.add(OutData_Story(R.drawable.k,R.drawable.i,"Phan Tuấn"))
+//        liststory.add(OutData_Story(R.drawable.k,R.drawable.i,"Phan Tuấn"))
+//        liststory.add(OutData_Story(R.drawable.k,R.drawable.i,"Phan Tuấn"))
+//        liststory.add(OutData_Story(R.drawable.k,R.drawable.i,"Phan Tuấn"))
+//        liststory.add(OutData_Story(R.drawable.k,R.drawable.i,"Phan Tuấn"))
+//        liststory.add(OutData_Story(R.drawable.k,R.drawable.i,"Phan Tuấn"))
+//        liststory.add(OutData_Story(R.drawable.k,R.drawable.i,"Phan Tuấn"))
+//        liststory.add(OutData_Story(R.drawable.k,R.drawable.i,"Phan Tuấn"))
+//        liststory.add(OutData_Story(R.drawable.k,R.drawable.i,"Phan Tuấn"))
+//        val adapterStory = StoryAdapter(liststory, object : RvChat {
+//
+//            override fun onClickchat(pos: Int) {
+//                var intent = Intent(context, DisplayStory::class.java)
+////                intent.putExtra("idChat","${listChats[pos]._id}")
+//                startActivity(intent)
+//            }
+//        })
+//        var listStory = binding.listStory
+//        listStory.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL,false)
+//        listStory.adapter = adapterStory
+//        listStory.setHasFixedSize(true)
+
     }
 
     private fun openGallery() {
@@ -152,6 +151,101 @@ class DiaryFragment : Fragment() {
             }
         }
     }
+
+    private fun fetchStorys() {
+        val retrofit = Retrofit.Builder()
+            .baseUrl("http://192.168.1.175:3200/")
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
+
+        val apiService = retrofit.create(ApiService::class.java)
+        val call = apiService.findStory()
+        call.enqueue(object : Callback<List<GetStoryReponse>> {
+            override fun onResponse(
+                call: Call<List<GetStoryReponse>>,
+                response: Response<List<GetStoryReponse>>
+            ) {
+                if (response.isSuccessful) {
+                    val storyResponse = response.body()
+
+                    if (!storyResponse.isNullOrEmpty()) {
+                        Toast.makeText(context, "Success", Toast.LENGTH_SHORT).show()
+                        listStorys.addAll(storyResponse);
+                        val adapterDs = StoryAdapter(listStorys, object : RvChat {
+                            override fun onClickchat(pos: Int) {
+                                var intent = Intent(context, DisplayStory::class.java)
+                                intent.putExtra("pos",pos)
+                                startActivity(intent)
+                            }
+                        })
+                        var liststory = binding.listStory
+                        liststory.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL,false)
+                        liststory.adapter = adapterDs
+                        liststory.setHasFixedSize(true)
+
+                        // TODO: Thực hiện xử lý với thông tin người dùng
+                    } else {
+                        Toast.makeText(context, "Không có chat nào", Toast.LENGTH_SHORT)
+                            .show()
+                    }
+                } else {
+                    val error = response.errorBody()?.string()
+                    Toast.makeText(context, "Lỗi: $error", Toast.LENGTH_SHORT).show()
+                }
+            }
+
+            override fun onFailure(call: Call<List<GetStoryReponse>>, t: Throwable) {
+                val errorMessage = "Lỗi: ${t.message}"
+                Toast.makeText(context, errorMessage, Toast.LENGTH_LONG).show()
+            }
+        })
+    }
+
+    private fun fetchPosts() {
+        val retrofit = Retrofit.Builder()
+            .baseUrl("http://192.168.1.175:3200/")
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
+
+        val apiService = retrofit.create(ApiService::class.java)
+        val call = apiService.findPosts()
+        call.enqueue(object : Callback<List<GetPostReponse>> {
+            override fun onResponse(
+                call: Call<List<GetPostReponse>>,
+                response: Response<List<GetPostReponse>>
+            ) {
+                if (response.isSuccessful) {
+                    val postsResponse = response.body()
+
+                    if (!postsResponse.isNullOrEmpty()) {
+                        Toast.makeText(context, "Success", Toast.LENGTH_SHORT).show()
+                        listPosts.addAll(postsResponse);
+                        Log.d("ddhh", listPosts[0].userName)
+
+                        val adapterDs = postAdapter(listPosts)
+                        var listpost = binding.listPort
+                        listpost.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL,false)
+                        listpost.adapter = adapterDs
+                        listpost.setHasFixedSize(true)
+
+                        // TODO: Thực hiện xử lý với thông tin người dùng
+                    } else {
+                        Toast.makeText(context, "Không có chat nào", Toast.LENGTH_SHORT)
+                            .show()
+                    }
+                } else {
+                    val error = response.errorBody()?.string()
+                    Toast.makeText(context, "Lỗi: $error", Toast.LENGTH_SHORT).show()
+                }
+            }
+
+            override fun onFailure(call: Call<List<GetPostReponse>>, t: Throwable) {
+                val errorMessage = "Lỗi: ${t.message}"
+                Toast.makeText(context, errorMessage, Toast.LENGTH_LONG).show()
+            }
+        })
+    }
+
 
     companion object {
         private const val REQUEST_IMAGE_CAPTURE = 1

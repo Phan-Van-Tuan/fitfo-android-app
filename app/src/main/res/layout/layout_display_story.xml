@@ -4,11 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <androidx.cardview.widget.CardView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:cardCornerRadius="25dp"
-        >
+
 
         <ImageView
             android:id="@+id/imgDisplayStory"
@@ -53,6 +49,7 @@
             android:src="@drawable/optionw"
             android:padding="5dp"
             android:layout_marginRight="55dp"
+            android:layout_alignParentRight="true"
             android:layout_gravity="end"
             />
 
@@ -61,10 +58,10 @@
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:layout_gravity="end"
+            android:layout_alignParentRight="true"
             android:padding="5dp"
             android:src="@drawable/ic_close" />
 
-    </androidx.cardview.widget.CardView>
 
 
 

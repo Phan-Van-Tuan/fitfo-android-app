@@ -38,7 +38,6 @@ class LoginActivity : AppCompatActivity() {
         }
 
 
-
         binding.btnLogin.setOnClickListener {
             val context: Context = this
             val phoneNumber = binding.inputPhoneNumber.text.toString().trim();

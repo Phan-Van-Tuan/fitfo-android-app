@@ -1,11 +1,14 @@
 package com.example.ff
 
+import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
+import android.speech.RecognizerIntent
 import android.text.Editable
 import android.text.TextWatcher
+import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.activity.result.ActivityResultLauncher
@@ -14,16 +17,17 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.ff.Adapter.ListMessageAdapter
 import com.example.ff.Interface.ApiService
-import com.example.ff.Models.findChatResponse
 import com.example.ff.Models.findMessageResponse
-import com.example.ff.Test.NameChat
+import com.example.ff.Socket.MySocketManager
+import com.example.ff.Test.MyInfo
 import com.example.ff.databinding.ActivityChatBinding
-import kotlinx.coroutines.runBlocking
+import com.jakewharton.threetenabp.AndroidThreeTen
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import java.util.Locale
 
 class ChatActivity : AppCompatActivity() {
     private lateinit var binding: ActivityChatBinding
@@ -31,31 +35,54 @@ class ChatActivity : AppCompatActivity() {
     private var selectedImages: ArrayList<String> = ArrayList()
     private lateinit var pickImagesLauncher: ActivityResultLauncher<Intent>
     private var listmessages: MutableList<findMessageResponse> = mutableListOf()
+    private val SPEECH_REQUEST_CODE = 0
+    private val socketManager = MySocketManager()
 
+    private val speechRecognitionLauncher =
+        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+            onSpeechRecognitionResult(result.resultCode, result.data)
+        }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         binding = ActivityChatBinding.inflate(layoutInflater)
         super.onCreate(savedInstanceState)
+        AndroidThreeTen.init(this)
         setContentView(binding.root)
+        binding.btnMic.setOnClickListener {
+            displaySpeechRecognizer()
+        }
 
         sharedPreferences = this.getSharedPreferences("data", Context.MODE_PRIVATE)
         val myId = sharedPreferences.getString("MY_ID", null).toString()
 
-        val chatId = NameChat.chatID
+        val chatId = MyInfo.chatID
+
         if(chatId != "") {
             fectchMessage(chatId, myId)
+        } else return
+
+        socketManager.initSocket();
+        socketManager.connectSocket();
+        socketManager.addNewUser(myId);
+
+        binding.btnSent.setOnClickListener {
+            val myMessage = binding.edtMessage.text.toString().trim();
+            socketManager.sendMessage("""{"chatId":"$chatId","senderId":"$myId","title":"$myMessage"}""");
+
+            // Xóa nội dung trong EditText sau khi gửi tin nhắn
+            binding.edtMessage.text.clear()
+            fectchMessage(chatId, myId);
         }
 
 //        binding.btnSent.setOnClickListener {
-//            listmessages.add(findMessageResponse(1, R.drawable.k, binding.edtMessage.text.toString(), "Ngày gửi"))
-//
-//            // Thông báo cho Adapter là dữ liệu đã thay đổi
-//            adapterListmessage.notifyDataSetChanged()
-//
-//            // Cuộn RecyclerView đến cuối cùng để hiển thị tin nhắn mới nhất
-//            lmss.scrollToPosition(adapterListmessage.itemCount - 1)
-//
-//            // Xóa nội dung trong EditText sau khi gửi tin nhắn
+//            val myMessage = binding.edtMessage.text.toString().trim()
+//            socketManager.sendMessage("{'chatId': '$chatId','senderId': '$myId','title':$myMessage}")
+////            Toast.makeText(this,myMessage,Toast.LENGTH_LONG).show()
+//            socketManager.onReceiveMessage { args ->
+//                // Xử lý khi nhận được tin nhắn từ server
+//                val receiveMessage = args[0] as String
+//                Toast.makeText(this, receiveMessage, Toast.LENGTH_LONG).show()
+//            }
 //            binding.edtMessage.text.clear()
 //        }
 
@@ -104,7 +131,7 @@ class ChatActivity : AppCompatActivity() {
 //                fectchMessage(chatId,myId)
 //            };
 //        }
-        val item = NameChat.userName
+        val item = MyInfo.userName
         binding.txtNameChat.setText(item)
 
 
@@ -162,7 +189,6 @@ class ChatActivity : AppCompatActivity() {
     }
 
 
-
     private fun fectchMessage(chatId: String, myId: String) {
         val retrofit = Retrofit.Builder()
             .baseUrl("https://fitfo-api.vercel.app/")
@@ -189,7 +215,11 @@ class ChatActivity : AppCompatActivity() {
 //                        val createdAt = firstChatResponse.createdAt;
                         val adapterListmessage = ListMessageAdapter(listmessages, myId)
                         var lmss = binding.chatRecyclerView
-                        lmss.layoutManager = LinearLayoutManager(this@ChatActivity, LinearLayoutManager.VERTICAL, false)
+                        lmss.layoutManager = LinearLayoutManager(
+                            this@ChatActivity,
+                            LinearLayoutManager.VERTICAL,
+                            false
+                        )
                         lmss.adapter = adapterListmessage
                         lmss.scrollToPosition(adapterListmessage.itemCount - 1)
                         lmss.setHasFixedSize(true)
@@ -201,7 +231,7 @@ class ChatActivity : AppCompatActivity() {
 
                         // TODO: Thực hiện xử lý với thông tin người dùng
                     } else {
-                        Toast.makeText(this@ChatActivity, "im here", Toast.LENGTH_SHORT)
+                        Toast.makeText(this@ChatActivity, "Bạn chưa nhắn tin với người này, hãy bắt đầu trò chuyện", Toast.LENGTH_SHORT)
                             .show()
                     }
                 } else {
@@ -217,5 +247,36 @@ class ChatActivity : AppCompatActivity() {
         })
     }
 
+    private fun displaySpeechRecognizer() {
+        val intent = Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH)
+        intent.putExtra(
+            RecognizerIntent.EXTRA_LANGUAGE_MODEL,
+            RecognizerIntent.LANGUAGE_MODEL_FREE_FORM
+        )
+        intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE, Locale.getDefault())
+        // Launch the speech recognition activity
+        startActivityForResult(intent, SPEECH_REQUEST_CODE)
+    }
 
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        val matches: ArrayList<String>? = data?.getStringArrayListExtra(
+            RecognizerIntent.EXTRA_RESULTS
+        )
+        if (requestCode == SPEECH_REQUEST_CODE && resultCode == RESULT_OK && data != null) {
+            val speechResults = data.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS)
+            var spokentText = speechResults?.get(0)
+            Log.d("hhhh", spokentText.toString())
+        }
+
+    }
+
+    private fun onSpeechRecognitionResult(resultCode: Int, data: Intent?) {
+        if (resultCode == Activity.RESULT_OK && data != null) {
+            val spokenText: String? =
+                data.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS)?.get(0)
+            // Do something with spokenText.
+            binding.edtMessage.setText(spokenText)
+        }
+    }
 }

@@ -1,57 +1,21 @@
 package com.example.ff.OptionActivity
 
-import android.Manifest
-import android.content.ContentResolver
 import android.content.Intent
-import android.content.pm.PackageManager
-import android.graphics.Bitmap
-import android.graphics.BitmapFactory
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.ImageView
-import androidx.activity.result.ActivityResultLauncher
-import androidx.activity.result.contract.ActivityResultContracts
-import androidx.core.app.ActivityCompat
-import androidx.core.content.ContextCompat
-import com.example.ff.ChatActivity
+import android.widget.Toast
 import com.example.ff.PersonalActivity
 import com.example.ff.databinding.ActivityOptionPersonalBinding
-import com.squareup.picasso.Picasso
-import java.io.IOException
-
-fun Uri.toBitmap(contentResolver: ContentResolver): Bitmap? {
-    return try {
-        contentResolver.openInputStream(this)?.use { inputStream ->
-            BitmapFactory.decodeStream(inputStream)
-        }
-    } catch (e: IOException) {
-        e.printStackTrace()
-        null
-    }
-}
+import com.example.test_firebase.ImageLoader
+import com.google.firebase.Firebase
+import com.google.firebase.storage.StorageReference
+import com.google.firebase.storage.storage
 
 class OptionPersonal : AppCompatActivity() {
     private lateinit var binding: ActivityOptionPersonalBinding
-    val REQUEST_CODE = 10
-    val GALLERY_REQUEST_CODE = 15
-
-    private val galleryLauncher =
-        registerForActivityResult(ActivityResultContracts.GetContent()) { uri: Uri? ->
-            uri?.let {
-                handleImageUri(it)
-            }
-        }
-
-    private fun handleImageUri(uri: Uri) {
-        // Xử lý đường dẫn của ảnh ở đây
-        val bitmap: Bitmap? = uri?.toBitmap(this.contentResolver)
-        if (bitmap != null) {
-            // Hiển thị hoặc xử lý ảnh theo nhu cầu của bạn
-            val imageView: ImageView = binding.imgpick
-            imageView.setImageBitmap(bitmap)
-        }
-    }
+    private val PICK_IMAGE_REQUEST = 123
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -61,83 +25,70 @@ class OptionPersonal : AppCompatActivity() {
             var intent = Intent(this, PersonalActivity::class.java)
             startActivity(intent)
         }
+        val storage = Firebase.storage("gs://fitfo-storage.appspot.com")
+
+        // handle pick image
+        val intent = Intent(Intent.ACTION_PICK)
+        intent.type = "image/*"
+        startActivityForResult(intent, PICK_IMAGE_REQUEST)
+
         binding.txtEditAvt.setOnClickListener {
-            onClickRequestPermission()
+            // You can add your logic here
         }
     }
 
-
-    private fun onClickRequestPermission() {
-        val permission = Manifest.permission.READ_EXTERNAL_STORAGE
-        if (ContextCompat.checkSelfPermission(
-                this,
-                permission
-            ) == PackageManager.PERMISSION_GRANTED
-        ) {
-            // Quyền đã được cấp, thực hiện công việc liên quan đến thư viện ở đây
-            openGallery()
-        } else {
-            // Quyền chưa được cấp, yêu cầu quyền
-            ActivityCompat.requestPermissions(this, arrayOf(permission), REQUEST_CODE)
-        }
-
-    }
-
-    private fun openGallery() {
-//        val intent = Intent(Intent.ACTION_PICK)
-//        intent.type = "image/*"
-//        startActivityForResult(intent, GALLERY_REQUEST_CODE)
-
-        //cách 2  dùng launcher
-        // Sử dụng launcher để mở thư viện (gallery)
-        galleryLauncher.launch("image/*")
-    }
-
-    override fun onRequestPermissionsResult(
-        requestCode: Int,
-        permissions: Array<out String>,
-        grantResults: IntArray
-    ) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
-        if (requestCode == REQUEST_CODE) {
-            if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                // Permission granted, perform tasks related to the gallery here
-                openGallery()
+    fun displayImage(imageRef: StorageReference) {
+        imageRef.downloadUrl.addOnCompleteListener { task ->
+            if (task.isSuccessful) {
+                val imageUrl = task.result.toString()
+                ImageLoader.loadImage(this, imageUrl,binding.imgpick)
             } else {
-                // Permission not granted, handle it (e.g., show a message to the user)
+                // Handle error if needed
             }
         }
     }
 
+    fun displayImage2(imageUrl: String) {
+        ImageLoader.loadImage(this, imageUrl, binding.imgpick)
+    }
+
+    fun uploadImageToFirebaseStorage(imageUri: Uri, imageName: String, onComplete: (String?) -> Unit) {
+        val storage = Firebase.storage
+        val storageRef = storage.reference
+        val imageRef: StorageReference = storageRef.child("images/$imageName")
+
+        imageRef.putFile(imageUri)
+            .addOnSuccessListener {
+                // Upload success
+                imageRef.downloadUrl.addOnSuccessListener { uri ->
+                    onComplete(uri.toString())
+                }
+            }
+            .addOnFailureListener {
+                // Upload failed
+                onComplete(null)
+            }
+    }
+
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-        if (requestCode == GALLERY_REQUEST_CODE && resultCode == AppCompatActivity.RESULT_OK) {
-            // Handle the selected image from the gallery
-// requestCode là một mã số đặc biệt được gán khi bạn gọi một hoạt động (activity)
-            // để mở thư viện ảnh bằng startActivityForResult hoặc launcher.launch (nếu sử dụng ActivityResultLauncher).
-//GALLERY_REQUEST_CODE là một hằng số mà bạn tự đặt để định danh cho yêu cầu mở thư viện ảnh.
-            val selectedImageUri = data?.data
-            // Continue processing based on your needs
-            try {
 
-                // Chuyển đổi đường dẫn thành đối tượng Bitmap
-                val bitmap: Bitmap? = selectedImageUri?.let { uri ->
-                    this.contentResolver.openInputStream(uri)?.use { inputStream ->
-                        BitmapFactory.decodeStream(inputStream)
+        if (requestCode == PICK_IMAGE_REQUEST && resultCode == RESULT_OK) {
+            // Uri of the selected image
+            val selectedImageUri: Uri? = data?.data
+
+            // Call uploadImageToFirebaseStorage function with this Uri
+            if (selectedImageUri != null) {
+                val imageName = "user123.png" // Đặt tên mong muốn cho hình ảnh trên Firebase Storage
+
+                uploadImageToFirebaseStorage(selectedImageUri, imageName) { imageUrl ->
+                    if (imageUrl != null) {
+                        Toast.makeText(this, "Thành công", Toast.LENGTH_SHORT).show()
+                        displayImage2(imageUrl)
+                    } else {
+                        // Xử lý lỗi nếu cần thiết
                     }
                 }
-
-                // Kiểm tra xem bitmap có null hay không trước khi sử dụng
-                if (bitmap != null) {
-                    // Sử dụng bitmap theo nhu cầu của bạn
-                    // Ví dụ: Hiển thị ảnh trên ImageView
-                    val imageView: ImageView = binding.imgpick
-                    imageView.setImageBitmap(bitmap)
-
-                    // Hoặc tiếp tục xử lý ảnh theo nhu cầu của bạn
-                }
-            } catch (e: IOException) {
-                e.printStackTrace()
             }
         }
     }

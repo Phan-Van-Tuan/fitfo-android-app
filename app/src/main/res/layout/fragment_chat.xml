@@ -14,6 +14,7 @@
         android:hint="Tìm kiếm đoạn chat"
         app:iconifiedByDefault="false"
         app:closeIcon="@drawable/ic_close"
+        android:focusable="false"
         app:defaultQueryHint="Không có dữ liệu"
         app:queryHint="Tìm kiếm" />
 

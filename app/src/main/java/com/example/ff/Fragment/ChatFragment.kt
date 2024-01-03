@@ -12,12 +12,9 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.ff.Adapter.ListChatAdapter
 import com.example.ff.ChatActivity
 import com.example.ff.Interface.ApiService
-import com.example.ff.OutData.OutDataChat
-import com.example.ff.R
 import com.example.ff.Interface.RvChat
 import com.example.ff.Models.findChatResponse
-import com.example.ff.Models.findMessageResponse
-import com.example.ff.Test.NameChat
+import com.example.ff.Test.MyInfo
 import com.example.ff.databinding.FragmentChatBinding
 import retrofit2.Call
 import retrofit2.Callback
@@ -67,9 +64,9 @@ class ChatFragment : Fragment() {
                         val adapterDs = ListChatAdapter(listChats, object : RvChat {
 
                             override fun onClickchat(pos: Int) {
-                                NameChat.userName = listChats[pos].chatName;
-                                NameChat.chatID = listChats[pos]._id;
-                                NameChat.userID = listChats[pos].members[1];
+                                MyInfo.userName = listChats[pos].chatName;
+                                MyInfo.chatID = listChats[pos]._id;
+                                MyInfo.userID = listChats[pos].members[1];
                                 var intent = Intent(context, ChatActivity::class.java)
                                 intent.putExtra("idChat","${listChats[pos]._id}")
                                 startActivity(intent)

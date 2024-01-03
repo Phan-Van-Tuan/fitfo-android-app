@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/commentPost"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    >
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_alignParentTop="true"
+        android:background="@color/view">
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Bình luận"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="10dp"
+            android:textStyle="bold"
+            android:textSize="20dp"/>
+        <ImageView
+            android:id="@+id/btnCloseComment"
+            android:layout_width="wrap_content"
+            android:layout_marginRight="5dp"
+            android:padding="10dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:src="@drawable/closeblack"/>
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/commentRecyclerView"
+        android:layout_marginTop="50dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:overScrollMode="never"
+        android:visibility="visible"
+        android:background="@color/background"
+        android:layout_marginBottom="60dp"
+        />
+
+    <LinearLayout
+        android:id="@+id/nocmt"
+        android:layout_width="match_parent"
+        android:gravity="center"
+        android:visibility="gone"
+        android:orientation="vertical"
+        android:layout_marginTop="50dp"
+        android:layout_marginBottom="60dp"
+        android:layout_height="match_parent" >
+        <ImageView
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:src="@drawable/nocmt"
+            android:layout_gravity="center"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="Chưa có bình luận nào \n Hãy là người bình luận đầu tiên"
+            android:textSize="18dp"
+            android:textAlignment="center"/>
+    </LinearLayout>
+
+    <!--    <ProgressBar-->
+    <!--        android:layout_width="40dp"-->
+    <!--        android:layout_height="match_parent"-->
+    <!--        android:layout_gravity="center"/>-->
+
+
+
+    <RelativeLayout
+        android:id="@+id/view2"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_alignParentBottom="true"
+        >
+
+        <EditText
+            android:id="@+id/edtComment"
+            android:layout_width="match_parent"
+            android:layout_height="55dp"
+            android:hint="Mời nhập bình luận"
+            android:layout_marginRight="50dp"
+            />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/btnSentComment"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_alignParentRight="true"
+            android:layout_marginTop="10dp"
+            android:src="@drawable/send"/>
+    </RelativeLayout>
+
+</RelativeLayout>

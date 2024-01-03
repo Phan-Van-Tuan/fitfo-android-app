@@ -8,7 +8,7 @@ import android.os.Bundle
 import android.widget.Toast
 import com.example.ff.Interface.ApiService
 import com.example.ff.Models.findChatResponse
-import com.example.ff.Test.NameChat
+import com.example.ff.Test.MyInfo
 import com.example.ff.databinding.ActivityProfileBinding
 import retrofit2.Call
 import retrofit2.Callback
@@ -26,8 +26,8 @@ class ProfileActivity : AppCompatActivity() {
         setContentView(binding.root)
         sharedPreferences = this.getSharedPreferences("data", Context.MODE_PRIVATE)
         val myId = sharedPreferences.getString("MY_ID", null).toString()
-        val userId = NameChat.userID
-        binding.txtName.setText(NameChat.userName)
+        val userId = MyInfo.userID
+        binding.txtName.setText(MyInfo.userName)
         fetchChat(myId, userId)
 
     }
@@ -61,7 +61,7 @@ class ProfileActivity : AppCompatActivity() {
                     ).show()
 
                     binding.btnToChat.setOnClickListener {
-                        NameChat.chatID = chatId
+                        MyInfo.chatID = chatId
                         var intent = Intent(this@ProfileActivity, ChatActivity::class.java)
                         startActivity(intent);
                     }

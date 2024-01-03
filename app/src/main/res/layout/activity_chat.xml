@@ -30,15 +30,18 @@
             android:layout_marginTop="12dp"
             android:text="Tuấn"
             android:textSize="24dp"
-            android:maxLength="20"
+            android:maxLength="22"
             />
+        <Space
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/chatVideoCall"
             android:layout_width="32dp"
             android:layout_height="36dp"
             android:layout_marginTop="10dp"
-            android:layout_marginLeft="180dp"
             android:src="@drawable/video_call"
              />
 
@@ -51,16 +54,13 @@
             android:src="@drawable/call"
             />
 
-
-
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/chatInfo"
             android:layout_width="26dp"
             android:layout_height="36dp"
-            android:layout_marginTop="10dp"
             android:layout_marginLeft="10dp"
-            android:src="@drawable/info"
-             />
+            android:layout_marginTop="10dp"
+            android:src="@drawable/info" />
     </LinearLayout>
 
 
@@ -77,10 +77,10 @@
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         />
 
-<!--    <ProgressBar-->
-<!--        android:layout_width="40dp"-->
-<!--        android:layout_height="match_parent"-->
-<!--        android:layout_gravity="center"/>-->
+    <ProgressBar
+        android:layout_width="40dp"
+        android:layout_height="match_parent"
+        android:layout_gravity="center"/>
 
 
 
@@ -142,6 +142,7 @@
             android:visibility="gone"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.5" />
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
