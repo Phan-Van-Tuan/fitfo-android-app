@@ -28,7 +28,7 @@
                 android:id="@+id/imgDisplayAvtStory"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
-                app:srcCompat="@drawable/a" />
+                app:srcCompat="@drawable/a_logo_white" />
         </androidx.cardview.widget.CardView>
 
 

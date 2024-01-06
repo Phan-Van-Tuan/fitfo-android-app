@@ -1,10 +1,11 @@
 package com.example.fitfo.Fragment
 
 import android.Manifest
+import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import android.content.pm.PackageManager
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -15,19 +16,20 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.fitfo.Adapter.StoryAdapter
 import com.example.fitfo.Adapter.postAdapter
-import com.example.fitfo.DisplayStory
-import com.example.fitfo.Interface.ApiService
+import com.example.fitfo.ChatActivity
+import com.example.fitfo.Define.CallApi.RetrofitClient
+import com.example.fitfo.Diary.CreatePost
+import com.example.fitfo.Diary.DisplayStory
 import com.example.fitfo.Interface.RvChat
 import com.example.fitfo.Models.GetPostReponse
 import com.example.fitfo.Models.GetStoryReponse
+import com.example.fitfo.Search
 import com.example.fitfo.databinding.FragmentDiaryBinding
 import com.example.fitfo.test
 import com.nguyenhoanglam.imagepicker.ui.imagepicker.registerImagePicker
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import retrofit2.Retrofit
-import retrofit2.converter.gson.GsonConverterFactory
 
 
 private const val ARG_PARAM1 = "param1"
@@ -37,6 +39,7 @@ class DiaryFragment : Fragment() {
     private lateinit var binding: FragmentDiaryBinding
     private var listPosts: MutableList<GetPostReponse> = mutableListOf()
     private var listStorys: MutableList<GetStoryReponse> = mutableListOf()
+    private lateinit var sharedPreferences: SharedPreferences
 
     val REQUEST_CODE = 10
     private val launcher = registerImagePicker { images ->
@@ -66,44 +69,28 @@ class DiaryFragment : Fragment() {
     ): View? {
         binding = FragmentDiaryBinding.inflate(inflater,container,false)
         return binding.root
-
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        sharedPreferences = requireActivity().getSharedPreferences("data", Context.MODE_PRIVATE)
+        val myId = sharedPreferences.getString("MY_ID", null).toString()
 
-        fetchPosts()
+        fetchPosts(myId)
         fetchStorys()
         binding.addStory.setOnClickListener {
             launcher
         }
 
-//        val liststory = mutableListOf<OutData_Story>()
-//        liststory.add(OutData_Story(R.drawable.k,R.drawable.i,"Phan Tuấn"))
-//        liststory.add(OutData_Story(R.drawable.k,R.drawable.i,"Phan Tuấn"))
-//        liststory.add(OutData_Story(R.drawable.k,R.drawable.i,"Phan Tuấn"))
-//        liststory.add(OutData_Story(R.drawable.k,R.drawable.i,"Phan Tuấn"))
-//        liststory.add(OutData_Story(R.drawable.k,R.drawable.i,"Phan Tuấn"))
-//        liststory.add(OutData_Story(R.drawable.k,R.drawable.i,"Phan Tuấn"))
-//        liststory.add(OutData_Story(R.drawable.k,R.drawable.i,"Phan Tuấn"))
-//        liststory.add(OutData_Story(R.drawable.k,R.drawable.i,"Phan Tuấn"))
-//        liststory.add(OutData_Story(R.drawable.k,R.drawable.i,"Phan Tuấn"))
-//        liststory.add(OutData_Story(R.drawable.k,R.drawable.i,"Phan Tuấn"))
-//        liststory.add(OutData_Story(R.drawable.k,R.drawable.i,"Phan Tuấn"))
-//        liststory.add(OutData_Story(R.drawable.k,R.drawable.i,"Phan Tuấn"))
-//        val adapterStory = StoryAdapter(liststory, object : RvChat {
-//
-//            override fun onClickchat(pos: Int) {
-//                var intent = Intent(context, DisplayStory::class.java)
-////                intent.putExtra("idChat","${listChats[pos]._id}")
-//                startActivity(intent)
-//            }
-//        })
-//        var listStory = binding.listStory
-//        listStory.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL,false)
-//        listStory.adapter = adapterStory
-//        listStory.setHasFixedSize(true)
+        binding.btnSearch.setOnClickListener {
+            var intent = Intent(context, Search::class.java)
+            startActivity(intent)
+        }
 
+        binding.createPost.setOnClickListener {
+            var intent = Intent(context, CreatePost::class.java)
+            startActivity(intent)
+        }
     }
 
     private fun openGallery() {
@@ -143,12 +130,7 @@ class DiaryFragment : Fragment() {
     }
 
     private fun fetchStorys() {
-        val retrofit = Retrofit.Builder()
-            .baseUrl("http://192.168.1.175:3200/")
-            .addConverterFactory(GsonConverterFactory.create())
-            .build()
-
-        val apiService = retrofit.create(ApiService::class.java)
+        val apiService = RetrofitClient.apiService
         val call = apiService.findStory()
         call.enqueue(object : Callback<List<GetStoryReponse>> {
             override fun onResponse(
@@ -191,14 +173,9 @@ class DiaryFragment : Fragment() {
         })
     }
 
-    private fun fetchPosts() {
-        val retrofit = Retrofit.Builder()
-            .baseUrl("http://192.168.1.175:3200/")
-            .addConverterFactory(GsonConverterFactory.create())
-            .build()
-
-        val apiService = retrofit.create(ApiService::class.java)
-        val call = apiService.findPosts()
+    private fun fetchPosts(myId: String) {
+        val apiService = RetrofitClient.apiService
+        val call = apiService.findPosts(myId)
         call.enqueue(object : Callback<List<GetPostReponse>> {
             override fun onResponse(
                 call: Call<List<GetPostReponse>>,
@@ -206,14 +183,10 @@ class DiaryFragment : Fragment() {
             ) {
                 if (response.isSuccessful) {
                     val postsResponse = response.body()
-
                     if (!postsResponse.isNullOrEmpty()) {
-                        Toast.makeText(context, "Success", Toast.LENGTH_SHORT).show()
                         listPosts.addAll(postsResponse);
-                        Log.d("ddhh", listPosts[0].userName)
-
                         val adapterDs = postAdapter(listPosts)
-                        var listpost = binding.listPort
+                        var listpost = binding.listPost
                         listpost.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL,false)
                         listpost.adapter = adapterDs
                         listpost.setHasFixedSize(true)

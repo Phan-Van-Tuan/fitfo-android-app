@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Account_SecurityActivity">
+    tools:context=".Account_Security">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -14,17 +14,17 @@
     <View
         android:id="@+id/view3"
         android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:background="#4876FF"
+        android:layout_height="50dp"
+        android:background="@drawable/shape_background_color"
         app:layout_constraintTop_toTopOf="parent" />
 
 
         <ImageView
             android:id="@+id/backtopeople"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:layout_marginTop="16dp"
-            android:src="@drawable/back"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_marginTop="10dp"
+            android:src="@drawable/b_back_white"
             app:layout_constraintEnd_toEndOf="@+id/view3"
             app:layout_constraintHorizontal_bias="0.057"
             app:layout_constraintStart_toStartOf="parent"
@@ -33,9 +33,8 @@
         <TextView
             android:id="@+id/textView5"
             android:layout_width="wrap_content"
-            android:layout_height="51dp"
+            android:layout_height="46dp"
             android:layout_marginStart="16dp"
-            android:layout_marginTop="5dp"
             android:gravity="center"
             android:text="Tài khoản và bảo mật"
             android:textColor="@color/white"
@@ -52,58 +51,44 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="12dp"
         android:text="Tài khoản"
-        android:textColor="#0000FF"
+        android:textColor="@color/primary"
         android:textSize="18dp"
         android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.054"
+        android:layout_marginLeft="12dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/view3" />
 
-    <TextView
-        android:id="@+id/textView9"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
-        android:text="Đổi số điện thoại"
-        android:textColor="@color/black"
-        android:textSize="20dp"
-        app:layout_constraintStart_toStartOf="@+id/textView8"
-        app:layout_constraintTop_toBottomOf="@+id/textView8" />
+        <TextView
+            android:id="@+id/textView9"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:text="Đổi số điện thoại"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            app:layout_constraintStart_toStartOf="@+id/textView8"
+            app:layout_constraintTop_toBottomOf="@+id/textView8" />
 
-    <TextView
-        android:id="@+id/textView10"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="8dp"
-        android:text="+8432659jqk"
-        android:textColor="#8B7D7B"
-        android:textSize="20dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView9" />
-
-    <ImageView
-        android:id="@+id/imageView5"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
-        android:layout_marginTop="64dp"
-        android:src="@drawable/baseline_navigate_next_24"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.924"
-        app:layout_constraintStart_toEndOf="@+id/textView9"
-        app:layout_constraintTop_toBottomOf="@+id/view3" />
+        <TextView
+            android:id="@+id/phoneNumber"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="+84123456789"
+            android:textColor="@color/text_40"
+            android:textSize="12sp"
+            app:layout_constraintStart_toStartOf="@+id/textView9"
+            app:layout_constraintTop_toBottomOf="@+id/textView9" />
 
     <View
         android:id="@+id/view8"
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:layout_marginTop="8dp"
-        android:background="#C1CDC1"
+        android:background="@color/line"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView10" />
+        app:layout_constraintTop_toBottomOf="@+id/phoneNumber" />
 
     <TextView
         android:id="@+id/textView11"
@@ -112,62 +97,42 @@
         android:layout_marginTop="24dp"
         android:text="Đổi mật khẩu"
         android:textColor="@color/black"
-        android:textSize="20dp"
+        android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="@+id/textView9"
         app:layout_constraintHorizontal_bias="0.088"
-        app:layout_constraintStart_toStartOf="@+id/textView10"
-        app:layout_constraintTop_toBottomOf="@+id/textView10" />
+        app:layout_constraintStart_toStartOf="@+id/phoneNumber"
+        app:layout_constraintTop_toBottomOf="@+id/phoneNumber" />
 
-    <ImageView
-        android:id="@+id/imd1"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
-        android:src="@drawable/baseline_navigate_next_24"
-        app:layout_constraintBottom_toBottomOf="@+id/textView11"
-        app:layout_constraintEnd_toEndOf="@+id/imageView5"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/imageView5"
-        app:layout_constraintTop_toTopOf="@+id/textView11"
-        app:layout_constraintVertical_bias="1.0" />
 
     <View
         android:id="@+id/view5"
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:layout_marginTop="12dp"
-        android:background="#C1CDC1"
+        android:background="@color/line"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView11" />
 
-    <TextView
-        android:id="@+id/textView12"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:text="Xác thực tài khoản"
-        android:textColor="@color/black"
-        android:textSize="20dp"
-        app:layout_constraintStart_toStartOf="@+id/textView11"
-        app:layout_constraintTop_toBottomOf="@+id/view5" />
+        <TextView
+            android:id="@+id/textView12"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="Xác thực tài khoản"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            app:layout_constraintStart_toStartOf="@+id/textView11"
+            app:layout_constraintTop_toBottomOf="@+id/view5" />
 
-    <ImageView
-        android:id="@+id/imd2"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
-        android:src="@drawable/baseline_navigate_next_24"
-        app:layout_constraintBottom_toBottomOf="@+id/textView12"
-        app:layout_constraintEnd_toEndOf="@+id/imd1"
-        app:layout_constraintStart_toStartOf="@+id/imd1"
-        app:layout_constraintTop_toTopOf="@+id/textView12" />
 
     <View
         android:id="@+id/view6"
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:layout_marginTop="16dp"
-        android:background="#C1CDC1"
+        android:background="@color/line"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
@@ -180,20 +145,9 @@
         android:layout_marginTop="20dp"
         android:text="Xóa tài khoản"
         android:textColor="@color/black"
-        android:textSize="20dp"
+        android:textSize="16sp"
         app:layout_constraintStart_toStartOf="@+id/textView12"
         app:layout_constraintTop_toBottomOf="@+id/view6" />
-
-    <ImageView
-        android:id="@+id/imd3"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
-        android:src="@drawable/baseline_navigate_next_24"
-        app:layout_constraintBottom_toBottomOf="@+id/textView13"
-        app:layout_constraintEnd_toEndOf="@+id/imd2"
-        app:layout_constraintStart_toStartOf="@+id/imd2"
-        app:layout_constraintTop_toTopOf="@+id/textView13" />
-
     <View
         android:id="@+id/view7"
         android:layout_width="match_parent"
@@ -205,181 +159,148 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView13" />
 
-    <TextView
-        android:id="@+id/textView15"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
-        android:text="Bảo mật"
-        android:textColor="#0000FF"
-        android:textSize="18dp"
-        android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="@+id/textView8"
-        app:layout_constraintTop_toBottomOf="@+id/view7" />
+        <TextView
+            android:id="@+id/textView15"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:text="Bảo mật"
+            android:textColor="@color/primary"
+            android:textSize="18dp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="@+id/textView13"
+            app:layout_constraintTop_toBottomOf="@+id/view7" />
 
-    <TextView
-        android:id="@+id/tv1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:text="Kiểm tra bảo mật"
-        android:textColor="@color/black"
-        android:textSize="20dp"
-        app:layout_constraintStart_toStartOf="@+id/textView15"
-        app:layout_constraintTop_toBottomOf="@+id/textView15" />
+        <TextView
+            android:id="@+id/tv1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:text="Kiểm tra bảo mật"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            app:layout_constraintStart_toStartOf="@+id/textView15"
+            app:layout_constraintTop_toBottomOf="@+id/textView15" />
 
-    <TextView
-        android:id="@+id/tv2"
-        android:layout_width="340dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
-        android:text="Theo dõi các vấn đề bảo mật và xử lý các vắn đề liên quan đến tài khoản"
-        android:textColor="#8B7D7B"
-        android:textSize="18dp"
-        app:layout_constraintStart_toStartOf="@+id/tv1"
-        app:layout_constraintTop_toBottomOf="@+id/tv1" />
-
-    <ImageView
-        android:id="@+id/imageView7"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
-        android:layout_marginTop="108dp"
-        android:src="@drawable/baseline_navigate_next_24"
-        app:layout_constraintEnd_toEndOf="@+id/imd3"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/imd3"
-        app:layout_constraintTop_toBottomOf="@+id/imd3" />
+        <TextView
+            android:id="@+id/tv2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginTop="6dp"
+            android:text="Theo dõi các vấn đề bảo mật và xử lý các vắn đề liên quan đến tài khoản"
+            android:textColor="@color/text_40"
+            android:textSize="12sp"
+            app:layout_constraintStart_toStartOf="@+id/tv1"
+            app:layout_constraintTop_toBottomOf="@+id/tv1" />
 
     <View
         android:id="@+id/v1"
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:layout_marginTop="4dp"
-        android:background="#C1CDC1"
+        android:layout_marginTop="12dp"
+        android:background="@color/line"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv2" />
 
-    <TextView
-        android:id="@+id/tv3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
-        android:text="Quản lý thiết bị đăng nhập"
-        android:textColor="@color/black"
-        android:textSize="20dp"
-        app:layout_constraintStart_toStartOf="@+id/tv2"
-        app:layout_constraintTop_toBottomOf="@+id/tv2" />
+        <TextView
+            android:id="@+id/tv3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:text="Quản lý thiết bị đăng nhập"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            app:layout_constraintStart_toStartOf="@+id/tv1"
+            app:layout_constraintTop_toBottomOf="@+id/v1" />
 
-    <TextView
-        android:id="@+id/tv4"
-        android:layout_width="340dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
-        android:text="Quản lý các thiết bị mà bạn đã và đang sử dụng để đăng nhập Fitfo"
-        android:textColor="#8B7D7B"
-        android:textSize="18dp"
-        app:layout_constraintStart_toStartOf="@+id/tv3"
-        app:layout_constraintTop_toBottomOf="@+id/tv3" />
-
-    <ImageView
-
-        android:id="@+id/imageView6"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
-        android:layout_marginTop="48dp"
-        android:src="@drawable/baseline_navigate_next_24"
-        app:layout_constraintEnd_toEndOf="@+id/imageView7"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/imageView7"
-        app:layout_constraintTop_toBottomOf="@+id/imageView7" />
+        <TextView
+            android:id="@+id/tv4"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginTop="6dp"
+            android:text="Quản lý các thiết bị mà bạn đã và đang sử dụng để đăng nhập fitfo"
+            android:textColor="@color/text_40"
+            android:textSize="12sp"
+            app:layout_constraintStart_toStartOf="@+id/tv3"
+            app:layout_constraintTop_toBottomOf="@+id/tv3" />
 
     <View
         android:id="@+id/v2"
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:layout_marginTop="4dp"
-        android:background="#C1CDC1"
+        android:layout_marginTop="12dp"
+        android:background="@color/line"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv4" />
 
-    <TextView
-        android:id="@+id/tv5"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="4dp"
-        android:layout_marginTop="16dp"
-        android:text="Khóa Fitfo"
-        android:textColor="@color/black"
-        android:textSize="20dp"
-        app:layout_constraintStart_toStartOf="@+id/tv3"
-        app:layout_constraintTop_toBottomOf="@+id/v2" />
+        <TextView
+            android:id="@+id/tv5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="Khóa fitfo"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            app:layout_constraintStart_toStartOf="@+id/tv3"
+            app:layout_constraintTop_toBottomOf="@+id/v2" />
 
-    <TextView
-        android:id="@+id/textView14"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="24dp"
-        android:text="Đang tắt"
-        android:textSize="18dp"
-        app:layout_constraintBottom_toBottomOf="@+id/tv5"
-        app:layout_constraintEnd_toStartOf="@+id/img7"
-        app:layout_constraintTop_toTopOf="@+id/tv5" />
+        <TextView
+            android:id="@+id/textView14"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="30dp"
+            android:text="Đang tắt"
+            android:textSize="12sp"
+            app:layout_constraintBottom_toBottomOf="@+id/tv5"
+            app:layout_constraintEnd_toEndOf="parent" />
 
-    <ImageView
-        android:id="@+id/img7"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
-        android:layout_marginTop="36dp"
-        android:src="@drawable/baseline_navigate_next_24"
-        app:layout_constraintEnd_toEndOf="@+id/imageView6"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/imageView6"
-        app:layout_constraintTop_toBottomOf="@+id/imageView6" />
-
-    <View
+        <View
         android:id="@+id/v4"
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:layout_marginTop="12dp"
-        android:background="#C1CDC1"
+        android:background="@color/line"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv5" />
 
-    <TextView
-        android:id="@+id/tv8"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:text="Xác Thực 2 lớp"
-        android:textColor="@color/black"
-        android:textSize="20dp"
-        app:layout_constraintStart_toStartOf="@+id/tv3"
-        app:layout_constraintTop_toBottomOf="@+id/v4" />
+        <TextView
+            android:id="@+id/tv8"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:text="Xác Thực 2 lớp"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            app:layout_constraintStart_toStartOf="@+id/tv5"
+            app:layout_constraintTop_toBottomOf="@+id/v4" />
 
-    <TextView
-        android:id="@+id/tv9"
-        android:layout_width="320dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:text="Thêm hình thức xác nhận để bảo vệ tài khoản của bạn khi đăng nhập trên thiết bị lạ"
-        android:textColor="#8B7D7B"
-        android:textSize="16dp"
-        app:layout_constraintStart_toStartOf="@+id/tv8"
-        app:layout_constraintTop_toBottomOf="@+id/tv8" />
+        <TextView
+            android:id="@+id/tv9"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Thêm hình thức xác nhận để bảo vệ tài khoản của bạn khi đăng nhập trên thiết bị lạ"
+            android:textColor="@color/text_40"
+            android:textSize="12sp"
+            android:layout_marginTop="6dp"
+            android:layout_marginHorizontal="16dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/tv8"
+            app:layout_constraintTop_toBottomOf="@+id/tv8" />
 
-    <Switch
-        android:id="@+id/switch1"
-        android:layout_width="48dp"
-        android:layout_height="48dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/img7"
-        app:layout_constraintTop_toBottomOf="@+id/v4" />
+        <Switch
+            android:id="@+id/switch1"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_marginEnd="20dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/v4" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

@@ -6,6 +6,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.example.fitfo.Define.ImageUtils
 import com.example.fitfo.Interface.RvChat
 import com.example.fitfo.Models.GetStoryReponse
 import com.example.fitfo.R
@@ -25,9 +26,12 @@ class StoryAdapter( var liststory:List<GetStoryReponse>, val rvInterfaceChat: Rv
             var imgAvtStory = findViewById<ImageView>(R.id.imgAvtStory)
             var imgStory = findViewById<ImageView>(R.id.imgStory)
             var txtNameStory = findViewById<TextView>(R.id.txtNameStory)
-//            imgAvtStory.setImageResource(liststory[position].author)
+            val avatarUrl = liststory[position].avatar
+            if (!avatarUrl.isNullOrEmpty() ) {
+            ImageUtils.displayImage2(avatarUrl, imgAvtStory)
+        }
 //            imgStory.setImageResource(liststory[position].photo)
-            txtNameStory.setText(liststory[position]._id)
+            txtNameStory.setText(liststory[position].userName)
             holder.itemView.setOnClickListener {
                 rvInterfaceChat.onClickchat(position)
             }

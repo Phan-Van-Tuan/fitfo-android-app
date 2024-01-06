@@ -16,17 +16,17 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.fitfo.Adapter.ListMessageAdapter
-import com.example.fitfo.Interface.ApiService
+import com.example.fitfo.Define.CallApi.RetrofitClient
 import com.example.fitfo.Models.findMessageResponse
-import com.example.fitfo.Socket.MySocketManager
-import com.example.fitfo.Test.MyInfo
+import com.example.fitfo.Define.MySocketManager
+import com.example.fitfo.Define.UserInfo
+import com.example.fitfo.Profile.ProfileActivity
 import com.example.fitfo.databinding.ActivityChatBinding
 import com.jakewharton.threetenabp.AndroidThreeTen
+import org.json.JSONObject
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import retrofit2.Retrofit
-import retrofit2.converter.gson.GsonConverterFactory
 import java.util.Locale
 
 class ChatActivity : AppCompatActivity() {
@@ -55,12 +55,19 @@ class ChatActivity : AppCompatActivity() {
         sharedPreferences = this.getSharedPreferences("data", Context.MODE_PRIVATE)
         val myId = sharedPreferences.getString("MY_ID", null).toString()
 
-        val chatId = MyInfo.chatID
+        val chatId = UserInfo.chatID
+        val userName = UserInfo.userName
+        binding.txtNameChat.setText(userName)
 
         if(chatId != "") {
             fectchMessage(chatId, myId)
         } else return
 
+        // nhấn vô tên thì chuyển qua profile
+        binding.txtNameChat.setOnClickListener {
+            val intent = Intent(this, ProfileActivity::class.java)
+            startActivity(intent)
+        }
         socketManager.initSocket();
         socketManager.connectSocket();
         socketManager.addNewUser(myId);
@@ -74,17 +81,19 @@ class ChatActivity : AppCompatActivity() {
             fectchMessage(chatId, myId);
         }
 
-//        binding.btnSent.setOnClickListener {
-//            val myMessage = binding.edtMessage.text.toString().trim()
-//            socketManager.sendMessage("{'chatId': '$chatId','senderId': '$myId','title':$myMessage}")
-////            Toast.makeText(this,myMessage,Toast.LENGTH_LONG).show()
-//            socketManager.onReceiveMessage { args ->
-//                // Xử lý khi nhận được tin nhắn từ server
-//                val receiveMessage = args[0] as String
-//                Toast.makeText(this, receiveMessage, Toast.LENGTH_LONG).show()
-//            }
-//            binding.edtMessage.text.clear()
-//        }
+        val socketManager = MySocketManager()
+        socketManager.initSocket()
+        socketManager.connectSocket()
+
+        socketManager.onReceiveNotification { args ->
+            // Xử lý thông báo ở đây
+            if (args.isNotEmpty()) {
+                val notificationData = args[0] as JSONObject
+                Log.d("notificationData", "" + notificationData)
+                // Thực hiện xử lý thông báo dựa trên dữ liệu nhận được từ server
+                // Ví dụ: Hiển thị thông báo, cập nhật giao diện người dùng, v.v.
+            }
+        }
 
 
         pickImagesLauncher =
@@ -131,9 +140,6 @@ class ChatActivity : AppCompatActivity() {
 //                fectchMessage(chatId,myId)
 //            };
 //        }
-        val item = MyInfo.userName
-        binding.txtNameChat.setText(item)
-
 
         binding.edtMessage.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(
@@ -172,7 +178,7 @@ class ChatActivity : AppCompatActivity() {
 
 
         binding.chatBack.setOnClickListener {
-            var intent = Intent(this, MainActivity_Logged_in::class.java)
+            var intent = Intent(this, Logged::class.java)
             startActivity(intent)
         }
 
@@ -190,12 +196,7 @@ class ChatActivity : AppCompatActivity() {
 
 
     private fun fectchMessage(chatId: String, myId: String) {
-        val retrofit = Retrofit.Builder()
-            .baseUrl("https://fitfo-api.vercel.app/")
-            .addConverterFactory(GsonConverterFactory.create())
-            .build()
-
-        val apiService = retrofit.create(ApiService::class.java)
+        val apiService = RetrofitClient.apiService
         val call = apiService.findMessages(chatId)
         call.enqueue(object : Callback<List<findMessageResponse>> {
             override fun onResponse(
@@ -207,12 +208,6 @@ class ChatActivity : AppCompatActivity() {
 
                     if (!messageResponses.isNullOrEmpty()) {
                         listmessages.addAll(messageResponses);
-//                        val firstChatResponse = chatResponses[0]
-//                        val messageId = firstChatResponse._id;
-//                        val chatId = firstChatResponse.chatId;
-//                        val senderId = firstChatResponse.senderId;
-//                        val text = firstChatResponse.text;
-//                        val createdAt = firstChatResponse.createdAt;
                         val adapterListmessage = ListMessageAdapter(listmessages, myId)
                         var lmss = binding.chatRecyclerView
                         lmss.layoutManager = LinearLayoutManager(

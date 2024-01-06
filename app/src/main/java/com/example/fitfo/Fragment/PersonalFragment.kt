@@ -1,5 +1,6 @@
 package com.example.fitfo.Fragment
 
+import android.R
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
@@ -8,9 +9,11 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.example.fitfo.Account_SecurityActivity
+import com.example.fitfo.Account_Security
+import com.example.fitfo.Define.ImageUtils
 import com.example.fitfo.MainActivity
-import com.example.fitfo.PersonalActivity
+import com.example.fitfo.Profile.PersonalActivity
+import com.example.fitfo.Search
 import com.example.fitfo.databinding.FragmentPersonalBinding
 
 // TODO: Rename parameter arguments, choose names that match
@@ -52,12 +55,18 @@ class PersonalFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        binding.btnSearch.setOnClickListener {
+            var intent = Intent(context, Search::class.java)
+            startActivity(intent)
+        }
+
         binding.personal.setOnClickListener {
             var intent = Intent(context, PersonalActivity::class.java)
             startActivity(intent)
         }
-        binding.accountandsecurity.setOnClickListener {
-            var intent = Intent(context, Account_SecurityActivity::class.java)
+        binding.accountAndSecurity.setOnClickListener {
+            var intent = Intent(context, Account_Security::class.java)
             startActivity(intent)
         }
 
@@ -65,11 +74,14 @@ class PersonalFragment : Fragment() {
             removePrivateData()
             var intent = Intent(context, MainActivity::class.java)
             startActivity(intent)
-
         }
 
         sharedPreferences = requireActivity()?.getSharedPreferences("data", Context.MODE_PRIVATE)!!
-        binding.txtName.setText(sharedPreferences.getString("MY_NAME", ""))
+        val avatarUrl = sharedPreferences.getString("MY_AVATAR", "")
+        if (!avatarUrl.isNullOrEmpty() ) {
+            ImageUtils.displayImage2(avatarUrl, binding.imgAvt)
+        }
+        binding.textName.setText(sharedPreferences.getString("MY_NAME", ""))
 
     }
 
@@ -99,6 +111,7 @@ class PersonalFragment : Fragment() {
         editor.remove("MY_ID")
         editor.remove("MY_NAME")
         editor.remove("MY_PHONE_NUMBER")
+        editor.remove("MY_AVATAR")
         editor.remove("ACCESS_TOKEN")
 
         editor.apply()

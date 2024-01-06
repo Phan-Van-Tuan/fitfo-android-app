@@ -10,7 +10,9 @@ import androidx.annotation.RequiresApi
 import androidx.recyclerview.widget.RecyclerView
 import com.example.fitfo.Models.findMessageResponse
 import com.example.fitfo.R
-import com.example.fitfo.Test.DateFormat
+import com.example.fitfo.Define.DateFormat
+import com.example.fitfo.Define.ImageUtils
+import com.example.fitfo.Define.UserInfo
 
 
 class ListMessageAdapter(
@@ -43,6 +45,10 @@ class ListMessageAdapter(
             val txtMessage = findViewById<TextView>(R.id.txtMessage)
             val txtDateTime = findViewById<TextView>(R.id.txtDateTime)
             val imgProfile = findViewById<ImageView>(R.id.imgProfile)
+            val userAvatar = UserInfo.userAvatar
+            if (!userAvatar.isNullOrEmpty()) {
+                ImageUtils.displayImage2(userAvatar, imgProfile)
+            }
             txtMessage.setText(listmessage[position].title)
             var dateTimeFormated = dateFormat.toFormattedString(listmessage[position].createdAt)
             txtDateTime.setText(dateTimeFormated)

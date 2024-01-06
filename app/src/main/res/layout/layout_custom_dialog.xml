@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <TextView
+        android:id="@+id/dialog_title"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:textStyle="bold"
+        android:textColor="@color/white"
+        android:layout_weight="1"
+        android:background="@drawable/shape_background_border_radius_tl_tr"
+        android:padding="20dp"
+        android:text="Title" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="20dp"
+        android:orientation="vertical">
+        <TextView
+            android:id="@+id/dialog_message"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:minHeight="60dp"
+            android:layout_weight="1"
+            android:text="Content" />
+
+        <LinearLayout
+            android:id="@+id/dialog_control"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:paddingHorizontal="40dp"
+            android:orientation="horizontal">
+            <Button
+                android:id="@+id/dialog_cancel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_marginRight="20dp"
+                android:background="@drawable/shape_button_dark"
+                android:text="Hủy" />
+
+            <Button
+                android:id="@+id/dialog_accept"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@drawable/shape_button"
+                android:text="Đồng ý" />
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>

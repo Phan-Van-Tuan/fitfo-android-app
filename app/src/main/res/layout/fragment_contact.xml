@@ -7,111 +7,33 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".Fragment.ContactFragment">
 
-    <androidx.appcompat.widget.SearchView
-        android:id="@+id/searchView"
-        android:layout_width="350dp"
-        android:layout_height="wrap_content"
-        android:hint="Tìm kiếm đoạn chat"
-        app:iconifiedByDefault="false"
-        android:focusable="false"
-        app:closeIcon="@drawable/ic_close"
-        app:defaultQueryHint="Không có dữ liệu"
-        app:queryHint="Tìm kiếm" />
+    <LinearLayout
+        android:id="@+id/btn_search"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_alignParentTop="true"
+        android:gravity="start|center"
+        android:background="@drawable/shape_background_color">
 
-    <ImageView
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:layout_gravity="end"
-        android:layout_marginTop="5dp"
-        android:layout_marginRight="5dp"
-        android:src="@drawable/baseline_add_24"/>
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="1dp"
+            android:padding="2dp"
+            android:src="@drawable/b_search_white" />
 
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="6dp"
+            android:text="Tìm kiếm"
+            android:gravity="start|center"
+            android:textColor="@color/white_40"/>
+
+    </LinearLayout>
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/listcontact"
         android:layout_width="match_parent"
         android:layout_marginTop="60dp"
         android:layout_height="wrap_content" />
-
-    <FrameLayout
-        android:id="@+id/frameSearch"
-        android:visibility="gone"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="60dp">
-
-        <androidx.appcompat.widget.LinearLayoutCompat
-            android:id="@+id/searchSuccess"
-            android:visibility="gone"
-            android:background="@color/primary"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <androidx.cardview.widget.CardView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    app:cardCornerRadius="70dp"
-                    android:layout_marginLeft="5dp"
-                    android:layout_marginTop="5dp"
-                    >
-
-                    <ImageView
-                        android:id="@+id/imgAvt"
-                        android:layout_width="50dp"
-                        android:layout_height="50dp"
-
-                        android:src="@drawable/k" />
-
-                </androidx.cardview.widget.CardView>
-            </LinearLayout>
-
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:layout_marginLeft="10dp"
-                android:layout_gravity="center"
-                android:gravity="center"
-                android:orientation="vertical">
-
-                <TextView
-                    android:id="@+id/txtName"
-                    android:layout_width="match_parent"
-                    android:textStyle="bold"
-                    android:textSize="22dp"
-                    android:layout_height="wrap_content"
-                    android:text="Phan Tuấn" />
-
-            </LinearLayout>
-        </androidx.appcompat.widget.LinearLayoutCompat>
-
-        <LinearLayout
-            android:id="@+id/noContact"
-            android:visibility="gone"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
-
-            <ImageView
-                android:layout_width="150dp"
-                android:layout_height="150dp"
-                android:layout_gravity="center"
-                android:src="@drawable/nocontact"/>
-
-            <TextView
-                android:layout_width="350dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:gravity="center"
-                android:text="Số điện thoại chưa đăng ký tài khoản hoặc không cho phép tìm kiếm"
-                android:textSize="20dp"/>
-        </LinearLayout>
-
-    </FrameLayout>
-
-
 </FrameLayout>

@@ -6,11 +6,13 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.example.fitfo.OutData.OutDataContact
+import com.example.fitfo.Define.ImageUtils
+import com.example.fitfo.Interface.RvChat
+import com.example.fitfo.Models.getListFriendResponse
 import com.example.fitfo.R
 
 
-class ContactAdapter(var Contact: MutableList<OutDataContact>): RecyclerView.Adapter<ContactAdapter.listcontact>() {
+class ContactAdapter(var Contact: MutableList<getListFriendResponse>, val rvChat: RvChat): RecyclerView.Adapter<ContactAdapter.listcontact>() {
 inner class listcontact(itemView: View) :RecyclerView.ViewHolder(itemView)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): listcontact {
@@ -20,10 +22,16 @@ inner class listcontact(itemView: View) :RecyclerView.ViewHolder(itemView)
 
     override fun onBindViewHolder(holder: listcontact, position: Int) {
         holder.itemView.apply {
-            var txtNameChat = findViewById<TextView>(R.id.txtNameChat)
-            var imgAvtChat = findViewById<ImageView>(R.id.imgAvtChat)
-            txtNameChat.setText(Contact[position].txtNameChat)
-            imgAvtChat.setImageResource(Contact[position].imgAvtChat)
+            var nameContact = findViewById<TextView>(R.id.txtNameChat)
+            var avatarContact = findViewById<ImageView>(R.id.imgAvtChat)
+            nameContact.setText(Contact[position].name)
+            val avatarUrl = Contact[position].avatar
+            if (!avatarUrl.isNullOrEmpty() ) {
+                ImageUtils.displayImage2(avatarUrl, avatarContact)
+            }
+            holder.itemView.setOnClickListener {
+                rvChat.onClickchat(position)
+            }
         }
     }
 

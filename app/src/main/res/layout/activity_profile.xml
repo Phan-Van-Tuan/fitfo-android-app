@@ -1,10 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ProfileActivity">
+    android:background="@color/background"
+    tools:context=".Profile.ProfileActivity">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
     <ImageView
         android:id="@+id/imageView8"
@@ -14,7 +19,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/k" />
+        app:srcCompat="@drawable/bg" />
 
     <ImageView
         android:id="@+id/backtoPeople"
@@ -49,19 +54,20 @@
         app:cardCornerRadius="145dp">
 
         <ImageView
+            android:id="@+id/avatar"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@drawable/person" />
+            android:background="@drawable/a_logo_white" />
     </androidx.cardview.widget.CardView>
 
     <TextView
-        android:id="@+id/txtName"
+        android:id="@+id/text_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/cardView"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="10dp"
-        android:text="Long Vũ"
+        android:text="User name"
         android:textColor="@color/black"
         android:textSize="20dp"
         android:textStyle="bold"
@@ -71,41 +77,87 @@
         android:id="@+id/btnToChat"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/txtName"
+        android:layout_below="@+id/text_name"
         android:layout_alignParentStart="true"
         android:layout_marginStart="30dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="30dp"
         app:icon="@drawable/chat"
-        android:textColor="@color/black"
+        android:textColor="@color/white"
         android:text="@string/chat"
         android:layout_toStartOf="@+id/btnAddFriend" />
 
     <Button
         android:id="@+id/btnAddFriend"
-        android:layout_width="wrap_content"
+        android:layout_width="140dp"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/txtName"
+        android:layout_below="@+id/text_name"
         android:layout_alignParentEnd="true"
-        android:textColor="@color/black"
+        android:textColor="@color/white"
         android:text="@string/add_friend"
-        app:icon="@drawable/baseline_person_add_24"
+        app:icon="@drawable/a_add_friend"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="30dp"/>
 
     <Button
-        android:id="@+id/btnAddFriendSuccess"
-        android:layout_width="wrap_content"
+        android:id="@+id/btn_destroy_friendship"
+        android:layout_width="140dp"
         android:visibility="gone"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/txtName"
+        android:layout_below="@+id/text_name"
         android:layout_alignParentEnd="true"
-        android:textColor="@color/black"
-        android:text="@string/add_friend"
-        app:icon="@drawable/baseline_person_add_24"
+        android:textColor="@color/white"
+        android:text="@string/destroy_friendship"
+        app:icon="@drawable/a_remove_friend"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="30dp"/>
 
+    <Button
+        android:id="@+id/btn_accept_friendship"
+        android:layout_width="140dp"
+        android:visibility="gone"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/text_name"
+        android:layout_alignParentEnd="true"
+        android:textColor="@color/black"
+        android:text="@string/accept_friendship"
+        app:icon="@drawable/a_accept_friend"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="30dp"/>
 
+    <Button
+        android:id="@+id/btn_wait_accept_friendship"
+        android:layout_width="140dp"
+        android:visibility="gone"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/text_name"
+        android:layout_alignParentEnd="true"
+        android:textColor="@color/white"
+        android:text="@string/wait_accept_friendship"
+        app:icon="@drawable/a_wait_friend"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="30dp"/>
 
-</RelativeLayout>
+        <TextView
+            android:id="@+id/recyclerview_no_post"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Kết bạn để xem nhiều hơn"
+            android:padding="30dp"
+            android:gravity="center"
+            android:textColor="@color/text_40"
+            android:layout_marginTop="30dp"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@+id/btnToChat"/>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvListUserPost"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone"
+        android:layout_marginTop="30dp"
+        android:layout_below="@+id/btnToChat"
+        />
+
+    </RelativeLayout>
+</androidx.core.widget.NestedScrollView>

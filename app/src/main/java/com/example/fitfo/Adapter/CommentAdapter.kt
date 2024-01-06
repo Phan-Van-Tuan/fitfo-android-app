@@ -6,6 +6,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.example.fitfo.Define.ImageUtils
 import com.example.fitfo.Interface.RvChat
 import com.example.fitfo.Models.findCommentResponse
 import com.example.fitfo.R
@@ -25,7 +26,10 @@ inner class listcomment(itemView: View) :RecyclerView.ViewHolder(itemView)
             var txtTitleCmt = findViewById<TextView>(R.id.txtTitleCmt)
             var imgAvtCmt = findViewById<ImageView>(R.id.imgAvtCmt)
             txtNameCmt.setText(Comment[position].userName)
-//            imgAvtCmt.setImageResource(Comment[position].avatar)
+            val avatarUrl = Comment[position].avatar
+            if (!avatarUrl.isNullOrEmpty() ) {
+                ImageUtils.displayImage2(avatarUrl, imgAvtCmt)
+            }
             txtTitleCmt.setText(Comment[position].content)
             holder.itemView.setOnClickListener {
                 rvInterfaceChat.onClickchat(position)

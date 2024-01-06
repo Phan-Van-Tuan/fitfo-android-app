@@ -14,6 +14,6 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "ff"
+rootProject.name = "fitfo"
 include(":app")
  

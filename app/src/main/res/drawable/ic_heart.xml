@@ -5,6 +5,6 @@
         android:drawable="@drawable/click_favorite_24"/>
 
     <item
-        android:drawable="@drawable/heart"/>
+        android:drawable="@drawable/b_heart_gray"/>
 
 </selector>

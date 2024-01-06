@@ -5,8 +5,8 @@ import android.content.Intent
 import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import com.example.fitfo.Login_Register_ForgotPass.LoginActivity
-import com.example.fitfo.Login_Register_ForgotPass.RegisterActivity
+import com.example.fitfo.Authentication.LoginActivity
+import com.example.fitfo.Authentication.RegisterActivity
 import com.example.fitfo.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
@@ -21,7 +21,7 @@ class MainActivity : AppCompatActivity() {
         val id: String= sharedPreferences.getString("MY_ID","").toString()
         if (id==""){
             }else{
-            var intent = Intent(this,MainActivity_Logged_in::class.java)
+            var intent = Intent(this,Logged::class.java)
             startActivity(intent)
         }
         binding.btnToRegister.setOnClickListener {

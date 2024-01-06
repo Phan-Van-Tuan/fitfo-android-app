@@ -31,7 +31,7 @@
         android:layout_marginStart="4dp"
         android:layout_marginLeft="4dp"
         android:background="@drawable/backround_received_messagge"
-        android:src="@drawable/a"
+        android:src="@drawable/a_logo_white"
         app:layout_constraintStart_toEndOf="@+id/cvProfile"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintWidth_percent="0.75"/>

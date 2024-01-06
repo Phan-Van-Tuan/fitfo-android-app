@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".OptionActivity.OptionPersonal">
+    tools:context=".Profile.OptionPersonal">
 
     <View
         android:id="@+id/view4"
@@ -28,11 +28,11 @@
         app:layout_constraintVertical_bias="0.444" />
 
     <TextView
-        android:id="@+id/txtName"
+        android:id="@+id/text_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
-        android:text="Long Vũ"
+        android:text="..."
         android:textColor="@color/white"
         android:textSize="20dp"
         android:textStyle="bold"

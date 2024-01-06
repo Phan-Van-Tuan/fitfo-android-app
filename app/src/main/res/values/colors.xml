@@ -1,17 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="black">#FF000000</color>
+    <color name="text_40">#65000000</color>
     <color name="white">#FFFFFFFF</color>
-    <color name="primary">#f4c2d7</color>
+    <color name="white_40">#65FFFFFF</color>
+    <color name="white_70">#80FFFFFF</color>
+<!--    <color name="primary">#f4c2d7</color>-->
+    <color name="primary">#272f59</color>
     <color name="text_primary">#f4c2d7</color>
     <color name="view">#C1CDC1</color>
     <color name="chat_sent">#4876FF</color>
-    <color name="line">#DDDDDD</color>
-
-    <color name="gray">#4876FF</color>
+    <color name="line">#C1CDC1</color>
+    <color name="end">#48355b</color>
+    <color name="start">#272f59</color>
+    <color name="gray">#CCC</color>
     <color name="text">#4d4d4d</color>
     <color name="pastel">#efb0c9</color>
-    <color name="background">#FAF0F4</color>
+<!--    <color name="background">#FAF0F4</color>-->
+    <color name="background">#f6f6f9</color>
     <color name="red">#FA3030</color>
 
 
