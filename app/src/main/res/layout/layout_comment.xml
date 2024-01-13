@@ -3,6 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@color/white"
+    android:padding="4dp"
     android:layout_marginTop="2dp"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
@@ -20,11 +21,10 @@
             >
 
             <ImageView
-                android:id="@+id/imgAvtCmt"
+                android:id="@+id/comment_user_name_avatar"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
-
-                android:src="@drawable/k" />
+                android:src="@drawable/a_logo_white" />
 
         </androidx.cardview.widget.CardView>
     </LinearLayout>
@@ -39,20 +39,28 @@
         android:orientation="vertical">
 
         <TextView
-            android:id="@+id/txtNameCmt"
+            android:id="@+id/comment_user_name"
             android:layout_width="match_parent"
             android:textStyle="bold"
-            android:textSize="22dp"
+            android:textSize="20dp"
             android:maxLength="20"
             android:layout_height="wrap_content"
-            android:text="Phan Tuấn" />
+            android:text="User name" />
 
         <TextView
-            android:id="@+id/txtTitleCmt"
-            android:textSize="20dp"
+            android:id="@+id/comment_content"
+            android:textSize="16sp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="hihi" />
+            android:text="comment" />
+
+        <TextView
+            android:id="@+id/comment_time"
+            android:textSize="12sp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/text_40"
+            android:text="vừa xong" />
     </LinearLayout>
 
 </LinearLayout>

@@ -16,7 +16,7 @@
         tools:layout_editor_absoluteX="0dp">
 
         <androidx.cardview.widget.CardView
-            android:id="@+id/cardview"
+            android:id="@+id/cardView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
@@ -26,14 +26,14 @@
             app:layout_constraintTop_toTopOf="parent">
 
             <ImageView
-                android:id="@+id/imgAvtPost"
+                android:id="@+id/post_avtar"
                 android:layout_width="48dp"
                 android:layout_height="48dp"
                 android:src="@drawable/a_logo_white" />
         </androidx.cardview.widget.CardView>
 
         <TextView
-            android:id="@+id/txtNamePort"
+            android:id="@+id/post_of_user_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
@@ -41,11 +41,11 @@
             android:text="User name"
             android:textSize="16dp"
             android:textStyle="bold"
-            app:layout_constraintStart_toEndOf="@+id/cardview"
+            app:layout_constraintStart_toEndOf="@+id/cardView"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/txtCause"
+            android:id="@+id/post_action"
             android:layout_width="0dp"
             android:layout_height="58dp"
             android:layout_marginRight="20dp"
@@ -54,24 +54,24 @@
             android:gravity="left"
             android:text="đã có một bài viết mới"
             android:textSize="16dp"
-            app:layout_constraintBottom_toTopOf="@+id/txtStatus"
-            app:layout_constraintEnd_toStartOf="@+id/optionPort"
+            app:layout_constraintBottom_toTopOf="@+id/post_caption"
+            app:layout_constraintEnd_toStartOf="@+id/post_option"
             app:layout_constraintHorizontal_bias="1.0"
-            app:layout_constraintStart_toEndOf="@+id/txtNamePort"
-            app:layout_constraintTop_toTopOf="@+id/txtNamePort"
+            app:layout_constraintStart_toEndOf="@+id/post_of_user_name"
+            app:layout_constraintTop_toTopOf="@+id/post_of_user_name"
             app:layout_constraintVertical_bias="0.0" />
 
         <TextView
-            android:id="@+id/txtTimeport"
+            android:id="@+id/post_time"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="time"
+            android:text="vừa xong"
             android:textColor="@color/text_40"
-            app:layout_constraintStart_toStartOf="@+id/txtNamePort"
-            app:layout_constraintTop_toBottomOf="@+id/txtNamePort" />
+            app:layout_constraintStart_toStartOf="@+id/post_of_user_name"
+            app:layout_constraintTop_toBottomOf="@+id/post_of_user_name" />
 
         <ImageView
-            android:id="@+id/optionPort"
+            android:id="@+id/post_option"
             android:layout_width="20dp"
             android:layout_height="20dp"
             android:src="@drawable/option"
@@ -81,7 +81,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <ImageView
-            android:id="@+id/picture_post"
+            android:id="@+id/post_picture"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
@@ -89,34 +89,21 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/txtStatus" />
+            app:layout_constraintTop_toBottomOf="@+id/post_caption" />
 
         <CheckBox
-            android:id="@+id/btn_love"
+            android:id="@+id/post_btn_like"
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:layout_marginStart="12dp"
             android:layout_marginTop="16dp"
-            android:background="@drawable/b_heart_gray"
+            android:background="@drawable/checkbox_tint"
             android:button="@null"
             android:checked="false"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/picture_post" />
-        <CheckBox
-            android:id="@+id/btn_loved"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:layout_marginStart="12dp"
-            android:layout_marginTop="16dp"
-            android:visibility="gone"
-            android:background="@drawable/b_love_red"
-            android:button="@null"
-            android:checked="false"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/picture_post" />
-
+            app:layout_constraintTop_toBottomOf="@+id/post_picture" />
         <TextView
-            android:id="@+id/count_heart"
+            android:id="@+id/post_count_liked"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="50dp"
@@ -124,38 +111,38 @@
             android:text="0"
             android:textColor="@color/text_40"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/picture_post" />
+            app:layout_constraintTop_toBottomOf="@+id/post_picture" />
 
         <TextView
-            android:id="@+id/ic_cmt"
+            android:id="@+id/post_btn_comment"
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:layout_marginStart="36dp"
             android:layout_marginTop="16dp"
             android:background="@drawable/b_comment_gray"
-            app:layout_constraintStart_toEndOf="@+id/count_heart"
-            app:layout_constraintTop_toBottomOf="@+id/picture_post" />
+            app:layout_constraintStart_toEndOf="@+id/post_count_liked"
+            app:layout_constraintTop_toBottomOf="@+id/post_picture" />
 
         <TextView
-            android:id="@+id/countCmt"
+            android:id="@+id/post_count_comment"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
             android:layout_marginTop="24dp"
             android:text="0"
             android:textColor="@color/text_40"
-            app:layout_constraintStart_toEndOf="@+id/ic_cmt"
-            app:layout_constraintTop_toBottomOf="@+id/picture_post" />
+            app:layout_constraintStart_toEndOf="@+id/post_btn_comment"
+            app:layout_constraintTop_toBottomOf="@+id/post_picture" />
 
         <TextView
-            android:id="@+id/txtStatus"
+            android:id="@+id/post_caption"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginTop="12dp"
             android:text=""
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/cardview" />
+            app:layout_constraintTop_toBottomOf="@+id/cardView" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.cardview.widget.CardView

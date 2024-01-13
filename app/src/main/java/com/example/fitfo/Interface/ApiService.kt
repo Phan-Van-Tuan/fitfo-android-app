@@ -1,5 +1,6 @@
 package com.example.fitfo.Interface
 
+import com.example.fitfo.Models.ChatResponse
 import com.example.fitfo.Models.CommentRequest
 import com.example.fitfo.Models.GetPostReponse
 import com.example.fitfo.Models.GetStoryReponse
@@ -10,13 +11,13 @@ import com.example.fitfo.Models.LoginRequest
 import com.example.fitfo.Models.RegisterRequest
 import com.example.fitfo.Models.addFriendshipRequest
 import com.example.fitfo.Models.createPostRequest
-import com.example.fitfo.Models.findChatResponse
 import com.example.fitfo.Models.findCommentResponse
 import com.example.fitfo.Models.findMessageResponse
-import com.example.fitfo.Models.getFriendShipResponse
-import com.example.fitfo.Models.getListFriendResponse
+import com.example.fitfo.Models.FriendShipResponse
+import com.example.fitfo.Models.ListFriendResponse
 import com.example.fitfo.Models.updateAvatarRequest
 import com.example.fitfo.Models.updatePasswordRequest
+import com.example.fitfo.Models.updatePostLikeRequest
 import retrofit2.Call
 import retrofit2.http.Body
 import retrofit2.http.DELETE
@@ -37,20 +38,21 @@ interface ApiService {
     @GET("api/user/getUserByPhoneNumber/{phoneNumber}")
     fun getUserByPhoneNumber(@Path("phoneNumber") phoneNumber: String): Call<GetUserByPhoneNumberResponse>
     @GET("api/chat/find/{myId}/{userId}")
-    fun findChat(@Path("myId") myId: String, @Path("userId") userId: String): Call<List<findChatResponse>>
+    fun findChat(@Path("myId") myId: String, @Path("userId") userId: String): Call<List<ChatResponse>>
     @GET("api/chat/{myId}")
-    fun findChats(@Path("myId") myId: String): Call<List<findChatResponse>>
+    fun findChats(@Path("myId") myId: String): Call<List<ChatResponse>>
     @GET("api/message/{chatId}")
     fun findMessages(@Path("chatId") myId: String): Call<List<findMessageResponse>>
     @GET("api/friendship/{myId}")
-    fun findContact(@Path("myId") myId: String): Call<List<getListFriendResponse>>
+    fun findContact(@Path("myId") myId: String): Call<List<ListFriendResponse>>
     @GET("api/post/getAll/{myId}")
     fun findPosts(@Path("myId") myId: String): Call<List<GetPostReponse>>
     @POST("api/post")
     fun createPost(@Body requestBody: createPostRequest): Call<String>
     @GET("api/post/getByUser/{userId}")
     fun findPostsOfUser(@Path("userId") userId: String): Call<List<GetPostReponse>>
-    @DELETE("api/post/{id}")
+    @PATCH("api/post/like/{postId}")
+    fun updatePostLike(@Path("postId") postId: String, @Body requestBody: updatePostLikeRequest): Call<String>
     fun deletePost(@Path("id") id: String): Call<String>
     @GET("api/story")
     fun findStory(): Call<List<GetStoryReponse>>
@@ -63,7 +65,7 @@ interface ApiService {
     @PATCH("/api/user/updateAvatar/{myId}")
     fun updateAvatar(@Path("myId") myId: String, @Body requestBody: updateAvatarRequest): Call<String>
     @GET("api/friendship/{myId}/{userId}")
-    fun getFriendship(@Path("myId") myId: String, @Path("userId") userId: String): Call<getFriendShipResponse>
+    fun getFriendship(@Path("myId") myId: String, @Path("userId") userId: String): Call<FriendShipResponse>
     @POST("api/friendship/addFriend")
     fun addFriend(@Body requestBody: addFriendshipRequest): Call<String>
     @PATCH("api/friendship/acceptFriend/{friendshipId}")

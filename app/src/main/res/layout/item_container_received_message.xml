@@ -5,7 +5,8 @@
     android:layout_height="wrap_content"
     android:background="@color/background"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:padding="4dp">
+    android:padding="4dp"
+    >
 
 
     <androidx.cardview.widget.CardView
@@ -28,9 +29,9 @@
         android:id="@+id/txtMessage"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="4dp"
         android:layout_marginLeft="4dp"
-        android:text="cam onm nsnfjrij efeifjei jhfuefj fnuifji dsfhuie nfuirjfe f"
+        android:text="message"
+        android:minWidth="70dp"
         android:maxWidth="300dp"
         android:background="@drawable/backround_received_messagge"
         android:padding="12dp"
@@ -44,11 +45,46 @@
         android:id="@+id/txtDateTime"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
-        android:textColor="#8B7D7B"
-        android:textSize="10dp"
+        android:textColor="@color/text_40"
+        android:layout_marginLeft="14dp"
+        android:textSize="10sp"
+        android:text="ngày anh mất em"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/txtMessage"
-        app:layout_constraintTop_toBottomOf="@+id/txtMessage" />
+        app:layout_constraintStart_toEndOf="@+id/cvProfile" />
+
+<!--    <androidx.cardview.widget.CardView-->
+<!--        android:id="@+id/layout_display_image"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        app:layout_constraintHorizontal_bias="0.984"-->
+<!--        app:layout_constraintTop_toBottomOf="@+id/txtMessage"-->
+<!--        app:layout_constraintStart_toEndOf="@+id/cvProfile"-->
+<!--        android:layout_marginLeft="4dp"-->
+<!--        android:visibility="gone">-->
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/display_image"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:src="@drawable/a_logo_white"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/cvProfile"
+            android:layout_marginLeft="4dp"
+            android:maxWidth="320dp"
+            android:visibility="gone"/>
+
+    <!--    </androidx.cardview.widget.CardView>-->
+
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/display_audio"
+        android:layout_width="90dp"
+        android:layout_height="90dp"
+        android:layout_marginLeft="40dp"
+        app:lottie_autoPlay="false"
+        app:lottie_loop="true"
+        android:visibility="gone"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:lottie_rawRes="@raw/audio"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

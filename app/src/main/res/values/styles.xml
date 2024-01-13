@@ -6,4 +6,11 @@
         <item name="android:windowFullscreen">true</item>
         <item name="android:textColorPrimary">@color/primary</item>
     </style>
+    <style name="FullScreen" parent="Base.Theme.Ff">
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowActionBar">false</item>
+        <item name="android:windowFullscreen">true</item>
+        <item name="android:windowBackground">@color/text_40</item>
+        <item name="android:windowContentOverlay">@null</item>
+    </style>
 </resources>

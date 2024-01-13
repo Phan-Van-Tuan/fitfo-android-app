@@ -68,7 +68,7 @@ class PersonalActivity : AppCompatActivity() {
                     if (!postsResponse.isNullOrEmpty()) {
                         Toast.makeText(this@PersonalActivity, "Success", Toast.LENGTH_SHORT).show()
                         listPosts.addAll(postsResponse);
-                        val adapterDs = postAdapter(listPosts)
+                        val adapterDs = postAdapter(listPosts, myId)
                         var listpost = binding.rvListMyPost
                         listpost.layoutManager = LinearLayoutManager(this@PersonalActivity, LinearLayoutManager.VERTICAL, false)
                         listpost.adapter = adapterDs

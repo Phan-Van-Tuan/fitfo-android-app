@@ -13,12 +13,12 @@ import com.example.fitfo.Adapter.postAdapter
 import com.example.fitfo.ChatActivity
 import com.example.fitfo.Define.CallApi.RetrofitClient
 import com.example.fitfo.Define.ImageUtils
-import com.example.fitfo.Models.findChatResponse
 import com.example.fitfo.Define.UserInfo
 import com.example.fitfo.Logged
+import com.example.fitfo.Models.ChatResponse
 import com.example.fitfo.Models.GetPostReponse
 import com.example.fitfo.Models.addFriendshipRequest
-import com.example.fitfo.Models.getFriendShipResponse
+import com.example.fitfo.Models.FriendShipResponse
 import com.example.fitfo.databinding.ActivityProfileBinding
 import retrofit2.Call
 import retrofit2.Callback
@@ -48,7 +48,7 @@ class ProfileActivity : AppCompatActivity() {
 
         // tình trạng bạn bè
         fetchFriendship(myId,userId)
-        fetchPosts(userId)
+        fetchPosts(userId, myId)
 
         binding.textName.setText(UserInfo.userName)
         fetchChat(myId, userId)
@@ -63,10 +63,10 @@ class ProfileActivity : AppCompatActivity() {
     private fun fetchChat(myId: String, userId: String) {
         val apiService = RetrofitClient.apiService
         val call = apiService.findChat(myId, userId)
-        call.enqueue(object : Callback<List<findChatResponse>> {
+        call.enqueue(object : Callback<List<ChatResponse>> {
             override fun onResponse(
-                call: Call<List<findChatResponse>>,
-                response: Response<List<findChatResponse>>
+                call: Call<List<ChatResponse>>,
+                response: Response<List<ChatResponse>>
             ) {
                 if (response.isSuccessful) {
                     val chatResponses = response.body()
@@ -89,14 +89,14 @@ class ProfileActivity : AppCompatActivity() {
                 }
             }
 
-            override fun onFailure(call: Call<List<findChatResponse>>, t: Throwable) {
+            override fun onFailure(call: Call<List<ChatResponse>>, t: Throwable) {
                 val errorMessage = "Lỗi: ${t.message}"
                 Toast.makeText(this@ProfileActivity, errorMessage, Toast.LENGTH_LONG).show()
             }
         })
     }
 
-    private fun fetchPosts(userId: String) {
+    private fun fetchPosts(userId: String, myId: String) {
         val apiService = RetrofitClient.apiService
         val call = apiService.findPostsOfUser(userId)
         call.enqueue(object : Callback<List<GetPostReponse>> {
@@ -110,7 +110,7 @@ class ProfileActivity : AppCompatActivity() {
                     if (!postsResponse.isNullOrEmpty()) {
                         Toast.makeText(this@ProfileActivity, "Success", Toast.LENGTH_SHORT).show()
                         listPosts.addAll(postsResponse);
-                        val adapterDs = postAdapter(listPosts)
+                        val adapterDs = postAdapter(listPosts, myId)
                         var listpost = binding.rvListUserPost
                         listpost.layoutManager = LinearLayoutManager(this@ProfileActivity, LinearLayoutManager.VERTICAL, false)
                         listpost.adapter = adapterDs
@@ -140,10 +140,10 @@ class ProfileActivity : AppCompatActivity() {
     private fun fetchFriendship(myId: String, userId: String) {
         val apiService = RetrofitClient.apiService
         val call = apiService.getFriendship(myId, userId)
-        call.enqueue(object : Callback<getFriendShipResponse> {
+        call.enqueue(object : Callback<FriendShipResponse> {
             override fun onResponse(
-                call: Call<getFriendShipResponse>,
-                response: Response<getFriendShipResponse>
+                call: Call<FriendShipResponse>,
+                response: Response<FriendShipResponse>
             ) {
                 if (response.isSuccessful) {
                     val user1 = response.body()?.user1
@@ -170,7 +170,7 @@ class ProfileActivity : AppCompatActivity() {
                     Toast.makeText(this@ProfileActivity, "Lỗi3: $error", Toast.LENGTH_SHORT).show()
                 }
             }
-            override fun onFailure(call: Call<getFriendShipResponse>, t: Throwable) {
+            override fun onFailure(call: Call<FriendShipResponse>, t: Throwable) {
                 val errorMessage = "Lỗi2: ${t.message}"
                 Toast.makeText(this@ProfileActivity, errorMessage, Toast.LENGTH_LONG).show()
             }

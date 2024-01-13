@@ -11,12 +11,13 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@drawable/backround_sent_messagge"
+        android:maxWidth="320dp"
+        android:minWidth="70dp"
         android:padding="12dp"
-        android:text="cảm ơn bạn "
+        android:text="message"
         android:textColor="@color/black"
         android:textSize="16dp"
         app:layout_constraintEnd_toEndOf="parent"
-        android:maxWidth="320dp"
         app:layout_constraintHorizontal_bias="0.984"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -24,21 +25,45 @@
         android:id="@+id/txtDateTime"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginRight="10dp"
+        android:gravity="right"
+        android:text="ngày anh có em"
+        android:textColor="@color/text_40"
+        android:textSize="10sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/display_image"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginTop="4dp"
-        android:textColor="#8B7D7B"
-        android:textSize="10dp"
+        android:layoutDirection="rtl"
+        android:paddingBottom="20dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtMessage"/>
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintHorizontal_bias="0.05"/>
+
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/display_audio"
+        android:layout_width="90dp"
+        android:layout_height="90dp"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:lottie_autoPlay="false"
+        app:lottie_loop="true"
+        app:lottie_rawRes="@raw/audio" />
 
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/imgProfile"
         android:layout_width="25dp"
         android:layout_height="25dp"
         android:scaleType="centerCrop"
+        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:visibility="gone"
-        />
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

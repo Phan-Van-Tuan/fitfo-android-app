@@ -78,22 +78,23 @@
         android:id="@+id/view2"
         android:layout_width="match_parent"
         android:layout_height="60dp"
-        android:layout_alignParentBottom="true"
-        >
+        android:layout_alignParentBottom="true">
 
         <EditText
             android:id="@+id/edtComment"
             android:layout_width="match_parent"
-            android:layout_height="55dp"
-            android:hint="Mời nhập bình luận"
+            android:layout_height="50dp"
+            android:paddingTop="5dp"
             android:layout_marginRight="50dp"
-            />
+            android:paddingHorizontal="10dp"
+            android:hint="Mời nhập bình luận"/>
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/btnSentComment"
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:layout_alignParentRight="true"
+            android:layout_marginRight="10dp"
             android:layout_marginTop="10dp"
             android:src="@drawable/send"/>
     </RelativeLayout>

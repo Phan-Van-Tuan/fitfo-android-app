@@ -15,7 +15,10 @@ class MySocketManager {
             options.reconnection = true
 
             // Thay đổi địa chỉ server của bạn tại đây
-            socket = IO.socket("http://192.168.1.175:3200/", options)
+//            socket = IO.socket("https://fitfo-api.vercel.app/", options)
+            socket = IO.socket("http://192.168.1.24:3200/", options)
+//            socket = IO.socket("http://192.168.2.9:3200/", options)
+//            socket = IO.socket("http://192.168.179.161:3200/", options)
         } catch (e: Exception) {
             e.printStackTrace()
         }

@@ -86,66 +86,61 @@
 
 
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <LinearLayout
         android:id="@+id/view2"
         android:layout_width="match_parent"
         android:layout_height="60dp"
-        android:layout_marginTop="-65dp"
-        >
+        android:layout_marginTop="-60dp"
+        android:orientation="horizontal">
 
         <EditText
             android:id="@+id/edtMessage"
-            android:layout_width="0dp"
-            android:layout_height="55dp"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:paddingHorizontal="12dp"
             android:hint="Mời nhập tin nhắn"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:background="@null"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/btnOptionChat"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/btnOptionChat"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:layout_marginRight="5dp"
-            android:src="@drawable/option"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/btnMic"
-            app:layout_constraintTop_toTopOf="parent" />
+<!--        <androidx.appcompat.widget.AppCompatImageView-->
+<!--            android:id="@+id/btnOptionChat"-->
+<!--            android:layout_width="30dp"-->
+<!--            android:layout_height="30dp"-->
+<!--            android:layout_marginRight="5dp"-->
+<!--            android:layout_gravity="center"-->
+<!--            android:layout_marginHorizontal="10dp"-->
+<!--            android:src="@drawable/option"/>-->
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/btnMic"
             android:layout_width="30dp"
             android:layout_height="30dp"
-            android:layout_marginRight="5dp"
-            android:src="@drawable/baseline_mic_none_24"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/btnImageSent"
-            app:layout_constraintTop_toTopOf="parent" />
+            android:layout_gravity="center"
+            android:layout_marginHorizontal="10dp"
+            android:src="@drawable/baseline_mic_none_24" />
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/btnImageSent"
             android:layout_width="30dp"
             android:layout_height="30dp"
-            android:layout_marginEnd="16dp"
-            android:src="@drawable/b_image"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/btnSent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.5" />
+            android:layout_gravity="center"
+            android:layout_marginHorizontal="10dp"
+            android:src="@drawable/b_pick_picture_primary" />
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/btnSent"
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:src="@drawable/send"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:visibility="gone"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.5" />
+            android:layout_marginHorizontal="10dp"
+            android:layout_gravity="center"
+            android:visibility="gone"/>
 
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+    </LinearLayout>
 
 </LinearLayout>

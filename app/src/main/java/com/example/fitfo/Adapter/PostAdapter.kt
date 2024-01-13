@@ -8,6 +8,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.CheckBox
 import android.widget.EditText
 import android.widget.ImageView
 import android.widget.LinearLayout
@@ -22,6 +23,7 @@ import com.example.fitfo.Interface.RvChat
 import com.example.fitfo.Models.CommentRequest
 import com.example.fitfo.Models.GetPostReponse
 import com.example.fitfo.Models.findCommentResponse
+import com.example.fitfo.Models.updatePostLikeRequest
 import com.example.fitfo.R
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialog
@@ -30,10 +32,10 @@ import retrofit2.Callback
 import retrofit2.Response
 
 
-class postAdapter(var listPost:List<GetPostReponse>): RecyclerView.Adapter<postAdapter.ListPost>() {
-    inner class ListPost(itemView:View):RecyclerView.ViewHolder(itemView)
+class postAdapter(var listPost:List<GetPostReponse>, var myId: String)
+    : RecyclerView.Adapter<postAdapter.ListPost>() {
     val dateFormat = DateFormat()
-
+    inner class ListPost(itemView:View):RecyclerView.ViewHolder(itemView)
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ListPost {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.layout_post,parent,false)
         return ListPost(view)
@@ -43,46 +45,67 @@ class postAdapter(var listPost:List<GetPostReponse>): RecyclerView.Adapter<postA
     override fun onBindViewHolder(holder: ListPost, position: Int) {
         holder.itemView.apply {
             // ánh xạ
-            var imgAvtPost = findViewById<ImageView>(R.id.imgAvtPost)
-            var txtNamePost = findViewById<TextView>(R.id.txtNamePort)
-            var txtCause = findViewById<TextView>(R.id.txtCause)
-            var txtTimePost = findViewById<TextView>(R.id.txtTimeport)
-            var txtStatus = findViewById<TextView>(R.id.txtStatus)
-            var picturePost = findViewById<ImageView>(R.id.picture_post)
-            var count_heart = findViewById<TextView>(R.id.count_heart)
-            var countCmt = findViewById<TextView>(R.id.countCmt)
-            var cmt = findViewById<TextView>(R.id.ic_cmt)
-            var btnOptionPort= findViewById<ImageView>(R.id.optionPort)
+            var avatar = findViewById<ImageView>(R.id.post_avtar)
+            var userName = findViewById<TextView>(R.id.post_of_user_name)
+            var action = findViewById<TextView>(R.id.post_action)
+            var timePost = findViewById<TextView>(R.id.post_time)
+            var content = findViewById<TextView>(R.id.post_caption)
+            var picturePost = findViewById<ImageView>(R.id.post_picture)
+            var countLike = findViewById<TextView>(R.id.post_count_liked)
+            var countComment = findViewById<TextView>(R.id.post_count_comment)
+            var commentBtn = findViewById<TextView>(R.id.post_btn_comment)
+            var optionBtn= findViewById<ImageView>(R.id.post_option)
+            var love = findViewById<CheckBox>(R.id.post_btn_like)
 
             // truyền dữ liệu
             val avatarUrl = listPost[position].avatar
             if (!avatarUrl.isNullOrEmpty() ) {
-                ImageUtils.displayImage2(avatarUrl, imgAvtPost)
+                ImageUtils.displayImage2(avatarUrl, avatar)
             }
             val pictureUrl = listPost[position].photo
             if (!pictureUrl.isNullOrEmpty() ) {
                 ImageUtils.displayImage2(pictureUrl, picturePost)
             }
             val author = listPost[position].author
-            txtNamePost.setText(listPost[position].userName)
-            txtCause.setText(listPost[position].action)
-            countCmt.setText(listPost[position].comment)
+            userName.text = listPost[position].userName
+            action.text = listPost[position].action
+            countComment.text = listPost[position].comment
+            content.text = listPost[position].caption
 
-//            var dateTimeFormated = dateFormat.toFormattedString(listPost[position].createdAt)
-//            if (!dateTimeFormated.isNullOrEmpty() ) {
-//                txtTimePost.setText(dateTimeFormated)
-//            }
-
-            txtStatus.setText(listPost[position].caption)
-            if (listPost[position].like != null) {
-                val countlike = listPost[position].like.size.toString()
-                count_heart.setText(countlike)
-                // Tiếp tục xử lý dựa trên kích thước của danh sách
-            } else {
-                count_heart.setText("0")
+            var time = listPost[position].createdAt ?: ""
+            if (!time.isNullOrEmpty()) {
+                var dateTimeFormated = dateFormat.toFormattedString(time)
+                timePost.text = dateTimeFormated
             }
 
-            cmt.setOnClickListener {
+            // xem mình đã tim hay chưa
+            var listLiked = listPost[position].like.toMutableList()
+            if (listLiked != null) {
+                val countLiked = listLiked.size.toString()
+                countLike.text = countLiked
+                val liked = myId in listLiked
+                if (liked) {
+                    love.isChecked = true
+                }
+            }
+
+            // lắng nghe sự kiện ở checkbox love
+            love.setOnCheckedChangeListener { button, isChecked ->
+                if (isChecked) {
+                    // Nếu người dùng nhấn thích, tăng giá trị của biến countlike
+                    listLiked.add(myId)
+                    countLike.text = (listLiked.size).toString()
+                    updateLike(listPost[position]._id, listLiked.toTypedArray())
+                } else {
+                    // Nếu người dùng bỏ thích, giảm giá trị của biến countlike
+                    listLiked.remove(myId)
+                    countLike.text = (listLiked.size).toString()
+                    updateLike(listPost[position]._id, listLiked.toTypedArray())
+                }
+            }
+
+
+            commentBtn.setOnClickListener {
                 val dialog = BottomSheetDialog(context)
                 var postId = listPost[position]._id
                 var listComments: MutableList<findCommentResponse> = mutableListOf()
@@ -129,8 +152,8 @@ class postAdapter(var listPost:List<GetPostReponse>): RecyclerView.Adapter<postA
                                         val userName = sharedPreferences.getString("MY_NAME", "").toString()
                                         val author = sharedPreferences.getString("MY_ID", "").toString()
                                         val avatar = sharedPreferences.getString("MY_AVATAR", "").toString()
-                                        val comment = edtCmt.text.toString()
-                                        val newComment = findCommentResponse("1",author, comment, postId, avatar, userName.toString())
+                                        val comment = edtCmt.text.toString().trim()
+                                        val newComment = findCommentResponse("1",author, comment, postId, avatar, userName, "")
                                         val CommentRequest = CommentRequest(author, comment)
 
                                         val apiService = RetrofitClient.apiService
@@ -196,7 +219,7 @@ class postAdapter(var listPost:List<GetPostReponse>): RecyclerView.Adapter<postA
                 dialog.show()
             }
 
-            btnOptionPort.setOnClickListener {
+            optionBtn.setOnClickListener {
                 val dialog = BottomSheetDialog(context)
                 val viewoptionport = LayoutInflater.from(context).inflate(R.layout.option_port, null)
                 val sharedPreferences = context.getSharedPreferences("data", Context.MODE_PRIVATE)
@@ -219,11 +242,11 @@ class postAdapter(var listPost:List<GetPostReponse>): RecyclerView.Adapter<postA
                     call.enqueue(object : Callback<String> {
                         override fun onResponse(
                             call: Call<String>,
-                            response: retrofit2.Response<String>
+                            response: Response<String>
                         ) {
                             Toast.makeText(context, response.body(), Toast.LENGTH_SHORT).show()
                             listPost
-                            val adapterDs = postAdapter(listPost)
+                            val adapterDs = postAdapter(listPost, myId)
                             adapterDs.notifyDataSetChanged()
                             dialog.dismiss()
                         }
@@ -240,7 +263,6 @@ class postAdapter(var listPost:List<GetPostReponse>): RecyclerView.Adapter<postA
                 dialog.setContentView(viewoptionport)
                 dialog.show()
             }
-//            countCmt.setText(listPost[position].countCmt)
         }
     }
 
@@ -285,5 +307,27 @@ class postAdapter(var listPost:List<GetPostReponse>): RecyclerView.Adapter<postA
     }
     override fun getItemCount(): Int {
         return listPost.size
+    }
+
+    private fun updateLike(postId: String, array: Array<String>) {
+        val apiService = RetrofitClient.apiService
+        val call = apiService.updatePostLike(postId,updatePostLikeRequest(array))
+        call.enqueue(object : Callback<String> {
+            override fun onResponse(
+                call: Call<String>,
+                response: Response<String>
+            ) {
+                if (response.isSuccessful) {
+                    Log.d("update like successfully................",
+                        response.body().toString())
+                } else {
+                    Log.e("update like failed...............",
+                        response.errorBody().toString())
+                }
+            }
+            override fun onFailure(call: Call<String>, t: Throwable) {
+                Log.e("Error 250", t.message.toString() )
+            }
+        })
     }
 }

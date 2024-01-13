@@ -2,6 +2,8 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="text_40">#65000000</color>
+    <color name="text_20">#32000000</color>
+    <color name="text_80">#CB000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="white_40">#65FFFFFF</color>
     <color name="white_70">#80FFFFFF</color>
@@ -9,7 +11,7 @@
     <color name="primary">#272f59</color>
     <color name="text_primary">#f4c2d7</color>
     <color name="view">#C1CDC1</color>
-    <color name="chat_sent">#4876FF</color>
+    <color name="chat_sent">#804876FF</color>
     <color name="line">#C1CDC1</color>
     <color name="end">#48355b</color>
     <color name="start">#272f59</color>

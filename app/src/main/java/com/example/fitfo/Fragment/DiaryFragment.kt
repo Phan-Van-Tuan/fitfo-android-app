@@ -16,13 +16,14 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.fitfo.Adapter.StoryAdapter
 import com.example.fitfo.Adapter.postAdapter
-import com.example.fitfo.ChatActivity
 import com.example.fitfo.Define.CallApi.RetrofitClient
+import com.example.fitfo.Define.FullScreenBottomSheetDialog
 import com.example.fitfo.Diary.CreatePost
 import com.example.fitfo.Diary.DisplayStory
 import com.example.fitfo.Interface.RvChat
 import com.example.fitfo.Models.GetPostReponse
 import com.example.fitfo.Models.GetStoryReponse
+import com.example.fitfo.R
 import com.example.fitfo.Search
 import com.example.fitfo.databinding.FragmentDiaryBinding
 import com.example.fitfo.test
@@ -31,15 +32,12 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
 class DiaryFragment : Fragment() {
     private lateinit var binding: FragmentDiaryBinding
+    private lateinit var sharedPreferences: SharedPreferences
+    private var loader: FullScreenBottomSheetDialog? = null
     private var listPosts: MutableList<GetPostReponse> = mutableListOf()
     private var listStorys: MutableList<GetStoryReponse> = mutableListOf()
-    private lateinit var sharedPreferences: SharedPreferences
 
     val REQUEST_CODE = 10
     private val launcher = registerImagePicker { images ->
@@ -49,17 +47,6 @@ class DiaryFragment : Fragment() {
             var intent = Intent(context, test::class.java)
             intent.putExtra("uriStory",image.uri.toString())
             startActivity(intent)
-        }
-    }
-
-    private var param1: String? = null
-    private var param2: String? = null
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
         }
     }
 
@@ -76,8 +63,11 @@ class DiaryFragment : Fragment() {
         sharedPreferences = requireActivity().getSharedPreferences("data", Context.MODE_PRIVATE)
         val myId = sharedPreferences.getString("MY_ID", null).toString()
 
+        loader = FullScreenBottomSheetDialog(requireActivity())
+        loader?.showLoading(R.layout.layout_loading)
         fetchPosts(myId)
         fetchStorys()
+
         binding.addStory.setOnClickListener {
             launcher
         }
@@ -95,7 +85,6 @@ class DiaryFragment : Fragment() {
 
     private fun openGallery() {
         launcher.launch()
-
     }
 
     private fun onClickRequestPermission() {
@@ -154,7 +143,6 @@ class DiaryFragment : Fragment() {
                         liststory.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL,false)
                         liststory.adapter = adapterDs
                         liststory.setHasFixedSize(true)
-
                         // TODO: Thực hiện xử lý với thông tin người dùng
                     } else {
                         Toast.makeText(context, "Không có chat nào", Toast.LENGTH_SHORT)
@@ -185,13 +173,13 @@ class DiaryFragment : Fragment() {
                     val postsResponse = response.body()
                     if (!postsResponse.isNullOrEmpty()) {
                         listPosts.addAll(postsResponse);
-                        val adapterDs = postAdapter(listPosts)
+                        val adapterDs = postAdapter(listPosts, myId)
                         var listpost = binding.listPost
                         listpost.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL,false)
                         listpost.adapter = adapterDs
                         listpost.setHasFixedSize(true)
+                        // TODO: Thực hiện xử lý với thông tin người
 
-                        // TODO: Thực hiện xử lý với thông tin người dùng
                     } else {
                         Toast.makeText(context, "Không có chat nào", Toast.LENGTH_SHORT)
                             .show()
@@ -202,23 +190,12 @@ class DiaryFragment : Fragment() {
                 }
             }
 
+
             override fun onFailure(call: Call<List<GetPostReponse>>, t: Throwable) {
                 val errorMessage = "Lỗi: ${t.message}"
                 Toast.makeText(context, errorMessage, Toast.LENGTH_LONG).show()
             }
         })
     }
-
-
-    companion object {
-        private const val REQUEST_IMAGE_CAPTURE = 1
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            DiaryFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
-            }
-    }
 }
+

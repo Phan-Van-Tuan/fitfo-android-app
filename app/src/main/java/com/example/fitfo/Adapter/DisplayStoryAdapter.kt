@@ -9,6 +9,7 @@ import android.widget.ImageView
 import android.widget.PopupMenu
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.example.fitfo.Define.ImageUtils
 import com.example.fitfo.Models.GetStoryReponse
 import com.example.fitfo.R
 
@@ -27,15 +28,25 @@ class DisplayStoryAdapter(var context:Context,var liststory:List<GetStoryReponse
 
     override fun onBindViewHolder(holder: listStory, position: Int) {
         holder.itemView.apply {
-            var imgAvtStory = findViewById<ImageView>(R.id.imgDisplayAvtStory)
-            var imgStory = findViewById<ImageView>(R.id.imgDisplayStory)
+            // anh xa
+            var avatarStory = findViewById<ImageView>(R.id.imgDisplayAvtStory)
+            var imageStory = findViewById<ImageView>(R.id.imgDisplayStory)
             var txtNameStory = findViewById<TextView>(R.id.txtDisplayNameStory)
             var BtnClose = findViewById<ImageView>(R.id.closeStory)
             var BtnOptionStory = findViewById<ImageView>(R.id.optionStory)
-//            imgAvtStory.setImageResource(liststory[position].imgAvtStory)
-//            imgStory.setImageResource(liststory[position].imgStory)
-            txtNameStory.setText(liststory[position]._id)
 
+            // binding info
+            txtNameStory.setText(liststory[position].userName)
+            val avatarUrl = liststory[position].avatar
+            if (!avatarUrl.isNullOrEmpty() ) {
+                ImageUtils.displayImage2(avatarUrl, avatarStory)
+            }
+            val imageUrl = liststory[position].photo
+            if (!avatarUrl.isNullOrEmpty() ) {
+                ImageUtils.displayImage2(imageUrl, imageStory)
+            }
+
+            // handle button
             BtnClose.setOnClickListener {
                 onItemClickListener(position)
             }

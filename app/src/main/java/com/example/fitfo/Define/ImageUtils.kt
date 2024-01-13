@@ -4,16 +4,18 @@ import android.app.Activity
 import android.content.Intent
 import android.net.Uri
 import android.widget.ImageView
-import android.widget.Toast
+import androidx.activity.result.ActivityResultLauncher
+import androidx.activity.result.contract.ActivityResultContracts
+import androidx.appcompat.app.AppCompatActivity
 import com.example.test_firebase.ImageLoader
 import com.google.firebase.ktx.Firebase
+import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
 import com.google.firebase.storage.ktx.storage
 
 object ImageUtils {
 
     const val PICK_IMAGE_REQUEST = 123
-
     fun handleImagePick(activity: Activity) {
         val intent = Intent(Intent.ACTION_PICK)
         intent.type = "image/*"
@@ -58,28 +60,67 @@ object ImageUtils {
             }
     }
 
-    fun onActivityResult(
+    fun handleImagePickerResult(data: Intent?): List<Uri> {
+        val selectedImages: MutableList<Uri> = mutableListOf()
+
+        val clipData = data?.clipData
+        val dataString = data?.data
+
+        if (clipData != null) {
+            for (i in 0 until clipData.itemCount) {
+                val uri = clipData.getItemAt(i).uri
+                selectedImages.add(uri)
+            }
+        } else if (dataString != null) {
+            selectedImages.add(dataString)
+        }
+
+        return selectedImages
+    }
+
+    fun pickImages(activity: Activity, imagePickResultLauncher: ActivityResultLauncher<Intent>) {
+        val intent = Intent(Intent.ACTION_PICK)
+        intent.type = "image/*"
+        intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true)
+        imagePickResultLauncher?.launch(intent)
+    }
+
+    fun uploadImagesToFirebaseStorage(
         activity: Activity,
-        requestCode: Int,
-        resultCode: Int,
-        data: Intent?
+        imageUris: List<Uri>,
+        dir: String,
+        onComplete: (List<String?>) -> Unit
     ) {
-        if (requestCode == PICK_IMAGE_REQUEST && resultCode == Activity.RESULT_OK) {
-            // Uri of the selected image
-            val selectedImageUri: Uri? = data?.data
+        val storage = FirebaseStorage.getInstance()
+        val storageRef = storage.reference
+        val uploadedImageUrls: MutableList<String?> = mutableListOf()
 
-            // Call uploadImageToFirebaseStorage function with this Uri
-            if (selectedImageUri != null) {
-                val imageName = "user123.png" // Đặt tên mong muốn cho hình ảnh trên Firebase Storage
+        val uploadTasks = mutableListOf<StorageReference>()
 
-                uploadImageToFirebaseStorage(activity, selectedImageUri, imageName) { imageUrl ->
-                    if (imageUrl != null) {
-                        Toast.makeText(activity, "Thành công", Toast.LENGTH_SHORT).show()
-                    } else {
-                        // Xử lý lỗi nếu cần thiết
+        imageUris.forEachIndexed { index, uri ->
+            val currentTimeMillis = System.currentTimeMillis()
+            val imageName = "$currentTimeMillis.png"
+            val imageRef: StorageReference = storageRef.child("$dir/$imageName")
+
+            // Tải ảnh lên Firebase Storage
+            imageRef.putFile(uri).addOnSuccessListener {
+                // Lấy đường dẫn của ảnh đã tải lên
+                imageRef.downloadUrl.addOnSuccessListener { downloadUri ->
+                    // Tạo một đối tượng Uri từ đường dẫn
+                    val uri = Uri.parse(downloadUri.toString())
+                    // Thêm đối tượng Uri vào danh sách uploadTasks
+                    uploadTasks.add(storage.getReferenceFromUrl(uri.toString()))
+                    // Thêm đường dẫn vào danh sách uploadedImageUrls
+                    uploadedImageUrls.add(downloadUri.toString())
+
+                    if (uploadedImageUrls.size == imageUris.size) {
+                        onComplete(uploadedImageUrls)
                     }
                 }
+            }.addOnFailureListener {
+                onComplete(emptyList())
             }
         }
     }
+
 }

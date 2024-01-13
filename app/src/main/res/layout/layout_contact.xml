@@ -46,7 +46,7 @@
             android:textStyle="bold"
             android:textSize="22dp"
             android:layout_height="wrap_content"
-            android:text="..." />
+            android:text="User name" />
 
     </LinearLayout>
 </LinearLayout>

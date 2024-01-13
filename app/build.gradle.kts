@@ -74,4 +74,9 @@ dependencies {
 
     implementation ("com.squareup.picasso:picasso:2.8")
 
+    implementation ("com.airbnb.android:lottie:6.3.0")
+
+    implementation ("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.0")
+
+
 }

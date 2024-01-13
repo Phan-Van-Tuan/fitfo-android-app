@@ -8,42 +8,27 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.SearchView
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.fitfo.Adapter.ContactAdapter
 import com.example.fitfo.ChatActivity
 import com.example.fitfo.Define.CallApi.RetrofitClient
-import com.example.fitfo.Define.ImageUtils
-import com.example.fitfo.Models.GetUserByPhoneNumberResponse
-import com.example.fitfo.Profile.ProfileActivity
 import com.example.fitfo.Define.UserInfo
 import com.example.fitfo.Interface.RvChat
-import com.example.fitfo.Models.getListFriendResponse
+import com.example.fitfo.Models.ListFriendResponse
 import com.example.fitfo.Search
 import com.example.fitfo.databinding.FragmentContactBinding
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
-
 class ContactFragment : Fragment() {
     private lateinit var binding: FragmentContactBinding
-    private var listContacts: MutableList<getListFriendResponse> = mutableListOf()
+    private var listContacts: MutableList<ListFriendResponse> = mutableListOf()
     private lateinit var sharedPreferences: SharedPreferences
-    private var param1: String? = null
-    private var param2: String? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
     }
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -68,10 +53,10 @@ class ContactFragment : Fragment() {
     private fun fetchListFriends(myId: String) {
         val apiService = RetrofitClient.apiService
         val call = apiService.findContact(myId)
-        call.enqueue(object : Callback<List<getListFriendResponse>> {
+        call.enqueue(object : Callback<List<ListFriendResponse>> {
             override fun onResponse(
-                call: Call<List<getListFriendResponse>>,
-                response: Response<List<getListFriendResponse>>
+                call: Call<List<ListFriendResponse>>,
+                response: Response<List<ListFriendResponse>>
             ) {
                 if (response.isSuccessful) {
                     if (!response.body().isNullOrEmpty()) {
@@ -102,25 +87,10 @@ class ContactFragment : Fragment() {
                 }
             }
 
-            override fun onFailure(call: Call<List<getListFriendResponse>>, t: Throwable) {
+            override fun onFailure(call: Call<List<ListFriendResponse>>, t: Throwable) {
                 Toast.makeText(context, "Lỗi 180", Toast.LENGTH_LONG).show()
             }
         })
     }
-
-
-
-    companion object {
-
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            ContactFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
-            }
-    }
-
 
 }
