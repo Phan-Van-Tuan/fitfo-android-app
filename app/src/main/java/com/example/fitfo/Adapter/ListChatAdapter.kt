@@ -1,5 +1,6 @@
 package com.example.fitfo.Adapter
 
+import android.graphics.Typeface
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,18 +10,22 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.fitfo.Define.DateFormat
 import com.example.fitfo.Define.ImageUtils
 import com.example.fitfo.R
-import com.example.fitfo.Interface.RvChat
+import com.example.fitfo.Interface.RecyclerViewOnClick
 import com.example.fitfo.Models.ChatResponse
 
 
-class ListChatAdapter(private var listChat: MutableList<ChatResponse>, val myId: String, private val rvInterfaceChat: RvChat) :
-    RecyclerView.Adapter<ListChatAdapter.listchat>() {
+class ListChatAdapter(
+    private var listChat: MutableList<ChatResponse>,
+    val myId: String,
+    private val rvInterfaceChat: RecyclerViewOnClick
+) : RecyclerView.Adapter<ListChatAdapter.listchat>() {
     inner class listchat(itemView: View) : RecyclerView.ViewHolder(itemView)
     private val dateFormat = DateFormat()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): listchat {
-        val view =
-            LayoutInflater.from(parent.context).inflate(R.layout.layout_listchat, parent, false)
+        val view = LayoutInflater
+            .from(parent.context)
+            .inflate(R.layout.layout_listchat, parent, false)
         return listchat(view)
     }
 
@@ -42,18 +47,30 @@ class ListChatAdapter(private var listChat: MutableList<ChatResponse>, val myId:
                 txtTitle.text = "You: ${listChat[position].latestType}"
             } else {
                 val type = listChat[position].latestType
-                if(type == "message") {
-                    txtTitle.text = "${listChat[position].chatName}: ${listChat[position].latestMessage}"
-                } else {
-                    txtTitle.text = "${listChat[position].chatName}: $type"
+                when (type) {
+                    "message" -> {
+                        txtTitle.text = "${listChat[position].chatName}: ${listChat[position].latestMessage}"
+                    }
+                    "empty" -> {
+                        txtTitle.text = "${listChat[position].latestMessage}"
+                    }
+                    else -> {
+                        txtTitle.text = "${listChat[position].chatName}: $type"
+                    }
                 }
             }
 
             var dateTimeFormated = dateFormat.toFormattedString(listChat[position].latestSend)
             txtTimeOnline.setText(dateTimeFormated)
 
+            var isRead = listChat[position].isRead
+            if(!isRead) {
+                txtNameChat.setTypeface(null, Typeface.BOLD)
+                txtTitle.setTypeface(null, Typeface.BOLD)
+            }
+
             holder.itemView.setOnClickListener {
-                rvInterfaceChat.onClickchat(position)
+                rvInterfaceChat.onClickItem(position)
             }
         }
     }

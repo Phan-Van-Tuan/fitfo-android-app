@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.PagerSnapHelper
 import androidx.recyclerview.widget.RecyclerView
 import com.example.fitfo.Adapter.DisplayStoryAdapter
 import com.example.fitfo.Define.CallApi.RetrofitClient
@@ -47,6 +48,10 @@ class DisplayStory : AppCompatActivity() {
                         listdisplay.layoutManager = LinearLayoutManager(this@DisplayStory, LinearLayoutManager.HORIZONTAL, false)
                         listdisplay.adapter = storyAdapter
                         listdisplay.setHasFixedSize(true)
+                        // làm cho recycleview không bị khựng di chuyển đúng vị trí pos
+                        val snapHelper = PagerSnapHelper()
+                        snapHelper.attachToRecyclerView(listdisplay)
+
                         listdisplay.scrollToPosition(position)
 
                         // Set up auto-scroll

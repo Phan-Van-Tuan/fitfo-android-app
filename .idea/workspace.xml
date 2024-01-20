@@ -9,19 +9,29 @@
     <option name="autoReloadType" value="NONE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="33f7314b-0f56-41e3-acf4-74cd42e6e1a7" name="Changes" comment="commit update interface 1/6">
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/example/fitfo/Adapter/ImageAdapter.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/example/fitfo/Define/FullScreenBottomSheetDialog.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/anim/scale_anim.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable/b_pick_picture_primary.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable/checkbox_tint.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/layout/image.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/layout/layout_diplay_micro.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/layout/layout_loading.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/raw/audio.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/raw/loading.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/raw/recording.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/8.0/checksums/checksums.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.0/checksums/checksums.lock" afterDir="false" />
+    <list default="true" id="33f7314b-0f56-41e3-acf4-74cd42e6e1a7" name="Changes" comment="commit update realtime">
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/example/fitfo/Adapter/DisplayImageAdapter.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/example/fitfo/Diary/CreateStory.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/example/fitfo/Interface/RecyclerViewOnClick.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/example/fitfo/Interface/RecyclerViewOnLongClick.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable/link_android.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable/link_anime.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable/link_chess.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable/link_postman.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable/link_quizlet.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable/link_ultraviewer.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable/link_vscode.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable/shape_notify_count.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable/t_express.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable/t_firebase.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable/t_kotlin.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable/t_mongodb.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable/t_nodejs.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable/t_socket.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_create_story.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/layout/image_full_screen.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/layout/layout_display_image.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/layout/layout_image.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/8.0/executionHistory/executionHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.0/executionHistory/executionHistory.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/8.0/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.0/executionHistory/executionHistory.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/8.0/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.0/fileHashes/fileHashes.bin" afterDir="false" />
@@ -30,58 +40,48 @@
       <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/file-system.probe" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/file-system.probe" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/assetWizardSettings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/assetWizardSettings.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build.gradle.kts" beforeDir="false" afterPath="$PROJECT_DIR$/app/build.gradle.kts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/fitfo/Account_Security.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/fitfo/Profile/Account_Security.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/fitfo/Adapter/CommentAdapter.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/fitfo/Adapter/CommentAdapter.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/fitfo/Adapter/ContactAdapter.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/fitfo/Adapter/ContactAdapter.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/fitfo/Adapter/DisplayStoryAdapter.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/fitfo/Adapter/DisplayStoryAdapter.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/fitfo/Adapter/ImageAdapter.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/fitfo/Adapter/ImageAdapter.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/fitfo/Adapter/ListChatAdapter.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/fitfo/Adapter/ListChatAdapter.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/fitfo/Adapter/ListMessageAdapter.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/fitfo/Adapter/ListMessageAdapter.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/fitfo/Adapter/PostAdapter.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/fitfo/Adapter/PostAdapter.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/fitfo/Adapter/StoryAdapter.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/fitfo/Adapter/StoryAdapter.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/fitfo/Authentication/ChangePassword.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/fitfo/Authentication/ChangePassword.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/fitfo/ChatActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/fitfo/ChatActivity.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/fitfo/Define/CallApi/RetrofitClient.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/fitfo/Define/CallApi/RetrofitClient.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/fitfo/Define/ImageUtils.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/fitfo/Define/ImageUtils.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/fitfo/Define/MySocketManager.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/fitfo/Define/MySocketManager.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/fitfo/Diary/DisplayStory.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/fitfo/Diary/DisplayStory.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/fitfo/Fragment/ChatFragment.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/fitfo/Fragment/ChatFragment.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/fitfo/Fragment/ContactFragment.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/fitfo/Fragment/ContactFragment.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/fitfo/Fragment/DiaryFragment.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/fitfo/Fragment/DiaryFragment.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/fitfo/Fragment/PersonalFragment.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/fitfo/Fragment/PersonalFragment.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/fitfo/Interface/ApiService.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/fitfo/Interface/ApiService.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/fitfo/Interface/RvChat.kt" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/fitfo/Logged.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/fitfo/Logged.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/fitfo/MainActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/fitfo/MainActivity.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/fitfo/Models/Request.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/fitfo/Models/Request.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/fitfo/Models/Response.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/fitfo/Models/Response.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/fitfo/Models/findChatResponse.kt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/fitfo/Models/findCommentResponse.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/fitfo/Models/findCommentResponse.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/fitfo/Models/findMessageResponse.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/fitfo/Models/findMessageResponse.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/fitfo/Profile/PersonalActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/fitfo/Profile/PersonalActivity.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/fitfo/Profile/ProfileActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/fitfo/Profile/ProfileActivity.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/drawable/baseline_add_24.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/drawable/baseline_add_24.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/drawable/baseline_mic_none_24.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/drawable/baseline_mic_none_24.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/drawable/option.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/drawable/option.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/drawable/optionw.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/drawable/optionw.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/drawable/send.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/drawable/send.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_account_security.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_account_security.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_chat.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_chat.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/fitfo/Search.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/fitfo/Search.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/drawable/a_accept_friend.png" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/drawable/b_accept_friend.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/drawable/a_add_friend.png" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/drawable/b_add_friend.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/drawable/a_duolingo.png" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/drawable/link_duolingo.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/drawable/a_remove_friend.png" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/drawable/b_remove_friend.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/drawable/a_wait_friend.png" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/drawable/b_wait_friend.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/drawable/bell.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/drawable/b_bell_white.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/drawable/bg.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/drawable/a_background_profile.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/drawable/closeblack.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/drawable/b_close_black.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/drawable/nocmt.png" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/drawable/a_no_comment.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/drawable/nocontact.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/drawable/a_no_contact.jpg" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_comment_post.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_comment_post.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/fragment_diary.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_diary.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/item_container_received_message.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/item_container_received_message.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/item_container_received_message_image.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/item_container_sent_message.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/item_container_sent_message.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/item_container_sent_message_image.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/layout_comment.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/layout_comment.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/layout_contact.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/layout_contact.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/layout_display_story.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/layout_display_story.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/layout_listchat.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/layout_listchat.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/layout_post.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/layout_post.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/layout_story.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/layout_story.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/values/colors.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/values/colors.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/values/styles.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/values/styles.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_personal.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_personal.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_profile.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_profile.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_search.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_search.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/fragment_chat.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_chat.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/fragment_discover.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_discover.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/layout_diplay_micro.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/layout_diplay_micro.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/option_port.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/option_port.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -136,7 +136,6 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Interface" />
-        <option value="Class" />
         <option value="Kotlin Interface" />
         <option value="Kotlin File" />
         <option value="valueResourceFile" />
@@ -144,6 +143,7 @@
         <option value="Kotlin Object" />
         <option value="layoutResourceFile_vertical" />
         <option value="resourceFile" />
+        <option value="Class" />
         <option value="layoutResourceFile" />
         <option value="Kotlin Class" />
       </list>
@@ -182,22 +182,23 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.cidr.known.project.marker&quot;: &quot;true&quot;,
-    &quot;android-custom-viewC:/Users/Onlap.vn/.gradle/caches/modules-2/files-2.1/androidx.recyclerview/recyclerview/1.3.2/7bc0f04ccbe0159dc303408af769dc1bbb80d584/recyclerview-1.3.2-sources.jar!/androidx/recyclerview/widget/RecyclerView.java_SELECTED&quot;: &quot;RecyclerView&quot;,
-    &quot;cidr.known.project.marker&quot;: &quot;true&quot;,
-    &quot;com.google.services.firebase.aqiPopupShown&quot;: &quot;true&quot;,
-    &quot;last_directory_selection&quot;: &quot;D:/appdata/fitfo/app/src/main/res/drawable&quot;,
-    &quot;last_opened_file_path&quot;: &quot;D:/appdata/IoT&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Variables&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.17&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;build.tools&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.cidr.known.project.marker": "true",
+    "android-custom-viewC:/Users/Onlap.vn/.gradle/caches/modules-2/files-2.1/androidx.recyclerview/recyclerview/1.3.2/7bc0f04ccbe0159dc303408af769dc1bbb80d584/recyclerview-1.3.2-sources.jar!/androidx/recyclerview/widget/RecyclerView.java_SELECTED": "RecyclerView",
+    "cidr.known.project.marker": "true",
+    "com.android.tools.idea.devicemanager.tab": "Physical",
+    "com.google.services.firebase.aqiPopupShown": "true",
+    "last_directory_selection": "D:/appdata/fitfo/app/src/main/res/drawable",
+    "last_opened_file_path": "D:/appdata/fitfo/app/src/main/res/drawable",
+    "project.structure.last.edited": "Variables",
+    "project.structure.proportion": "0.17",
+    "project.structure.side.proportion": "0.2",
+    "settings.editor.selected.configurable": "build.tools"
   }
-}</component>
+}]]></component>
   <component name="PsdUISettings">
     <option name="LAST_EDITED_BUILD_TYPE" value="release" />
   </component>
@@ -216,18 +217,18 @@
       <recent name="com.example.ff" />
     </key>
     <key name="CopyKotlinDeclarationDialog.RECENTS_KEY">
+      <recent name="com.example.fitfo.Interface" />
+      <recent name="com.example.fitfo.Adapter" />
       <recent name="com.example.ff.Models" />
       <recent name="com.example.ff.Adapter" />
       <recent name="com.example.ff.OutData" />
-      <recent name="com.example.ff.Interface" />
-      <recent name="com.example.ff" />
     </key>
     <key name="android.template.-893583051">
       <recent name="com.example.ff" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="D:\appdata\fitfo\app\src\main\res\layout" />
       <recent name="D:\appdata\fitfo\app\src\main\res\drawable" />
+      <recent name="D:\appdata\fitfo\app\src\main\res\layout" />
       <recent name="C:\LongVu\ff\app\src\main\res\anim" />
       <recent name="C:\LongVu\ff\app\src\main\res\menu" />
       <recent name="C:\LongVu\ff\app\src\main\res\layout" />
@@ -240,11 +241,14 @@
       <recent name="com.example.fitfo.Diary" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
-      <recent name="D:\appdata\fitfo\app\src\main\res\raw" />
       <recent name="D:\appdata\fitfo\app\src\main\res\drawable" />
+      <recent name="D:\appdata\fitfo\app\src\main\res\raw" />
       <recent name="D:\appdata\fitfo\app\src\main" />
       <recent name="D:\appdata\fitfo\app\src\main\res\drawable\icon" />
       <recent name="C:\LongVu\ff\app\src\main\java\com\example\ff\Test" />
+    </key>
+    <key name="android.template.415135919">
+      <recent name="com.example.fitfo.Diary" />
     </key>
     <key name="android.template.-883622965">
       <recent name="com.example.ff" />
@@ -444,7 +448,14 @@
       <option name="project" value="LOCAL" />
       <updated>1704532714798</updated>
     </task>
-    <option name="localTasksCounter" value="15" />
+    <task id="LOCAL-00015" summary="commit update realtime">
+      <created>1705162351000</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1705162351000</updated>
+    </task>
+    <option name="localTasksCounter" value="16" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -469,6 +480,7 @@
     <MESSAGE value="update 22/12" />
     <MESSAGE value="hi" />
     <MESSAGE value="commit update interface 1/6" />
-    <option name="LAST_COMMIT_MESSAGE" value="commit update interface 1/6" />
+    <MESSAGE value="commit update realtime" />
+    <option name="LAST_COMMIT_MESSAGE" value="commit update realtime" />
   </component>
 </project>

@@ -108,7 +108,6 @@ class ProfileActivity : AppCompatActivity() {
                     val postsResponse = response.body()
 
                     if (!postsResponse.isNullOrEmpty()) {
-                        Toast.makeText(this@ProfileActivity, "Success", Toast.LENGTH_SHORT).show()
                         listPosts.addAll(postsResponse);
                         val adapterDs = postAdapter(listPosts, myId)
                         var listpost = binding.rvListUserPost
@@ -131,8 +130,8 @@ class ProfileActivity : AppCompatActivity() {
             }
 
             override fun onFailure(call: Call<List<GetPostReponse>>, t: Throwable) {
-//                val errorMessage = "Lỗi: ${t.message}"
-                Toast.makeText(this@ProfileActivity, "errorPost", Toast.LENGTH_LONG).show()
+                val errorMessage = "Lỗi: ${t.message}"
+                Toast.makeText(this@ProfileActivity, errorMessage, Toast.LENGTH_LONG).show()
             }
         })
     }
@@ -167,7 +166,7 @@ class ProfileActivity : AppCompatActivity() {
                     }
                 } else {
                     val error = response.errorBody()?.string()
-                    Toast.makeText(this@ProfileActivity, "Lỗi3: $error", Toast.LENGTH_SHORT).show()
+//                    Toast.makeText(this@ProfileActivity, "Lỗi3: $error", Toast.LENGTH_SHORT).show()
                 }
             }
             override fun onFailure(call: Call<FriendShipResponse>, t: Throwable) {
@@ -188,7 +187,7 @@ class ProfileActivity : AppCompatActivity() {
         }
         binding.btnDestroyFriendship.setOnClickListener {
             changefriendship = 0
-            deletefriendShip(friendshipID)
+            deleteFriendShip(friendshipID)
             binding.btnAddFriend.visibility = View.VISIBLE
             binding.btnAcceptFriendship.visibility = View.GONE
             binding.btnWaitAcceptFriendship.visibility = View.GONE
@@ -196,7 +195,7 @@ class ProfileActivity : AppCompatActivity() {
         }
         binding.btnWaitAcceptFriendship.setOnClickListener {
             changefriendship = 0
-            deletefriendShip(friendshipID)
+            deleteFriendShip(friendshipID)
             binding.btnAddFriend.visibility = View.VISIBLE
             binding.btnAcceptFriendship.visibility = View.GONE
             binding.btnWaitAcceptFriendship.visibility = View.GONE
@@ -219,11 +218,11 @@ class ProfileActivity : AppCompatActivity() {
         friendshipId: String,
     ) {
         if(friendship == changeFriendship) return
-        if(changeFriendship == 1) createfriendShip(myId, userId)
-        if(changeFriendship == 3) acceptfriendShip(friendshipId)
+        if(changeFriendship == 1) createFriendShip(myId, userId)
+        if(changeFriendship == 3) acceptFriendShip(friendshipId)
     }
 
-    private fun deletefriendShip(friendshipId : String) {
+    private fun deleteFriendShip(friendshipId : String) {
         val apiService = RetrofitClient.apiService
         val call = apiService.deleteFriend(friendshipId)
         call.enqueue(object : Callback<String> {
@@ -231,12 +230,11 @@ class ProfileActivity : AppCompatActivity() {
                 call: Call<String>,
                 response: Response<String>
             ) {
-                if (response.isSuccessful) {
-                    Toast.makeText(this@ProfileActivity, "delete ok", Toast.LENGTH_SHORT).show()
-                } else {
+                if (!response.isSuccessful) {
                     val error = response.errorBody()?.string()
                     Log.e("Lỗi delete 1", "$error")
-                    Toast.makeText(this@ProfileActivity, "Lỗi delete 1: $error", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this@ProfileActivity, "Lỗi delete 1: $error", Toast.LENGTH_SHORT)
+                        .show()
                 }
             }
             override fun onFailure(call: Call<String>, t: Throwable) {
@@ -247,7 +245,7 @@ class ProfileActivity : AppCompatActivity() {
         })
     }
 
-    private fun acceptfriendShip(friendshipId : String) {
+    private fun acceptFriendShip(friendshipId : String) {
         val apiService = RetrofitClient.apiService
         val call = apiService.acceptFriend(friendshipId)
         call.enqueue(object : Callback<String> {
@@ -255,11 +253,10 @@ class ProfileActivity : AppCompatActivity() {
                 call: Call<String>,
                 response: Response<String>
             ) {
-                if (response.isSuccessful) {
-                    Toast.makeText(this@ProfileActivity, "accept ok", Toast.LENGTH_SHORT).show()
-                } else {
+                if (!response.isSuccessful) {
                     val error = response.errorBody()?.string()
-                    Toast.makeText(this@ProfileActivity, "Lỗi accept 1: $error", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this@ProfileActivity, "Lỗi accept 1: $error", Toast.LENGTH_SHORT)
+                        .show()
                 }
             }
             override fun onFailure(call: Call<String>, t: Throwable) {
@@ -269,7 +266,7 @@ class ProfileActivity : AppCompatActivity() {
         })
     }
 
-    private fun createfriendShip(myId: String, userId: String) {
+    private fun createFriendShip(myId: String, userId: String) {
         val apiService = RetrofitClient.apiService
         val call = apiService.addFriend(addFriendshipRequest(myId, userId))
         call.enqueue(object : Callback<String> {
@@ -277,9 +274,7 @@ class ProfileActivity : AppCompatActivity() {
                 call: Call<String>,
                 response: Response<String>
             ) {
-                if (response.isSuccessful) {
-                    Toast.makeText(this@ProfileActivity, "create ok", Toast.LENGTH_SHORT).show()
-                } else {
+                if (!response.isSuccessful) {
                     val error = response.errorBody()?.string()
                     Toast.makeText(this@ProfileActivity, "Lỗi create 1: $error", Toast.LENGTH_SHORT).show()
                 }

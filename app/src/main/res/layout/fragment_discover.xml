@@ -42,7 +42,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginTop="10dp"
-            android:text="Mini app dành cho bạn"
+            android:text="Dành riêng cho bạn"
             android:textSize="18dp"
             android:textStyle="bold"
             />
@@ -73,7 +73,7 @@
                     android:layout_width="50dp"
                     android:layout_height="50dp"
                     android:layout_gravity="center"
-                    android:src="@drawable/a_duolingo" />
+                    android:src="@drawable/link_duolingo" />
             </androidx.cardview.widget.CardView>
 
             <TextView
@@ -100,14 +100,14 @@
                     android:layout_width="50dp"
                     android:layout_height="50dp"
                     android:layout_gravity="center"
-                    android:src="@drawable/img_1" />
+                    android:src="@drawable/link_quizlet" />
 
             </androidx.cardview.widget.CardView>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Sticker"
+                android:text="Quizlet"
                 />
         </LinearLayout>
         <LinearLayout
@@ -128,14 +128,14 @@
                     android:layout_width="50dp"
                     android:layout_height="50dp"
                     android:layout_gravity="center"
-                    android:src="@drawable/img_1" />
+                    android:src="@drawable/link_chess" />
 
             </androidx.cardview.widget.CardView>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Sticker"
+                android:text="Chess"
 
                 />
         </LinearLayout>
@@ -157,14 +157,14 @@
                     android:layout_width="50dp"
                     android:layout_height="50dp"
                     android:layout_gravity="center"
-                    android:src="@drawable/img_1" />
+                    android:src="@drawable/link_anime" />
 
             </androidx.cardview.widget.CardView>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Sticker"
+                android:text="Anime"
                 />
         </LinearLayout>
 
@@ -174,7 +174,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_marginTop="15dp">
+        android:layout_marginVertical="15dp">
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -194,14 +194,16 @@
                     android:layout_width="50dp"
                     android:layout_height="50dp"
                     android:layout_gravity="center"
-                    android:src="@drawable/img_1" />
+                    android:src="@drawable/link_android" />
 
             </androidx.cardview.widget.CardView>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Sticker"
+                android:gravity="center"
+                android:maxWidth="50dp"
+                android:text="Android Studio"
                 />
         </LinearLayout>
         <LinearLayout
@@ -222,14 +224,16 @@
                     android:layout_width="50dp"
                     android:layout_height="50dp"
                     android:layout_gravity="center"
-                    android:src="@drawable/img_1" />
+                    android:src="@drawable/link_vscode" />
 
             </androidx.cardview.widget.CardView>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Sticker"
+                android:gravity="center"
+                android:maxWidth="80dp"
+                android:text="Visual Code Studio"
                 />
         </LinearLayout>
         <LinearLayout
@@ -250,14 +254,14 @@
                     android:layout_width="50dp"
                     android:layout_height="50dp"
                     android:layout_gravity="center"
-                    android:src="@drawable/img_1" />
+                    android:src="@drawable/link_postman" />
 
             </androidx.cardview.widget.CardView>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Sticker"
+                android:text="Postman"
 
                 />
         </LinearLayout>
@@ -280,14 +284,14 @@
                     android:layout_width="50dp"
                     android:layout_height="50dp"
                     android:layout_gravity="center"
-                    android:src="@drawable/img_1" />
+                    android:src="@drawable/link_ultraviewer" />
 
             </androidx.cardview.widget.CardView>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Sticker"
+                android:text="Ultraviewer"
                 />
         </LinearLayout>
 
@@ -303,63 +307,77 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Khám phá mới"
+            android:text="Khám phá FITFO"
             android:layout_marginTop="10dp"
             android:layout_marginLeft="10dp"
             android:textSize="18dp"/>
-
-        <ImageView
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:layout_marginTop="7dp"
-            android:layout_marginLeft="200dp"
-            android:src="@drawable/baseline_navigate_next_24"/>
     </LinearLayout>
 
-    <androidx.cardview.widget.CardView
+    <LinearLayout
         android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
-        android:layout_height="200dp">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <ImageView
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_weight="1"
+                android:padding="2dp"
+                android:src="@drawable/t_express" />
 
-        <ImageView
-            android:layout_width="190dp"
-            android:layout_height="match_parent"
-            android:layout_marginLeft="5dp"
-            android:scaleType="centerCrop"
-            android:src="@drawable/i"/>
-        <ImageView
-            android:layout_width="95dp"
-            android:layout_height="95dp"
-            android:layout_marginLeft="205dp"
-            android:scaleType="centerCrop"
-            android:src="@drawable/k"/>
-        <ImageView
-            android:layout_width="95dp"
-            android:layout_height="95dp"
-            android:layout_marginLeft="310dp"
-            android:scaleType="centerCrop"
-            android:src="@drawable/a_logo_white"/>
-        <ImageView
-            android:layout_width="95dp"
-            android:layout_height="95dp"
-            android:layout_marginTop="105dp"
-            android:layout_marginLeft="205dp"
-            android:scaleType="centerCrop"
-            android:src="@drawable/img"/>
-        <ImageView
-            android:layout_width="95dp"
-            android:layout_height="95dp"
-            android:layout_marginTop="105dp"
-            android:layout_marginLeft="310dp"
-            android:scaleType="centerCrop"
-            android:src="@drawable/h"/>
+            <ImageView
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_weight="1"
+                android:padding="2dp"
+                android:src="@drawable/t_mongodb" />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <ImageView
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_weight="1"
+                android:padding="2dp"
+                android:src="@drawable/t_firebase" />
+
+            <ImageView
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_weight="1"
+                android:padding="2dp"
+                android:src="@drawable/a_logo_white" />
+            <ImageView
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_weight="1"
+                android:padding="2dp"
+                android:src="@drawable/t_socket" />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:padding="2dp"
+                android:src="@drawable/t_kotlin" />
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:padding="2dp"
+                android:src="@drawable/t_nodejs" />
+        </LinearLayout>
 
 
-
-
-    </androidx.cardview.widget.CardView>
-
-
+    </LinearLayout>
 
 
 </LinearLayout>

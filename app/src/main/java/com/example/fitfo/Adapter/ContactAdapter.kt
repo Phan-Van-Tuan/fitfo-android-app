@@ -7,12 +7,12 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.fitfo.Define.ImageUtils
-import com.example.fitfo.Interface.RvChat
+import com.example.fitfo.Interface.RecyclerViewOnClick
 import com.example.fitfo.Models.ListFriendResponse
 import com.example.fitfo.R
 
 
-class ContactAdapter(var Contact: MutableList<ListFriendResponse>, val rvChat: RvChat): RecyclerView.Adapter<ContactAdapter.listcontact>() {
+class ContactAdapter(var Contact: MutableList<ListFriendResponse>, val recyclerViewHandle: RecyclerViewOnClick): RecyclerView.Adapter<ContactAdapter.listcontact>() {
 inner class listcontact(itemView: View) :RecyclerView.ViewHolder(itemView)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): listcontact {
@@ -30,7 +30,7 @@ inner class listcontact(itemView: View) :RecyclerView.ViewHolder(itemView)
                 ImageUtils.displayImage2(avatarUrl, avatarContact)
             }
             holder.itemView.setOnClickListener {
-                rvChat.onClickchat(position)
+                recyclerViewHandle.onClickItem(position)
             }
         }
     }

@@ -15,6 +15,7 @@ import com.example.fitfo.Models.findCommentResponse
 import com.example.fitfo.Models.findMessageResponse
 import com.example.fitfo.Models.FriendShipResponse
 import com.example.fitfo.Models.ListFriendResponse
+import com.example.fitfo.Models.createStoryRequest
 import com.example.fitfo.Models.updateAvatarRequest
 import com.example.fitfo.Models.updatePasswordRequest
 import com.example.fitfo.Models.updatePostLikeRequest
@@ -41,8 +42,12 @@ interface ApiService {
     fun findChat(@Path("myId") myId: String, @Path("userId") userId: String): Call<List<ChatResponse>>
     @GET("api/chat/{myId}")
     fun findChats(@Path("myId") myId: String): Call<List<ChatResponse>>
+    @PATCH("/api/chat/readChat/{chatId}")
+    fun readChat(@Path("chatId") chatId: String): Call<String>
     @GET("api/message/{chatId}")
     fun findMessages(@Path("chatId") myId: String): Call<List<findMessageResponse>>
+    @DELETE("api/message/{messageId}")
+    fun deleteMessage(@Path("messageId") messageId: String): Call<String>
     @GET("api/friendship/{myId}")
     fun findContact(@Path("myId") myId: String): Call<List<ListFriendResponse>>
     @GET("api/post/getAll/{myId}")
@@ -56,6 +61,8 @@ interface ApiService {
     fun deletePost(@Path("id") id: String): Call<String>
     @GET("api/story")
     fun findStory(): Call<List<GetStoryReponse>>
+    @POST("api/story")
+    fun createStory(@Body requestBody: createStoryRequest): Call<String>
     @GET("api/comment/{postId}")
     fun findComment(@Path("postId") postId: String): Call<List<findCommentResponse>>
     @POST("api/comment/{postId}")

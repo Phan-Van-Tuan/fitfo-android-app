@@ -1,9 +1,11 @@
 package com.example.fitfo
 
+import android.R
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import android.widget.ArrayAdapter
 import android.widget.SearchView
 import android.widget.Toast
 import com.example.fitfo.Define.CallApi.RetrofitClient
@@ -18,13 +20,16 @@ import retrofit2.Response
 
 class Search : AppCompatActivity() {
     private lateinit var binding: ActivitySearchBinding
+    private val searchHistoryList: ArrayList<String> = ArrayList()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivitySearchBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        binding.searchHistoryListView.visibility = View.VISIBLE
 
         binding.searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener,
             androidx.appcompat.widget.SearchView.OnQueryTextListener {
+
 
             override fun onQueryTextSubmit(query: String?): Boolean {
                 return true
@@ -35,7 +40,9 @@ class Search : AppCompatActivity() {
 
                 if (phoneNumberInsert != null) {
                     if (phoneNumberInsert.length==10){
+                        addToSearchHistory(phoneNumberInsert)
                         binding.frameSearch.visibility = View.VISIBLE
+                        binding.searchHistoryListView.visibility = View.GONE
                         val apiService = RetrofitClient.apiService
                         val phoneNumber = newText ?: ""
 
@@ -58,7 +65,7 @@ class Search : AppCompatActivity() {
                                         UserInfo.userAvatar = userAvatar
                                         binding.textName.setText(userName)
                                         if (!userAvatar.isNullOrEmpty() ) {
-                                            ImageUtils.displayImage2(userAvatar, binding.imgAvt)
+                                            ImageUtils.displayImage2(userAvatar, binding.imageAvatar)
                                         }
                                         binding.searchSuccess.visibility = View.VISIBLE
                                         binding.noContact.visibility = View.GONE
@@ -100,6 +107,16 @@ class Search : AppCompatActivity() {
             onBackPressed()
         }
 
+    }
+    // Hoặc thêm mục vào cuối mảng
+    fun addToSearchHistory(query: String) {
+        searchHistoryList.add(query)
+        updateSearchHistoryListView()
+    }
+    fun updateSearchHistoryListView() {
+        val adapter = ArrayAdapter<String>(this, R.layout.simple_list_item_1, searchHistoryList)
+        val listView = binding.searchHistoryListView
+        listView.adapter = adapter
     }
 
     override fun onBackPressed() {

@@ -19,11 +19,11 @@ import com.example.fitfo.Adapter.postAdapter
 import com.example.fitfo.Define.CallApi.RetrofitClient
 import com.example.fitfo.Define.FullScreenBottomSheetDialog
 import com.example.fitfo.Diary.CreatePost
+import com.example.fitfo.Diary.CreateStory
 import com.example.fitfo.Diary.DisplayStory
-import com.example.fitfo.Interface.RvChat
+import com.example.fitfo.Interface.RecyclerViewOnClick
 import com.example.fitfo.Models.GetPostReponse
 import com.example.fitfo.Models.GetStoryReponse
-import com.example.fitfo.R
 import com.example.fitfo.Search
 import com.example.fitfo.databinding.FragmentDiaryBinding
 import com.example.fitfo.test
@@ -63,17 +63,18 @@ class DiaryFragment : Fragment() {
         sharedPreferences = requireActivity().getSharedPreferences("data", Context.MODE_PRIVATE)
         val myId = sharedPreferences.getString("MY_ID", null).toString()
 
-        loader = FullScreenBottomSheetDialog(requireActivity())
-        loader?.showLoading(R.layout.layout_loading)
+//        loader = FullScreenBottomSheetDialog(requireActivity())
+//        loader?.showLoading(R.layout.layout_loading)
         fetchPosts(myId)
         fetchStorys()
 
-        binding.addStory.setOnClickListener {
-            launcher
-        }
-
         binding.btnSearch.setOnClickListener {
             var intent = Intent(context, Search::class.java)
+            startActivity(intent)
+        }
+
+        binding.addStory.setOnClickListener {
+            var intent = Intent(context, CreateStory::class.java)
             startActivity(intent)
         }
 
@@ -130,10 +131,9 @@ class DiaryFragment : Fragment() {
                     val storyResponse = response.body()
 
                     if (!storyResponse.isNullOrEmpty()) {
-                        Toast.makeText(context, "Success", Toast.LENGTH_SHORT).show()
                         listStorys.addAll(storyResponse);
-                        val adapterDs = StoryAdapter(listStorys, object : RvChat {
-                            override fun onClickchat(pos: Int) {
+                        val adapterDs = StoryAdapter(listStorys, object : RecyclerViewOnClick {
+                            override fun onClickItem(pos: Int) {
                                 var intent = Intent(context, DisplayStory::class.java)
                                 intent.putExtra("pos",pos)
                                 startActivity(intent)
@@ -145,7 +145,7 @@ class DiaryFragment : Fragment() {
                         liststory.setHasFixedSize(true)
                         // TODO: Thực hiện xử lý với thông tin người dùng
                     } else {
-                        Toast.makeText(context, "Không có chat nào", Toast.LENGTH_SHORT)
+                        Toast.makeText(context, "Chưa có tin nào", Toast.LENGTH_SHORT)
                             .show()
                     }
                 } else {
@@ -172,7 +172,8 @@ class DiaryFragment : Fragment() {
                 if (response.isSuccessful) {
                     val postsResponse = response.body()
                     if (!postsResponse.isNullOrEmpty()) {
-                        listPosts.addAll(postsResponse);
+                        listPosts.addAll(postsResponse)
+                        listPosts.shuffle()
                         val adapterDs = postAdapter(listPosts, myId)
                         var listpost = binding.listPost
                         listpost.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL,false)
@@ -181,7 +182,7 @@ class DiaryFragment : Fragment() {
                         // TODO: Thực hiện xử lý với thông tin người
 
                     } else {
-                        Toast.makeText(context, "Không có chat nào", Toast.LENGTH_SHORT)
+                        Toast.makeText(context, "Chưa có bài viết nào", Toast.LENGTH_SHORT)
                             .show()
                     }
                 } else {

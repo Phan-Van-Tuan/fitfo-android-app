@@ -32,11 +32,10 @@
             android:background="@drawable/shape_button_white"
             android:paddingVertical="2dp"
             android:paddingHorizontal="-10dp"
-            android:hint="Tìm kiếm đoạn chat"
             app:closeIcon="@drawable/ic_close"
             app:defaultQueryHint="Không có dữ liệu"
             app:iconifiedByDefault="false"
-            app:queryHint="Tìm kiếm" />
+            app:queryHint="Tìm kiếm người dùng" />
 
         <ImageView
             android:id="@+id/btn_post_action"
@@ -48,14 +47,14 @@
     </androidx.appcompat.widget.LinearLayoutCompat>
 
     <FrameLayout
-        android:id="@+id/frameSearch"
+        android:id="@+id/frame_search"
         android:visibility="gone"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="60dp">
 
         <androidx.appcompat.widget.LinearLayoutCompat
-            android:id="@+id/searchSuccess"
+            android:id="@+id/search_success"
             android:visibility="gone"
             android:background="@color/white"
             android:padding="4dp"
@@ -75,7 +74,7 @@
                     >
 
                     <ImageView
-                        android:id="@+id/imgAvt"
+                        android:id="@+id/image_avatar"
                         android:layout_width="50dp"
                         android:layout_height="50dp"
 
@@ -116,7 +115,7 @@
                 android:layout_width="150dp"
                 android:layout_height="150dp"
                 android:layout_gravity="center"
-                android:src="@drawable/nocontact"/>
+                android:src="@drawable/a_no_contact"/>
 
             <TextView
                 android:layout_width="350dp"
@@ -128,4 +127,12 @@
         </LinearLayout>
 
     </FrameLayout>
+
+    <ListView
+        android:id="@+id/search_history_listView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="60dp"
+        android:layout_marginHorizontal="20dp"/>
+
 </RelativeLayout>

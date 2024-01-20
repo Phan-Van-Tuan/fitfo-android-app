@@ -14,7 +14,7 @@ import com.example.fitfo.Adapter.ContactAdapter
 import com.example.fitfo.ChatActivity
 import com.example.fitfo.Define.CallApi.RetrofitClient
 import com.example.fitfo.Define.UserInfo
-import com.example.fitfo.Interface.RvChat
+import com.example.fitfo.Interface.RecyclerViewOnClick
 import com.example.fitfo.Models.ListFriendResponse
 import com.example.fitfo.Search
 import com.example.fitfo.databinding.FragmentContactBinding
@@ -61,8 +61,9 @@ class ContactFragment : Fragment() {
                 if (response.isSuccessful) {
                     if (!response.body().isNullOrEmpty()) {
                         listContacts.addAll(response.body()!!);
-                        val contactAdapter = ContactAdapter(listContacts, object : RvChat {
-                            override fun onClickchat(pos: Int) {
+                        listContacts.sortBy { it.name }
+                        val contactAdapter = ContactAdapter(listContacts, object : RecyclerViewOnClick {
+                            override fun onClickItem(pos: Int) {
                                 var intent = Intent(context, ChatActivity::class.java)
                                 UserInfo.userName= listContacts[pos].name
                                 UserInfo.userID= listContacts[pos].userId
@@ -78,7 +79,7 @@ class ContactFragment : Fragment() {
 
                         // TODO: Thực hiện xử lý với thông tin người dùng
                     } else {
-                        Toast.makeText(context, "Lỗi 178", Toast.LENGTH_SHORT)
+                        Toast.makeText(context, "Chưa có bạn bè", Toast.LENGTH_SHORT)
                             .show()
                     }
                 } else {

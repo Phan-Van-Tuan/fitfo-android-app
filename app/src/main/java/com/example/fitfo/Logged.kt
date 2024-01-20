@@ -42,22 +42,22 @@ class Logged : AppCompatActivity() {
             // Xử lý thông báo ở đây
             if (args.isNotEmpty()) {
                 val notificationData = args[0] as JSONObject
-                Log.d("notificationData...........", ".............." + notificationData)
+                Log.d("notificationData_logged", ".............." + notificationData)
                 // Thực hiện xử lý thông báo dựa trên dữ liệu nhận được từ server
                 // Ví dụ: Hiển thị thông báo, cập nhật giao diện người dùng, v.v.
             }
         }
-
-        // display all title and content in bottom nav
-        binding.bottomNavigationView.labelVisibilityMode =
-            NavigationBarView.LABEL_VISIBILITY_LABELED
-        replaceFragment(ChatFragment())
 
         val personalFragment = PersonalFragment()
         personalFragment.setSocketManager(socketManager)
 
         val chatFragment = ChatFragment()
         chatFragment.setSocketManager(socketManager)
+
+        // display all title and content in bottom nav
+        binding.bottomNavigationView.labelVisibilityMode =
+            NavigationBarView.LABEL_VISIBILITY_LABELED
+        replaceFragment(chatFragment)
 
         binding.bottomNavigationView.setOnItemSelectedListener { it ->
             when (it.itemId) {
@@ -67,11 +67,12 @@ class Logged : AppCompatActivity() {
                 R.id.bottom_tienich -> replaceFragment(DiscoverFragment())
                 R.id.bottom_profile -> replaceFragment(ContactFragment())
                 else -> {
-                    replaceFragment(ChatFragment())
+                    replaceFragment(chatFragment)
                 }
             }
             true
         }
+
     }
 
 

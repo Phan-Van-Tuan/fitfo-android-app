@@ -23,13 +23,32 @@
             android:src="@drawable/b_search_white" />
 
         <TextView
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_marginLeft="6dp"
+            android:layout_weight="1"
             android:text="Tìm kiếm"
             android:gravity="start|center"
             android:textColor="@color/white_40"/>
 
+        <ImageView
+            android:id="@+id/notify"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="1dp"
+            android:padding="2dp"
+            android:src="@drawable/b_bell_white" />
+        <TextView
+            android:id="@+id/notify_count"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_marginTop="1dp"
+            android:text="0"
+            android:layout_gravity="end"
+            android:gravity="center"
+            android:textColor="@color/white"
+            android:background="@drawable/shape_notify_count"
+            android:padding="2dp"/>
     </LinearLayout>
 
     <androidx.recyclerview.widget.RecyclerView
@@ -106,7 +125,7 @@
                 android:layout_width="150dp"
                 android:layout_height="150dp"
                 android:layout_gravity="center"
-                android:src="@drawable/nocontact"/>
+                android:src="@drawable/a_no_contact"/>
 
             <TextView
                 android:layout_width="350dp"

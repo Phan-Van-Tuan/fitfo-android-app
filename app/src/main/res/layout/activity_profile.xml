@@ -19,7 +19,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/bg" />
+        app:srcCompat="@drawable/a_background_profile" />
 
     <ImageView
         android:id="@+id/backtoPeople"
@@ -95,7 +95,7 @@
         android:layout_alignParentEnd="true"
         android:textColor="@color/white"
         android:text="@string/add_friend"
-        app:icon="@drawable/a_add_friend"
+        app:icon="@drawable/b_add_friend"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="30dp"/>
 
@@ -108,7 +108,7 @@
         android:layout_alignParentEnd="true"
         android:textColor="@color/white"
         android:text="@string/destroy_friendship"
-        app:icon="@drawable/a_remove_friend"
+        app:icon="@drawable/b_remove_friend"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="30dp"/>
 
@@ -121,7 +121,7 @@
         android:layout_alignParentEnd="true"
         android:textColor="@color/black"
         android:text="@string/accept_friendship"
-        app:icon="@drawable/a_accept_friend"
+        app:icon="@drawable/b_accept_friend"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="30dp"/>
 
@@ -134,7 +134,7 @@
         android:layout_alignParentEnd="true"
         android:textColor="@color/white"
         android:text="@string/wait_accept_friendship"
-        app:icon="@drawable/a_wait_friend"
+        app:icon="@drawable/b_wait_friend"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="30dp"/>
 

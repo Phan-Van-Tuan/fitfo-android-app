@@ -19,7 +19,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.fitfo.Define.CallApi.RetrofitClient
 import com.example.fitfo.Define.DateFormat
 import com.example.fitfo.Define.ImageUtils
-import com.example.fitfo.Interface.RvChat
+import com.example.fitfo.Interface.RecyclerViewOnClick
 import com.example.fitfo.Models.CommentRequest
 import com.example.fitfo.Models.GetPostReponse
 import com.example.fitfo.Models.findCommentResponse
@@ -35,6 +35,8 @@ import retrofit2.Response
 class postAdapter(var listPost:List<GetPostReponse>, var myId: String)
     : RecyclerView.Adapter<postAdapter.ListPost>() {
     val dateFormat = DateFormat()
+    private lateinit var adapterListComment: CommentAdapter
+    private var listComments: MutableList<findCommentResponse> = mutableListOf()
     inner class ListPost(itemView:View):RecyclerView.ViewHolder(itemView)
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ListPost {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.layout_post,parent,false)
@@ -104,13 +106,36 @@ class postAdapter(var listPost:List<GetPostReponse>, var myId: String)
                 }
             }
 
+            picturePost.setOnClickListener {
+                val image: MutableList<String> = mutableListOf()
+                image.add(pictureUrl)
+                val dialog = BottomSheetDialog(context,R.style.CustomBottomSheetDialog)
+                val viewimage = LayoutInflater.from(context).inflate(R.layout.layout_image, null)
+                var btncloseimage = viewimage.findViewById<ImageView>(R.id.btn_close)
+                var rcimage = viewimage.findViewById<RecyclerView>(R.id.rc_display_image)
+                val listimage = rcimage
+                val imageAdapter = DisplayImageAdapter(image)
+                listimage.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
+                listimage.adapter = imageAdapter
+                listimage.setHasFixedSize(true)
+                dialog.setCancelable(false)
+                viewimage?.layoutParams?.height = ViewGroup.LayoutParams.MATCH_PARENT
+                val screenHeight = Resources.getSystem().displayMetrics.heightPixels - 60
+                viewimage?.minimumHeight = screenHeight
+                val behavior = dialog.behavior
+                behavior.peekHeight = screenHeight
+                behavior.state = BottomSheetBehavior.STATE_EXPANDED
+                btncloseimage.setOnClickListener {
+                    dialog.dismiss()
+                }
+                dialog.setContentView(viewimage)
+                dialog.show()
+            }
 
             commentBtn.setOnClickListener {
                 val dialog = BottomSheetDialog(context)
                 var postId = listPost[position]._id
-                var listComments: MutableList<findCommentResponse> = mutableListOf()
-                val viewcommentport =
-                    LayoutInflater.from(context).inflate(R.layout.activity_comment_post, null)
+                val viewcommentport = LayoutInflater.from(context).inflate(R.layout.activity_comment_post, null)
                 var nocmt = viewcommentport.findViewById<LinearLayout>(R.id.nocmt)
                 var edtCmt = viewcommentport.findViewById<EditText>(R.id.edtComment)
                 var btnsend = viewcommentport.findViewById<ImageView>(R.id.btnSentComment)
@@ -129,13 +154,14 @@ class postAdapter(var listPost:List<GetPostReponse>, var myId: String)
 
                             if (!commentResponses.isNullOrEmpty()) {
                                 listComments.addAll(commentResponses);
-                                val adapterListComment = CommentAdapter(listComments, object : RvChat {
-                                    override fun onClickchat(pos: Int) {
-                                        val commentId = listComments[pos]._id
-                                        listComments.removeAt(pos)
-                                        showQuestionDialog(context,commentId)
-                                    }
-                                })
+                                adapterListComment =
+                                    CommentAdapter(listComments, object : RecyclerViewOnClick {
+                                        override fun onClickItem(pos: Int) {
+                                            //Xóa comment
+                                            val commentId = listComments[pos]._id
+                                            showQuestionDialog(context, commentId, pos)
+                                        }
+                                    })
                                 var listcomment = commentRecyclerView
                                 listcomment.layoutManager = LinearLayoutManager(
                                     context,
@@ -144,54 +170,82 @@ class postAdapter(var listPost:List<GetPostReponse>, var myId: String)
                                 )
                                 listcomment.adapter = adapterListComment
                                 listcomment.setHasFixedSize(true)
-                                btnsend.setOnClickListener {
-                                    if (edtCmt.length() == 0){
-                                        Toast.makeText(context,"Hãy nhập bình luận của mình!",Toast.LENGTH_LONG).show()
-                                    }else{
-                                        val sharedPreferences = context.getSharedPreferences("data", Context.MODE_PRIVATE)
-                                        val userName = sharedPreferences.getString("MY_NAME", "").toString()
-                                        val author = sharedPreferences.getString("MY_ID", "").toString()
-                                        val avatar = sharedPreferences.getString("MY_AVATAR", "").toString()
-                                        val comment = edtCmt.text.toString().trim()
-                                        val newComment = findCommentResponse("1",author, comment, postId, avatar, userName, "")
-                                        val CommentRequest = CommentRequest(author, comment)
-
-                                        val apiService = RetrofitClient.apiService
-                                        val call = apiService.comment(postId, CommentRequest)
-
-                                        call.enqueue(object : Callback<String> {
-                                            override fun onResponse(
-                                                call: Call<String>,
-                                                response: Response<String>
-                                            ) {
-                                                if (response.isSuccessful) {
-                                                    listComments.add(newComment)
-                                                    // Bạn có thể muốn thông báo cho adapter về sự thay đổi dữ liệu
-                                                    adapterListComment.notifyDataSetChanged()
-                                                    // TODO: Xử lý message
-                                                } else {
-                                                    // TODO: Xử lý phản hồi không thành công
-                                                    Toast.makeText(
-                                                        context,
-                                                        "Không thành công!",
-                                                        Toast.LENGTH_LONG
-                                                    ).show()
-                                                }
-                                            }
-
-                                            override fun onFailure(call: Call<String>, t: Throwable) {
-                                                // TODO: Xử lý lỗi khi request không thành công
-                                                Toast.makeText(context, "Đã xảy ra lỗi", Toast.LENGTH_SHORT).show()
-                                            }
-                                        })
-                                    }
-                                    edtCmt.setText("")
-                                    edtCmt.setHint("Mời nhập bình luận")
-                                }
                                 // TODO: Thực hiện xử lý với thông tin người dùng
                             } else {
                                 nocmt.visibility = View.VISIBLE
                                 commentRecyclerView.visibility = View.GONE
+                            }
+                            btnsend.setOnClickListener {
+                                if (edtCmt.length() == 0){
+                                    Toast.makeText(context,"Hãy nhập bình luận của mình!",Toast.LENGTH_LONG).show()
+                                }else{
+                                    val sharedPreferences = context.getSharedPreferences("data", Context.MODE_PRIVATE)
+                                    val userName = sharedPreferences.getString("MY_NAME", "").toString()
+                                    val author = sharedPreferences.getString("MY_ID", "").toString()
+                                    val avatar = sharedPreferences.getString("MY_AVATAR", "").toString()
+                                    val comment = edtCmt.text.toString().trim()
+                                    val newComment = findCommentResponse("1",author, comment, postId, avatar, userName, "")
+                                    val CommentRequest = CommentRequest(author, comment)
+
+                                    val apiService = RetrofitClient.apiService
+                                    val call = apiService.comment(postId, CommentRequest)
+
+                                    call.enqueue(object : Callback<String> {
+                                        override fun onResponse(
+                                            call: Call<String>,
+                                            response: Response<String>
+                                        ) {
+                                            if (response.isSuccessful) {
+                                                listComments.add(newComment)
+                                                if (listComments.size==1) {
+                                                    nocmt.visibility = View.GONE
+                                                    commentRecyclerView.visibility = View.VISIBLE
+                                                    // Bạn có thể muốn thông báo cho adapter về sự thay đổi dữ liệu
+                                                    adapterListComment = CommentAdapter(
+                                                        listComments,
+                                                        object : RecyclerViewOnClick {
+                                                            override fun onClickItem(pos: Int) {
+                                                            }
+                                                        })
+                                                    var listcomment = commentRecyclerView
+                                                    listcomment.layoutManager =
+                                                        LinearLayoutManager(
+                                                            context,
+                                                            LinearLayoutManager.VERTICAL,
+                                                            false
+                                                        )
+                                                    listcomment.adapter = adapterListComment
+                                                    listcomment.setHasFixedSize(true)
+                                                }
+                                                // Bạn có thể muốn thông báo cho adapter về sự thay đổi dữ liệu
+                                                if (!::adapterListComment.isInitialized) {
+                                                    // Khởi tạo adapterListComment nếu chưa được khởi tạo
+                                                    adapterListComment = CommentAdapter(listComments, object : RecyclerViewOnClick {
+                                                        override fun onClickItem(pos: Int) {
+                                                        }
+                                                    })
+                                                }
+                                                // Gọi notifyDataSetChanged() để cập nhật RecyclerView
+                                                adapterListComment.notifyDataSetChanged()
+                                                // TODO: Xử lý message
+                                            } else {
+                                                // TODO: Xử lý phản hồi không thành công
+                                                Toast.makeText(
+                                                    context,
+                                                    "Không thành công!",
+                                                    Toast.LENGTH_LONG
+                                                ).show()
+                                            }
+                                        }
+
+                                        override fun onFailure(call: Call<String>, t: Throwable) {
+                                            // TODO: Xử lý lỗi khi request không thành công
+                                            Toast.makeText(context, "Đã xảy ra lỗi", Toast.LENGTH_SHORT).show()
+                                        }
+                                    })
+                                }
+                                edtCmt.setText("")
+                                edtCmt.setHint("Mời nhập bình luận")
                             }
                         } else {
                             val error = response.errorBody()?.string()
@@ -214,6 +268,7 @@ class postAdapter(var listPost:List<GetPostReponse>, var myId: String)
                 behavior.state = BottomSheetBehavior.STATE_EXPANDED
                 btnclosecomment.setOnClickListener {
                     dialog.dismiss()
+                    listComments.clear()
                 }
                 dialog.setContentView(viewcommentport)
                 dialog.show()
@@ -266,14 +321,12 @@ class postAdapter(var listPost:List<GetPostReponse>, var myId: String)
         }
     }
 
-    fun showQuestionDialog(context: Context, commentId: String) {
+    fun showQuestionDialog(context: Context, commentId: String, pos: Int) {
         val alertDialogBuilder = AlertDialog.Builder(context)
         alertDialogBuilder.setTitle("Xóa bình luận")
         alertDialogBuilder.setMessage("Bạn muốn xóa bình luận không?")
         alertDialogBuilder.setPositiveButton("Có") { dialog, which ->
             val apiService = RetrofitClient.apiService
-            Toast.makeText(context, "hi", Toast.LENGTH_SHORT).show()
-
             val call = apiService.deleteComment(commentId)
             call.enqueue(object : Callback<String> {
                 override fun onResponse(
@@ -281,17 +334,29 @@ class postAdapter(var listPost:List<GetPostReponse>, var myId: String)
                     response: Response<String>
                 ) {
                     if (response.isSuccessful) {
-                        Toast.makeText(context, response.body(), Toast.LENGTH_SHORT).show()
-                        Toast.makeText(context, "hi123", Toast.LENGTH_SHORT).show()
+                        if (pos in 0 until listComments.size) {
+                            if (!::adapterListComment.isInitialized) {
+                                // Khởi tạo adapterListComment nếu chưa được khởi tạo
+                                adapterListComment = CommentAdapter(listComments, object : RecyclerViewOnClick {
+                                    override fun onClickItem(pos: Int) {
+                                        //Xóa comment
+                                        val commentId = listComments[pos]._id
+                                        showQuestionDialog(context, commentId, pos)
+                                        adapterListComment.notifyDataSetChanged()
+                                    }
+                                })
+                            }
+                            listComments.removeAt(pos)
+                            // Gọi notifyDataSetChanged() để cập nhật RecyclerView
+                            adapterListComment.notifyDataSetChanged()
+                        }
                     } else {
-                        Toast.makeText(context, "loi", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(context, "Thao tác lại!", Toast.LENGTH_SHORT).show()
                     }
                 }
 
                 override fun onFailure(call: Call<String>, t: Throwable) {
-                    // Handle failure
-                    Log.e("API Call", "Failed to delete post", t)
-                    Toast.makeText(context, "Failed to delete post. Please try again.1", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(context, "Failed to delete comment!", Toast.LENGTH_SHORT).show()
                     dialog.dismiss()
                 }
             })

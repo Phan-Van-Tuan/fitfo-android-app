@@ -66,7 +66,6 @@ class PersonalActivity : AppCompatActivity() {
                     val postsResponse = response.body()
 
                     if (!postsResponse.isNullOrEmpty()) {
-                        Toast.makeText(this@PersonalActivity, "Success", Toast.LENGTH_SHORT).show()
                         listPosts.addAll(postsResponse);
                         val adapterDs = postAdapter(listPosts, myId)
                         var listpost = binding.rvListMyPost
@@ -76,7 +75,7 @@ class PersonalActivity : AppCompatActivity() {
 
                         // TODO: Thực hiện xử lý với thông tin người dùng
                     } else {
-                        Toast.makeText(this@PersonalActivity, "Không có chat nào", Toast.LENGTH_SHORT)
+                        Toast.makeText(this@PersonalActivity, "bạn chưa có bài viết nào", Toast.LENGTH_SHORT)
                             .show()
                     }
                 } else {

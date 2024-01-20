@@ -28,7 +28,7 @@
             android:padding="10dp"
             android:layout_height="wrap_content"
             android:layout_gravity="end"
-            android:src="@drawable/closeblack"/>
+            android:src="@drawable/b_close_black"/>
     </androidx.appcompat.widget.LinearLayoutCompat>
 
     <androidx.recyclerview.widget.RecyclerView
@@ -55,7 +55,7 @@
         <ImageView
             android:layout_width="100dp"
             android:layout_height="100dp"
-            android:src="@drawable/nocmt"
+            android:src="@drawable/a_no_comment"
             android:layout_gravity="center"/>
 
         <TextView

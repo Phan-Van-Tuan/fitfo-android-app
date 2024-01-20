@@ -8,13 +8,12 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.fitfo.Define.DateFormat
 import com.example.fitfo.Define.ImageUtils
-import com.example.fitfo.Interface.RvChat
+import com.example.fitfo.Interface.RecyclerViewOnClick
 import com.example.fitfo.Models.findCommentResponse
 import com.example.fitfo.R
-import org.threeten.bp.Instant
 
 
-class CommentAdapter(var Comment:List<findCommentResponse>, val rvInterfaceChat: RvChat)
+class CommentAdapter(var Comment:List<findCommentResponse>, val rvInterfaceChat: RecyclerViewOnClick)
     : RecyclerView.Adapter<CommentAdapter.listcomment>() {
     val dateFormat = DateFormat();
 inner class listcomment(itemView: View) :RecyclerView.ViewHolder(itemView)
@@ -48,7 +47,7 @@ inner class listcomment(itemView: View) :RecyclerView.ViewHolder(itemView)
 
             // handle click comment item
             holder.itemView.setOnClickListener {
-                rvInterfaceChat.onClickchat(position)
+                rvInterfaceChat.onClickItem(position)
             }
         }
     }

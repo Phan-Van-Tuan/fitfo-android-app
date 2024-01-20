@@ -3,6 +3,7 @@ package com.example.fitfo
 import android.Manifest
 import android.annotation.SuppressLint
 import android.app.Activity
+import android.app.AlertDialog
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
@@ -30,6 +31,7 @@ import com.example.fitfo.Define.CallApi.RetrofitClient
 import com.example.fitfo.Define.ImageUtils
 import com.example.fitfo.Define.MySocketManager
 import com.example.fitfo.Define.UserInfo
+import com.example.fitfo.Interface.RecyclerViewOnLongClick
 import com.example.fitfo.Models.findMessageResponse
 import com.example.fitfo.Profile.ProfileActivity
 import com.example.fitfo.databinding.ActivityChatBinding
@@ -83,7 +85,12 @@ class ChatActivity : AppCompatActivity() {
         socketManager.addNewUser(myId)
 
         // Khởi tạo adapter một lần duy nhất trong onCreate()
-        adapterListMessage = ListMessageAdapter(listmessages, myId)
+        adapterListMessage = ListMessageAdapter(listmessages, myId,object : RecyclerViewOnLongClick {
+            override fun onLongClickItem(pos: Int) {
+                val messageId = listmessages[pos]._id
+                showQuestionDialogDeleteMessage(this@ChatActivity,messageId,pos)
+            }
+            })
         var listMessagesRecyclerView = binding.chatRecyclerView
         listMessagesRecyclerView.layoutManager = LinearLayoutManager(
             this,
@@ -404,6 +411,57 @@ class ChatActivity : AppCompatActivity() {
         intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP
         startActivity(intent)
         finish()
+    }
+
+    fun showQuestionDialogDeleteMessage(context: Context, messageId: String, pos: Int) {
+        val alertDialogBuilder = AlertDialog.Builder(context)
+        sharedPreferences = this.getSharedPreferences("data", Context.MODE_PRIVATE)
+        val myId = sharedPreferences.getString("MY_ID", null).toString()
+        alertDialogBuilder.setTitle("Xóa tin nhắn")
+        alertDialogBuilder.setMessage("Bạn muốn xóa tin nhắn không?")
+        alertDialogBuilder.setPositiveButton("Có") { dialog, which ->
+            val apiService = RetrofitClient.apiService
+            val call = apiService.deleteMessage(messageId)
+            call.enqueue(object : Callback<String> {
+                override fun onResponse(
+                    call: Call<String>,
+                    response: Response<String>
+                ) {
+                    if (response.isSuccessful) {
+                        if (pos in 0 until listmessages.size) {
+                            if (!::adapterListMessage.isInitialized) {
+                                // Khởi tạo adapterListComment nếu chưa được khởi tạo
+                                adapterListMessage = ListMessageAdapter(listmessages, myId,  object : RecyclerViewOnLongClick {
+                                    override fun onLongClickItem(pos: Int) {
+                                        val messageId = listmessages[pos]._id
+                                        showQuestionDialogDeleteMessage(context, messageId, pos)
+                                        adapterListMessage.notifyDataSetChanged()
+                                    }
+                                })
+                            }
+                            listmessages.removeAt(pos)
+                            // Gọi notifyDataSetChanged() để cập nhật RecyclerView
+                            adapterListMessage.notifyDataSetChanged()
+                        }
+                    } else {
+                        Toast.makeText(context, "Thao tác lại!", Toast.LENGTH_SHORT).show()
+                    }
+                }
+
+                override fun onFailure(call: Call<String>, t: Throwable) {
+                    Toast.makeText(context, "Failed to delete message!", Toast.LENGTH_SHORT).show()
+                    dialog.dismiss()
+                }
+            })
+        }
+
+        // Thiết lập lựa chọn tiêu cực (negative button)
+        alertDialogBuilder.setNegativeButton("Không") { dialog, which ->
+            dialog.dismiss()
+        }
+
+        val alertDialog = alertDialogBuilder.create()
+        alertDialog.show()
     }
 
 }

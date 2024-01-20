@@ -7,12 +7,11 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.fitfo.Define.ImageUtils
-import com.example.fitfo.Interface.RvChat
+import com.example.fitfo.Interface.RecyclerViewOnClick
 import com.example.fitfo.Models.GetStoryReponse
 import com.example.fitfo.R
-import com.example.fitfo.R.id.name_user_of_story
 
-class StoryAdapter( var liststory:List<GetStoryReponse>, val rvInterfaceChat: RvChat):RecyclerView.Adapter<StoryAdapter.listStory> (){
+class StoryAdapter( var liststory:List<GetStoryReponse>, val rvInterfaceChat: RecyclerViewOnClick):RecyclerView.Adapter<StoryAdapter.listStory> (){
     inner class listStory(itemView: View):RecyclerView.ViewHolder(itemView)
 
 
@@ -32,12 +31,12 @@ class StoryAdapter( var liststory:List<GetStoryReponse>, val rvInterfaceChat: Rv
                 ImageUtils.displayImage2(avatarUrl, avatarStory)
             }
             val imageUrl = liststory[position].photo
-            if (!avatarUrl.isNullOrEmpty() ) {
+            if (!imageUrl.isNullOrEmpty() ) {
                 ImageUtils.displayImage2(imageUrl, imageStory)
             }
             userName.setText(liststory[position].userName)
             holder.itemView.setOnClickListener {
-                rvInterfaceChat.onClickchat(position)
+                rvInterfaceChat.onClickItem(position)
             }
         }
     }
